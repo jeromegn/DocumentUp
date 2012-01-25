@@ -66,7 +66,7 @@ Indicate if the project is being tested by [Travis-CI](http://travis-ci.org/). I
 **twitter** (String *or* Array of strings) *default: null*  
 Add follow buttons for one or more Twitter accounts to your sidebar. Useful to gather followers.
 
-## Formatting your README
+## Formatting guide
 
 Just like you normally would. DocumentUp also supports "Github Flavored Markdown" and we recommend you use it for syntax highlighting.
 
@@ -74,7 +74,7 @@ h1's (# in markdown) will appear as first level navigation in the sidebar while 
 
 Example:
 
-```text
+```no-highlight
 # This will appear at the top!
 
 Some intro text if you want.

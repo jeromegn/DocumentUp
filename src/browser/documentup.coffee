@@ -157,7 +157,7 @@ class window.DocumentUp
     setTimeout ->
       # Highlight the code bits:
       $("pre code").each (el)->
-        hljs.initHighlighting(el)
+        hljs.highlightBlock(el, "  ")
 
 
 decode64 = (input) ->
