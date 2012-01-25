@@ -11,7 +11,7 @@ Essentially, it parses your readme's markdown into a clean and simple documentat
 Simple as pie.
 
 ```html
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/documentup/0.1.0/documentup.min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/documentup/latest.min.js"></script>
 <script type="text/javascript">
   DocumentUp.document("username/repository");
 </script>
@@ -24,7 +24,7 @@ Make sure to change the `"username/repository"` to the repository's name and use
 ### Getting the script
 
 **Recommended**  
-Use [CDNJS](http://cdnjs.com) with this script `src`: `http://cdnjs.cloudflare.com/ajax/libs/documentup/0.1.0/documentup.min.js`
+Use [CDNJS](http://cdnjs.com) with this script `src`: `http://cdnjs.cloudflare.com/ajax/libs/documentup/latest.min.js`
 
 **Also good**  
 Download it from this repository There's a minified version of it named `documentup.min.js`
@@ -97,6 +97,7 @@ Thanks for the few well documented project sites out there for the inspiration.
 ## Changelog
 
 **0.1.0 (Jan 25, 2012)**  
+* `http://cdnjs.cloudflare.com/ajax/libs/documentup/0.1.0/documentup.min.js`
 * Initial release
 
 ## License
