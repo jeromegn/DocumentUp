@@ -154,9 +154,10 @@ class window.DocumentUp
           </li>
         """
     
-    # Highlight the code bits:
-    $("pre code").each (el)->
-      hljs.initHighlighting(el)
+    setTimeout ->
+      # Highlight the code bits:
+      $("pre code").each (el)->
+        hljs.initHighlighting(el)
 
 
 decode64 = (input) ->

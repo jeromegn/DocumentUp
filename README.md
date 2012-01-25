@@ -96,8 +96,7 @@ Thanks for the few well documented project sites out there for the inspiration.
 
 ## Changelog
 
-### 0.1.0 (Jan 25, 2012)
-
+**0.1.0 (Jan 25, 2012)**  
 * Initial release
 
 ## License
