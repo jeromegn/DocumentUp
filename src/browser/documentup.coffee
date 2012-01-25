@@ -117,7 +117,7 @@ class window.DocumentUp
 
     $sections.empty()
 
-    $("h1, h2, h3, h4, h5, h6").each (el)->
+    $("h2, h3").each (el)->
       if el.tagName == "H2"
         current_subsection = 0
         current_section++
