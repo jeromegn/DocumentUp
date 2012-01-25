@@ -1,4 +1,4 @@
-# Document Up your Readme's!
+# Document Up your Readmes!
 
 Instantly beautify your Github repositories' `README.md` with DocumentUp. This site has been generated with it.
 
