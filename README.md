@@ -74,15 +74,17 @@ h1's (# in markdown) will appear as first level navigation in the sidebar while 
 
 Example:
 
-    # This will appear at the top!
+```plain
+# This will appear at the top!
 
-    Some intro text if you want.
+Some intro text if you want.
 
-    ## Top level-navigation
+## Top level-navigation
 
-    ### Sub-navigation
+### Sub-navigation
 
-    #### This wouldn't show up in the sidebar
+#### This wouldn't show up in the sidebar
+```
 
 ## Contributions are welcome
 
