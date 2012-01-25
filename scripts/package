@@ -1,0 +1,84 @@
+#!/usr/bin/env coffee
+
+File = require("fs")
+Uglify = require("uglify-js")
+Coffee = require("coffee-script")
+Ender = require("ender")
+Stylus = require("stylus")
+Nib = require("nib")
+Async = require("async")
+
+assert = require("assert")
+
+dependencies = ["domready", "bonzo", "qwery", "bean", "reqwest"]
+
+console.log "BUILDING ENDER PACKAGE"
+Ender.build dependencies, {output: "vendor/javascript/ender"}, ->
+  
+  to_build = [
+    "vendor/javascript/ender.js"
+    "vendor/javascript/highlight.js"
+    "vendor/javascript/languages/*"
+    "vendor/javascript/marked.js"
+    "src/browser/documentup.coffee"
+    "src/stylesheets/screen.styl"
+  ]
+
+  Async.map to_build, (path, callback)->
+    if /\*$/.test(path)
+      console.log "CONCATENATING ALL FILES UNDER: #{path}"
+      new_path = path.replace "*", ""
+      File.readdir "#{__dirname}/../#{new_path}", (err, files)->
+        return callback(err) if err
+        contents = ""
+        files.forEach (file, index, arr)->
+          return unless /(js|coffee)$/.test(file)
+          File.readFile "#{__dirname}/../#{new_path}#{file}", "utf8", (err, content)->
+            if /xml/.test(file)
+              contents = content + contents
+            else
+              contents += content
+            callback(null, contents) if index == arr.length - 1
+    else
+      console.log "CONCATENATING #{path}"
+      contents = File.readFile "#{__dirname}/../#{path}", "utf8", (err, contents)->
+        return callback(err) if err
+        if /coffee$/.test(path)
+          try
+            contents = Coffee.compile(contents)
+          catch e
+            return callback(e)
+          callback(null, contents)
+        else if /styl$/.test(path)
+          Stylus(contents).set('filename', path).set('compress', true).use(Nib()).render (err, css)->
+            return callback(err) if err
+            contents = """
+              var style_tag = document.createElement("style");
+              style_tag.type = "text/css"
+              style_tag.innerHTML = '#{css.replace(/\n/gm, "")}'
+              document.getElementsByTagName('head')[0].appendChild(style_tag);
+            """
+            callback(null, contents)
+        else
+          callback(err, contents)
+  
+  , (err, contents) ->
+    return throw err if err
+    contents = contents.join("")
+    File.writeFile "#{__dirname}/../documentup.js", contents, (err)->
+      if err
+        console.log "AN ERROR OCCURED WHEN ATTEMPTING TO SAVE UNCOMPRESSED FILE"
+        console.log(err)
+      console.log "UNCOMPRESSED FILE SAVED TO: #{__dirname}/../documentup.js"
+    try
+      ast = Uglify.parser.parse(contents)
+      ast = Uglify.uglify.ast_mangle(ast)
+      ast = Uglify.uglify.ast_squeeze(ast)
+      final_code = Uglify.uglify.gen_code(ast)
+      File.writeFile "#{__dirname}/../documentup.min.js", final_code, (err)->
+        throw err if err
+        console.log "COMPRESSED FILE SAVED TO: #{__dirname}/../documentup.min.js"
+    catch e
+      console.log "AN ERROR OCCURED WHEN ATTEMPTING TO SAVE COMPRESSED FILE"
+      console.log(e)
+    
