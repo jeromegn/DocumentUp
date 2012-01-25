@@ -57,15 +57,48 @@ Name of your project. It'll appear in the header of the sidebar. Defaults to the
 **color** (String) *default: "#336699"*  
 CSS-like color representing the color for the links both in the sidebar and the content.
 
+**issues** (Boolean or String) *default: true*
+Adds a link to the sidebar for the issues tab of the repository if `true`. Also accepts a string if your issues are managed elsewhere.
+
 **travis** (Boolean) *default: false*  
 Indicate if the project is being tested by [Travis-CI](http://travis-ci.org/). If `true`, it'll add the small travis badge in the sidebar.
 
 **twitter** (String *or* Array of strings) *default: null*  
 Add follow buttons for one or more Twitter accounts to your sidebar. Useful to gather followers.
 
+## Formatting your README
+
+Just like you normally would. DocumentUp also supports "Github Flavored Markdown" and we recommend you use it for syntax highlighting.
+
+h1's (# in markdown) will appear as first level navigation in the sidebar while h2's (##) will appear under them as sub-navigation.
+
+Example:
+
+```
+# This will appear at the top!
+
+Some intro text if you want.
+
+## Top level-navigation
+
+### Sub-navigation
+
+#### This wouldn't show up in the sidebar
+```
+
+## Contributions are welcome
+
+If you're a designer or coder and would like to contribute new styles, new features or bug fixes, please don't keep them to yourself, fork the project and send in a pull request!
+
 ## Thank you
 
 Thanks for the few well documented project sites out there for the inspiration.
+
+## Changelog
+
+### 0.1.0 (Jan 25, 2012)
+
+* Initial release
 
 ## License
 

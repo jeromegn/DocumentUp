@@ -18,7 +18,7 @@ class window.DocumentUp
   @defaults =
     color: "#369"
     twitter: null
-    changelog: false
+    issues: true
     travis: false
 
   @document = (@options)->
@@ -45,6 +45,19 @@ class window.DocumentUp
       """
 
       $nav = $("#nav")
+
+      $nav.append """
+        <div id="github" class="extra">
+          <a href="https://github.com/#{@options.repo}">Source on Github</a>
+        </div>
+      """
+
+      if @options.issues
+        $nav.append """
+          <div id="github-issues" class="extra">
+            <a href="https://github.com/#{@options.repo}/issues">Issues</a>
+          </div>
+        """
 
       if @options.travis
         $nav.append """
