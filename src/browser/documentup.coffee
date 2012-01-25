@@ -120,7 +120,8 @@ class window.DocumentUp
   
   @renderContent = ->
     # Populate HTML content
-    $("#content").html @html
+    $content = $("#content")
+    $content.html @html
 
     # Generate the navigation tree with the document structure
     current_section = 0

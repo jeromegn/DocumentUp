@@ -74,7 +74,7 @@ h1's (# in markdown) will appear as first level navigation in the sidebar while 
 
 Example:
 
-```
+```text
 # This will appear at the top!
 
 Some intro text if you want.
