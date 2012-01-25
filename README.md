@@ -75,7 +75,7 @@ h1's (# in markdown) will appear as first level navigation in the sidebar while 
 Example:
 
 ```plain
-# This will appear at the top!
+# Project name / Title (won't appear in the sidebar)
 
 Some intro text if you want.
 
