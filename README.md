@@ -8,13 +8,20 @@ Essentially, it parses your readme's markdown into a clean and simple documentat
 
 ## Quick dress up
 
-Simple as pie.
+Simple as pie. Put that in your repository's gh-pages' branch's `index.html`:
 
 ```html
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/documentup/latest.min.js"></script>
-<script type="text/javascript">
-  DocumentUp.document("username/repository");
-</script>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/documentup/latest.min.js"></script>
+    <script type="text/javascript">
+      DocumentUp.document("username/repository");
+    </script>
+  </head>
+  <body></body>
+</html>
 ```
 
 Make sure to change the `"username/repository"` to the repository's name and user's username.

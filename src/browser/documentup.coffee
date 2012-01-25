@@ -1,4 +1,6 @@
 class window.DocumentUp
+
+  # Base template that'll lie in the <body> of the page
   @template = (locals)->
     """
     <nav id="nav">
@@ -15,12 +17,14 @@ class window.DocumentUp
     </div>
     """
 
+  # Decent defaults
   @defaults =
     color: "#369"
     twitter: null
     issues: true
     travis: false
 
+  # Documentation method
   @document = (@options)->
     if "string" == typeof @options
       repo = @options
