@@ -90,9 +90,38 @@ Some intro text if you want.
 
 If you're a designer or coder and would like to contribute new styles, new features or bug fixes, please don't keep them to yourself, fork the project and send in a pull request!
 
+## Local development
+
+### Requirements
+
+* Node.js (preferrably > 0.6)
+* npm
+
+### Project structure
+
+`src/browser/documentup.coffee`: DocumentUp Class definition  
+`src/stylesheets/screen.styl`: Styles for the documentation
+
+### Setup your environment
+
+Simply `npm install`
+
+### Build cool shit
+
+When you're done, `./scripts/package` to package everything into a single file.
+
+## TODO
+
+Feel free to take up any of these if your bored:
+
+* Google crawlability
+* Deep linkability
+* Better cross-browser support
+
 ## Thank you
 
-Thanks for the few well documented project sites out there for the inspiration.
+* Thanks for the few well documented project sites out there for the inspiration.
+* Thanks to [CDNJS](http://cdnjs.com) for being so helpful and hosting this project.
 
 ## Changelog
 
