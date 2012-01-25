@@ -23,10 +23,10 @@ Make sure to change the `"username/repository"` to the repository's name and use
 
 ### Getting the script
 
-**Recommended**
+**Recommended**  
 Use [CDNJS](http://cdnjs.com) with this script `src`: `http://cdnjs.cloudflare.com/ajax/libs/documentup/0.1.0/documentup.min.js`
 
-**Also good**
+**Also good**  
 Download it from this repository There's a minified version of it named `documentup.min.js`
 
 ### Instantiation
@@ -48,19 +48,19 @@ DocumentUp.document({
 
 ### Options
 
-**repo** (String) *required*
+**repo** (String) *required*  
 Github repository in the form of `username/repository`
 
-**name** (String) *default: repository name*
+**name** (String) *default: repository name*  
 Name of your project. It'll appear in the header of the sidebar. Defaults to the `repository` substring of the `repo` option.
 
-**color** (String) *default: "#336699"*
+**color** (String) *default: "#336699"*  
 CSS-like color representing the color for the links both in the sidebar and the content.
 
-**travis** (Boolean) *default: false*
+**travis** (Boolean) *default: false*  
 Indicate if the project is being tested by [Travis-CI](http://travis-ci.org/). If `true`, it'll add the small travis badge in the sidebar.
 
-**twitter** (String *or* Array of strings) *default: null*
+**twitter** (String *or* Array of strings) *default: null*  
 Add follow buttons for one or more Twitter accounts to your sidebar. Useful to gather followers.
 
 ## Thank you
