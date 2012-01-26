@@ -91,7 +91,7 @@ class window.DocumentUp
   @getReadme = (callback)->
     using_cache = false
   
-    if html = localStorage.getItem("cached_content")
+    if html = localStorage.getItem(@options.repo + ":cached_content")
       callback(null, html)
       @usingCache = true
 
@@ -100,15 +100,15 @@ class window.DocumentUp
       type: "jsonp"
       success: (resp)=>
         readme_sha = obj.sha for obj in resp.data.tree when /readme/i.test(obj.path)
-        last_sha = localStorage.getItem("readme_sha")
+        last_sha = localStorage.getItem(@options.repo + ":readme_sha")
         if readme_sha != last_sha
           $.ajax
             url: "https://api.github.com/repos/#{@options.repo}/git/blobs/#{readme_sha}?callback=?"
             type: "jsonp"
             success: (resp)=>
               html = marked(decode64(resp.data.content))
-              localStorage.setItem("cached_content", html)
-              localStorage.setItem("readme_sha", readme_sha)
+              localStorage.setItem(@options.repo + ":cached_content", html)
+              localStorage.setItem(@options.repo + ":readme_sha", readme_sha)
               
               return callback(null, html) unless @usingCache
               
