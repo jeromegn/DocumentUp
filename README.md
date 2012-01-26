@@ -16,8 +16,8 @@ Simple as pie. Put that in your repository's gh-pages' branch's `index.html`:
   <head>
     <meta charset="utf-8">
     <title></title>
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/documentup/latest.min.js"></script>
-    <script type="text/javascript">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/documentup/latest.min.js"></script>
+    <script>
       DocumentUp.document("username/repository");
     </script>
   </head>
