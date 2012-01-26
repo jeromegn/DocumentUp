@@ -118,13 +118,12 @@ Simply `npm install`
 
 When you're done, `./scripts/package` to package everything into a single file.
 
-## TODO
+## Roadmap
 
-Feel free to take up any of these if you're bored:
-
-* Google crawlability
-* Deep linkability
-* Better cross-browser support
+* iOS and IE8+ compatibility
+* Themes
+* Bring Your Own Markdown Source
+* Multi-page aggregation
 
 ## Thank you
 

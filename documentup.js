@@ -1,4 +1,99 @@
-/*!
+if (typeof window.localStorage == 'undefined' || typeof window.sessionStorage == 'undefined') (function () {
+
+var Storage = function (type) {
+  function createCookie(name, value, days) {
+    var date, expires;
+
+    if (days) {
+      date = new Date();
+      date.setTime(date.getTime()+(days*24*60*60*1000));
+      expires = "; expires="+date.toGMTString();
+    } else {
+      expires = "";
+    }
+    document.cookie = name+"="+value+expires+"; path=/";
+  }
+
+  function readCookie(name) {
+    var nameEQ = name + "=",
+        ca = document.cookie.split(';'),
+        i, c;
+
+    for (i=0; i < ca.length; i++) {
+      c = ca[i];
+      while (c.charAt(0)==' ') {
+        c = c.substring(1,c.length);
+      }
+
+      if (c.indexOf(nameEQ) == 0) {
+        return c.substring(nameEQ.length,c.length);
+      }
+    }
+    return null;
+  }
+  
+  function setData(data) {
+    data = JSON.stringify(data);
+    if (type == 'session') {
+      window.name = data;
+    } else {
+      createCookie('localStorage', data, 365);
+    }
+  }
+  
+  function clearData() {
+    if (type == 'session') {
+      window.name = '';
+    } else {
+      createCookie('localStorage', '', 365);
+    }
+  }
+  
+  function getData() {
+    var data = type == 'session' ? window.name : readCookie('localStorage');
+    return data ? JSON.parse(data) : {};
+  }
+
+
+  // initialise if there's already data
+  var data = getData();
+
+  return {
+    length: 0,
+    clear: function () {
+      data = {};
+      this.length = 0;
+      clearData();
+    },
+    getItem: function (key) {
+      return data[key] === undefined ? null : data[key];
+    },
+    key: function (i) {
+      // not perfect, but works
+      var ctr = 0;
+      for (var k in data) {
+        if (ctr == i) return k;
+        else ctr++;
+      }
+      return null;
+    },
+    removeItem: function (key) {
+      delete data[key];
+      this.length--;
+      setData(data);
+    },
+    setItem: function (key, value) {
+      data[key] = value+''; // forces the value to a string
+      this.length++;
+      setData(data);
+    }
+  };
+};
+
+if (typeof window.localStorage == 'undefined') window.localStorage = new Storage('local');
+if (typeof window.sessionStorage == 'undefined') window.sessionStorage = new Storage('session');
+
+})();/*!
   * =============================================================
   * Ender: open module JavaScript framework (https://ender.no.de)
   * Build: ender null
@@ -3856,47 +3951,6 @@ hljs.LANGUAGES.coffee = function() {
     }
   };
 }();/*
-Language: C#
-Author: Jason Diamond <jason@diamond.name>
-*/
-
-hljs.LANGUAGES.cs  = {
-  defaultMode: {
-    keywords: {
-        // Normal keywords.
-        'abstract': 1, 'as': 1, 'base': 1, 'bool': 1, 'break': 1, 'byte': 1, 'case': 1, 'catch': 1, 'char': 1, 'checked': 1, 'class': 1, 'const': 1, 'continue': 1, 'decimal': 1, 'default': 1, 'delegate': 1, 'do': 1, 'do': 1, 'double': 1, 'else': 1, 'enum': 1, 'event': 1, 'explicit': 1, 'extern': 1, 'false': 1, 'finally': 1, 'fixed': 1, 'float': 1, 'for': 1, 'foreach': 1, 'goto': 1, 'if': 1, 'implicit': 1, 'in': 1, 'int': 1, 'interface': 1, 'internal': 1, 'is': 1, 'lock': 1, 'long': 1, 'namespace': 1, 'new': 1, 'null': 1, 'object': 1, 'operator': 1, 'out': 1, 'override': 1, 'params': 1, 'private': 1, 'protected': 1, 'public': 1, 'readonly': 1, 'ref': 1, 'return': 1, 'sbyte': 1, 'sealed': 1, 'short': 1, 'sizeof': 1, 'stackalloc': 1, 'static': 1, 'string': 1, 'struct': 1, 'switch': 1, 'this': 1, 'throw': 1, 'true': 1, 'try': 1, 'typeof': 1, 'uint': 1, 'ulong': 1, 'unchecked': 1, 'unsafe': 1, 'ushort': 1, 'using': 1, 'virtual': 1, 'volatile': 1, 'void': 1, 'while': 1,
-        // Contextual keywords.
-        'ascending': 1, 'descending': 1, 'from': 1, 'get': 1, 'group': 1, 'into': 1, 'join': 1, 'let': 1, 'orderby': 1, 'partial': 1, 'select': 1, 'set': 1, 'value': 1, 'var': 1, 'where': 1, 'yield': 1
-    },
-    contains: [
-      {
-        className: 'comment',
-        begin: '///', end: '$', returnBegin: true,
-        contains: [
-          {
-            className: 'xmlDocTag',
-            begin: '///|<!--|-->'
-          },
-          {
-            className: 'xmlDocTag',
-            begin: '</?', end: '>'
-          }
-        ]
-      },
-      hljs.C_LINE_COMMENT_MODE,
-      hljs.C_BLOCK_COMMENT_MODE,
-      {
-        className: 'string',
-        begin: '@"', end: '"',
-        contains: [{begin: '""'}]
-      },
-      hljs.APOS_STRING_MODE,
-      hljs.QUOTE_STRING_MODE,
-      hljs.C_NUMBER_MODE
-    ]
-  }
-};
-/*
 Language: C++
 */
 
@@ -3958,6 +4012,47 @@ hljs.LANGUAGES.cpp = function(){
     }
   };
 }();
+/*
+Language: C#
+Author: Jason Diamond <jason@diamond.name>
+*/
+
+hljs.LANGUAGES.cs  = {
+  defaultMode: {
+    keywords: {
+        // Normal keywords.
+        'abstract': 1, 'as': 1, 'base': 1, 'bool': 1, 'break': 1, 'byte': 1, 'case': 1, 'catch': 1, 'char': 1, 'checked': 1, 'class': 1, 'const': 1, 'continue': 1, 'decimal': 1, 'default': 1, 'delegate': 1, 'do': 1, 'do': 1, 'double': 1, 'else': 1, 'enum': 1, 'event': 1, 'explicit': 1, 'extern': 1, 'false': 1, 'finally': 1, 'fixed': 1, 'float': 1, 'for': 1, 'foreach': 1, 'goto': 1, 'if': 1, 'implicit': 1, 'in': 1, 'int': 1, 'interface': 1, 'internal': 1, 'is': 1, 'lock': 1, 'long': 1, 'namespace': 1, 'new': 1, 'null': 1, 'object': 1, 'operator': 1, 'out': 1, 'override': 1, 'params': 1, 'private': 1, 'protected': 1, 'public': 1, 'readonly': 1, 'ref': 1, 'return': 1, 'sbyte': 1, 'sealed': 1, 'short': 1, 'sizeof': 1, 'stackalloc': 1, 'static': 1, 'string': 1, 'struct': 1, 'switch': 1, 'this': 1, 'throw': 1, 'true': 1, 'try': 1, 'typeof': 1, 'uint': 1, 'ulong': 1, 'unchecked': 1, 'unsafe': 1, 'ushort': 1, 'using': 1, 'virtual': 1, 'volatile': 1, 'void': 1, 'while': 1,
+        // Contextual keywords.
+        'ascending': 1, 'descending': 1, 'from': 1, 'get': 1, 'group': 1, 'into': 1, 'join': 1, 'let': 1, 'orderby': 1, 'partial': 1, 'select': 1, 'set': 1, 'value': 1, 'var': 1, 'where': 1, 'yield': 1
+    },
+    contains: [
+      {
+        className: 'comment',
+        begin: '///', end: '$', returnBegin: true,
+        contains: [
+          {
+            className: 'xmlDocTag',
+            begin: '///|<!--|-->'
+          },
+          {
+            className: 'xmlDocTag',
+            begin: '</?', end: '>'
+          }
+        ]
+      },
+      hljs.C_LINE_COMMENT_MODE,
+      hljs.C_BLOCK_COMMENT_MODE,
+      {
+        className: 'string',
+        begin: '@"', end: '"',
+        contains: [{begin: '""'}]
+      },
+      hljs.APOS_STRING_MODE,
+      hljs.QUOTE_STRING_MODE,
+      hljs.C_NUMBER_MODE
+    ]
+  }
+};
 /*
 Language: CSS
 */
@@ -4306,64 +4401,6 @@ hljs.LANGUAGES.erlang_repl = {
   }
 };
 /*
-Language: Go
-Author: Stephan Kountso aka StepLg <steplg@gmail.com>
-Description: Google go language (golang). For info about language see http://golang.org/
-*/
-
-hljs.LANGUAGES.go = function(){
-  var GO_KEYWORDS = {
-    'keyword': {
-       'break' : 1, 'default' : 1, 'func' : 1, 'interface' : 1, 'select' : 1,
-       'case' : 1, 'map' : 1, 'struct' : 1, 'chan' : 1,
-       'else' : 1, 'goto' : 1, 'package' : 1, 'switch' : 1, 'const' : 1,
-       'fallthrough' : 1, 'if' : 1, 'range' : 1, 'type' : 1, 'continue' : 1,
-       'for' : 1, 'import' : 1, 'return' : 1, 'var' : 1, 'go': 1, 'defer' : 1
-    },
-    'constant': {
-       'true': 1, 'false': 1, 'iota': 1, 'nil': 1
-    },
-    'typename': {
-       'bool': 1, 'byte': 1, 'complex64': 1, 'complex128': 1, 'float32': 1,
-       'float64': 1, 'int8': 1, 'int16': 1, 'int32': 1, 'int64': 1, 'string': 1,
-       'uint8': 1, 'uint16': 1, 'uint32': 1, 'uint64': 1, 'int': 1, 'uint': 1,
-       'uintptr': 1
-   },
-    'built_in': {
-       'append': 1, 'cap': 1, 'close': 1, 'complex': 1, 'copy': 1, 'imag': 1,
-       'len': 1, 'make': 1, 'new': 1, 'panic': 1, 'print': 1, 'println': 1,
-       'real': 1, 'recover': 1
-    }
-  };
-  return {
-    defaultMode: {
-      keywords: GO_KEYWORDS,
-      illegal: '</',
-      contains: [
-        hljs.C_LINE_COMMENT_MODE,
-        hljs.C_BLOCK_COMMENT_MODE,
-        hljs.QUOTE_STRING_MODE,
-        {
-          className: 'string',
-          begin: '\'', end: '[^\\\\]\'',
-          relevance: 0
-        },
-        {
-          className: 'string',
-          begin: '`', end: '[^\\\\]`'
-        },
-        {
-          className: 'number',
-          begin: '[^a-zA-Z_0-9](\\-|\\+)?\\d+(\\.\\d+|\\/\\d+)?((d|e|f|l|s)(\\+|\\-)?\\d+)?',
-          relevance: 0
-        },
-        hljs.C_NUMBER_MODE
-      ]
-    }
-  };
-}();
-
-/*
 Language: Erlang
 Description: Erlang is a general-purpose functional language, with strict evaluation, single assignment, and dynamic typing.
 Author: Nikolay Zakharov <nikolay.desh@gmail.com>, Dmitry Kovega <arhibot@gmail.com>
@@ -4565,6 +4602,96 @@ hljs.LANGUAGES.erlang = function(){
   };
 }();
 /*
+Language: Go
+Author: Stephan Kountso aka StepLg <steplg@gmail.com>
+Description: Google go language (golang). For info about language see http://golang.org/
+*/
+
+hljs.LANGUAGES.go = function(){
+  var GO_KEYWORDS = {
+    'keyword': {
+       'break' : 1, 'default' : 1, 'func' : 1, 'interface' : 1, 'select' : 1,
+       'case' : 1, 'map' : 1, 'struct' : 1, 'chan' : 1,
+       'else' : 1, 'goto' : 1, 'package' : 1, 'switch' : 1, 'const' : 1,
+       'fallthrough' : 1, 'if' : 1, 'range' : 1, 'type' : 1, 'continue' : 1,
+       'for' : 1, 'import' : 1, 'return' : 1, 'var' : 1, 'go': 1, 'defer' : 1
+    },
+    'constant': {
+       'true': 1, 'false': 1, 'iota': 1, 'nil': 1
+    },
+    'typename': {
+       'bool': 1, 'byte': 1, 'complex64': 1, 'complex128': 1, 'float32': 1,
+       'float64': 1, 'int8': 1, 'int16': 1, 'int32': 1, 'int64': 1, 'string': 1,
+       'uint8': 1, 'uint16': 1, 'uint32': 1, 'uint64': 1, 'int': 1, 'uint': 1,
+       'uintptr': 1
+   },
+    'built_in': {
+       'append': 1, 'cap': 1, 'close': 1, 'complex': 1, 'copy': 1, 'imag': 1,
+       'len': 1, 'make': 1, 'new': 1, 'panic': 1, 'print': 1, 'println': 1,
+       'real': 1, 'recover': 1
+    }
+  };
+  return {
+    defaultMode: {
+      keywords: GO_KEYWORDS,
+      illegal: '</',
+      contains: [
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.QUOTE_STRING_MODE,
+        {
+          className: 'string',
+          begin: '\'', end: '[^\\\\]\'',
+          relevance: 0
+        },
+        {
+          className: 'string',
+          begin: '`', end: '[^\\\\]`'
+        },
+        {
+          className: 'number',
+          begin: '[^a-zA-Z_0-9](\\-|\\+)?\\d+(\\.\\d+|\\/\\d+)?((d|e|f|l|s)(\\+|\\-)?\\d+)?',
+          relevance: 0
+        },
+        hljs.C_NUMBER_MODE
+      ]
+    }
+  };
+}();
+
+/*
+Language: Ini
+*/
+
+hljs.LANGUAGES.ini = {
+  case_insensitive: true,
+  defaultMode: {
+    illegal: '[^\\s]',
+    contains: [
+      {
+        className: 'comment',
+        begin: ';', end: '$'
+      },
+      {
+        className: 'title',
+        begin: '^\\[', end: '\\]'
+      },
+      {
+        className: 'setting',
+        begin: '^[a-z0-9_\\[\\]]+[ \\t]*=[ \\t]*', end: '$',
+        contains: [
+          {
+            className: 'value',
+            endsWithParent: true,
+            keywords: {'on': 1, 'off': 1, 'true': 1, 'false': 1, 'yes': 1, 'no': 1},
+            contains: [hljs.QUOTE_STRING_MODE, hljs.NUMBER_MODE]
+          }
+        ]
+      }
+    ]
+  }
+};
+/*
 Language: Haskell
 Author: Jeremy Hull <sourdrums@gmail.com>
 */
@@ -4641,38 +4768,6 @@ hljs.LANGUAGES.haskell = function(){
     }
   };
 }();
-/*
-Language: Ini
-*/
-
-hljs.LANGUAGES.ini = {
-  case_insensitive: true,
-  defaultMode: {
-    illegal: '[^\\s]',
-    contains: [
-      {
-        className: 'comment',
-        begin: ';', end: '$'
-      },
-      {
-        className: 'title',
-        begin: '^\\[', end: '\\]'
-      },
-      {
-        className: 'setting',
-        begin: '^[a-z0-9_\\[\\]]+[ \\t]*=[ \\t]*', end: '$',
-        contains: [
-          {
-            className: 'value',
-            endsWithParent: true,
-            keywords: {'on': 1, 'off': 1, 'true': 1, 'false': 1, 'yes': 1, 'no': 1},
-            contains: [hljs.QUOTE_STRING_MODE, hljs.NUMBER_MODE]
-          }
-        ]
-      }
-    ]
-  }
-};
 /*
 Language: Java
 Author: Vsevolod Solovyov <vsevolod.solovyov@gmail.com>
