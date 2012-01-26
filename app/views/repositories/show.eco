@@ -1,0 +1,24 @@
+<nav id="nav">
+  <header>
+    <a href="#" id="logo"><%= @name %></a>
+  </header>
+  <ul id="sections">
+    <% for id, section of @sections: %>
+      <li>
+        <a href="<%= @baseUrl && "/#{@baseUrl}/" %><%= id %>"><%= section.name %></a>
+        <% if section.subSections: %>
+          <ul>
+            <% for sub in section.subSections: %>
+              <li>
+                <a href="<%= @baseUrl && "/#{@baseUrl}/" %><%= id %>/<%= sub.id %>"><%= sub.name %></a>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</nav>
+<div id="content">
+  <%- @content %>
+</div>

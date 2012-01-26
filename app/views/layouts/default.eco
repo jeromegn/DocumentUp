@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/screen.css?<%= @release %>">
+    <script type="text/javascript">
+      this.sections = <%- JSON.stringify(@sections) %>
+      this.repository = "<%- @repository %>"
+      this.baseUrl = "<%- @baseUrl %>"
+    </script>
+    <script type="text/javascript" src="/javascripts/main.js?<%= @release %>"></script>
+  </head>
+  <body><%- @body %></body>
+</html>

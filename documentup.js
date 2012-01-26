@@ -3690,86 +3690,6 @@ hljs.LANGUAGES.apache = function(){
   };
 }();
 /*
-Language: Bash
-Author: vah <vahtenberg@gmail.com>
-*/
-
-hljs.LANGUAGES.bash = function(){
-  var BASH_LITERAL = {'true' : 1, 'false' : 1};
-  var VAR1 = {
-    className: 'variable',
-    begin: '\\$([a-zA-Z0-9_]+)\\b'
-  };
-  var VAR2 = {
-    className: 'variable',
-    begin: '\\$\\{(([^}])|(\\\\}))+\\}',
-    contains: [hljs.C_NUMBER_MODE]
-  };
-  var STRING = {
-    className: 'string',
-    begin: '"', end: '"',
-    illegal: '\\n',
-    contains: [hljs.BACKSLASH_ESCAPE, VAR1, VAR2],
-    relevance: 0
-  };
-  var TEST_CONDITION = {
-    className: 'test_condition',
-    begin: '', end: '',
-    contains: [STRING, VAR1, VAR2, hljs.C_NUMBER_MODE],
-    keywords: {
-      'literal': BASH_LITERAL
-    },
-    relevance: 0
-  };
-
-  return {
-    defaultMode: {
-      keywords: {
-        'keyword': {'if' : 1, 'then' : 1, 'else' : 1, 'fi' : 1, 'for' : 1, 'break' : 1, 'continue' : 1, 'while' : 1, 'in' : 1, 'do' : 1, 'done' : 1, 'echo' : 1, 'exit' : 1, 'return' : 1, 'set' : 1, 'declare' : 1},
-        'literal': BASH_LITERAL
-      },
-      contains: [
-        {
-          className: 'shebang',
-          begin: '(#!\\/bin\\/bash)|(#!\\/bin\\/sh)',
-          relevance: 10
-        },
-        hljs.HASH_COMMENT_MODE,
-        hljs.C_NUMBER_MODE,
-        STRING,
-        VAR1,
-        VAR2,
-        hljs.inherit(TEST_CONDITION, {begin: '\\[ ', end: ' \\]', relevance: 0}),
-        hljs.inherit(TEST_CONDITION, {begin: '\\[\\[ ', end: ' \\]\\]'})
-      ]
-    }
-  };
-}();
-/*
-Language: CMake
-Description: CMake is an open-source cross-platform system for build automation.
-Author: Igor Kalnitsky <igor.kalnitsky@gmail.com>
-Website: http://kalnitsky.org.ua/
-*/
-
-hljs.LANGUAGES.cmake = {
-  case_insensitive: true,
-  defaultMode: {
-    keywords: {
-    'add_custom_command': 2, 'add_custom_target': 2, 'add_definitions': 2, 'add_dependencies': 2, 'add_executable': 2, 'add_library': 2, 'add_subdirectory': 2, 'add_executable': 2, 'add_library': 2, 'add_subdirectory': 2, 'add_test': 2, 'aux_source_directory': 2, 'break': 1, 'build_command': 2, 'cmake_minimum_required': 3, 'cmake_policy': 3, 'configure_file': 1, 'create_test_sourcelist': 1, 'define_property': 1, 'else': 1, 'elseif': 1, 'enable_language': 2, 'enable_testing': 2, 'endforeach': 1, 'endfunction': 1, 'endif': 1, 'endmacro': 1, 'endwhile': 1, 'execute_process': 2, 'export': 1, 'find_file': 1, 'find_library': 2, 'find_package': 2, 'find_path': 1, 'find_program': 1, 'fltk_wrap_ui': 2, 'foreach': 1, 'function': 1, 'get_cmake_property': 3, 'get_directory_property': 1, 'get_filename_component': 1, 'get_property': 1, 'get_source_file_property': 1, 'get_target_property': 1, 'get_test_property': 1, 'if': 1, 'include': 1, 'include_directories': 2, 'include_external_msproject': 1, 'include_regular_expression': 2, 'install': 1, 'link_directories': 1, 'load_cache': 1, 'load_command': 1, 'macro': 1, 'mark_as_advanced': 1, 'message': 1, 'option': 1, 'output_required_files': 1, 'project': 1, 'qt_wrap_cpp': 2, 'qt_wrap_ui': 2, 'remove_definitions': 2, 'return': 1, 'separate_arguments': 1, 'set': 1, 'set_directory_properties': 1, 'set_property': 1, 'set_source_files_properties': 1, 'set_target_properties': 1, 'set_tests_properties': 1, 'site_name': 1, 'source_group': 1, 'string': 1, 'target_link_libraries': 2, 'try_compile': 2, 'try_run': 2, 'unset': 1, 'variable_watch': 2, 'while': 1, 'build_name': 1, 'exec_program': 1, 'export_library_dependencies': 1, 'install_files': 1, 'install_programs': 1, 'install_targets': 1, 'link_libraries': 1, 'make_directory': 1, 'remove': 1, 'subdir_depends': 1, 'subdirs': 1, 'use_mangled_mesa': 1, 'utility_source': 1, 'variable_requires': 1, 'write_file': 1 },
-
-    contains: [
-      {
-        className: 'envvar',
-        begin: '\\${', end: '}'
-      },
-      hljs.HASH_COMMENT_MODE,
-      hljs.QUOTE_STRING_MODE,
-      hljs.NUMBER_MODE
-    ]
-  }
-};
-/*
 Language: CoffeeScript
 Author: Dmytrii Nagirniak (@dnagir)
 */
@@ -4934,100 +4854,6 @@ hljs.LANGUAGES.lua = function() {
   };
 }();
 /*
-Language: Objective C
-Author: Valerii Hiora <valerii.hiora@gmail.com>
-*/
-
-hljs.LANGUAGES.objectivec = function(){
-  var OBJC_KEYWORDS = {
-    'keyword': {
-      'false': 1, 'int': 1, 'float': 1, 'while': 1, 'private': 1, 'char': 1,
-      'catch': 1, 'export': 1, 'sizeof': 2, 'typedef': 2, 'const': 1,
-      'struct': 1, 'for': 1, 'union': 1, 'unsigned': 1, 'long': 1,
-      'volatile': 2, 'static': 1, 'protected': 1, 'bool': 1, 'mutable': 1,
-      'if': 1, 'public': 1, 'do': 1, 'return': 1, 'goto': 1, 'void': 2,
-      'enum': 1, 'else': 1, 'break': 1, 'extern': 1, 'true': 1, 'class': 1,
-      'asm': 1, 'case': 1, 'short': 1, 'default': 1, 'double': 1, 'throw': 1,
-      'register': 1, 'explicit': 1, 'signed': 1, 'typename': 1, 'try': 1,
-      'this': 1, 'switch': 1, 'continue': 1, 'wchar_t': 1, 'inline': 1,
-      'readonly': 1, 'assign': 1, 'property': 1, 'protocol': 10, 'self': 1,
-      'synchronized': 1, 'end': 1, 'synthesize': 50, 'id': 1, 'optional': 1,
-      'required': 1, 'implementation': 10, 'nonatomic': 1,'interface': 1,
-      'super': 1, 'unichar': 1, 'finally': 2, 'dynamic': 2, 'nil': 1
-    },
-    'built_in': {
-      'YES': 5, 'NO': 5, 'NULL': 1, 'IBOutlet': 50, 'IBAction': 50,
-      'NSString': 50, 'NSDictionary': 50, 'CGRect': 50, 'CGPoint': 50,
-      'NSRange': 50, 'release': 1, 'retain': 1, 'autorelease': 50,
-      'UIButton': 50, 'UILabel': 50, 'UITextView': 50, 'UIWebView': 50,
-      'MKMapView': 50, 'UISegmentedControl': 50, 'NSObject': 50,
-      'UITableViewDelegate': 50, 'UITableViewDataSource': 50, 'NSThread': 50,
-      'UIActivityIndicator': 50, 'UITabbar': 50, 'UIToolBar': 50,
-      'UIBarButtonItem': 50, 'UIImageView': 50, 'NSAutoreleasePool': 50,
-      'UITableView': 50, 'BOOL': 1, 'NSInteger': 20, 'CGFloat': 20,
-      'NSException': 50, 'NSLog': 50, 'NSMutableString': 50,
-      'NSMutableArray': 50, 'NSMutableDictionary': 50, 'NSURL': 50
-    }
-  };
-  return {
-    defaultMode: {
-      keywords: OBJC_KEYWORDS,
-      illegal: '</',
-      contains: [
-        hljs.C_LINE_COMMENT_MODE,
-        hljs.C_BLOCK_COMMENT_MODE,
-        hljs.C_NUMBER_MODE,
-        hljs.QUOTE_STRING_MODE,
-        {
-          className: 'string',
-          begin: '\'',
-          end: '[^\\\\]\'',
-          illegal: '[^\\\\][^\']'
-        },
-
-        {
-          className: 'preprocessor',
-          begin: '#import',
-          end: '$',
-          contains: [
-          {
-            className: 'title',
-            begin: '\"',
-            end: '\"'
-          },
-          {
-            className: 'title',
-            begin: '<',
-            end: '>'
-          }
-          ]
-        },
-        {
-          className: 'preprocessor',
-          begin: '#',
-          end: '$'
-        },
-        {
-          className: 'class',
-          begin: 'interface|class|protocol|implementation',
-          end: '({|$)',
-          keywords: {
-            'interface': 1,
-            'class': 1,
-            'protocol': 5,
-            'implementation': 5
-          },
-          contains: [{
-            className: 'id',
-            begin: hljs.UNDERSCORE_IDENT_RE
-          }
-          ]
-        }
-      ]
-    }
-  };
-}();
-/*
 Language: Nginx
 Author: Peter Leonov <gojpeg@yandex.ru>
 */
@@ -5250,6 +5076,100 @@ hljs.LANGUAGES.nginx = function() {
       ]
     }
   }
+}();
+/*
+Language: Objective C
+Author: Valerii Hiora <valerii.hiora@gmail.com>
+*/
+
+hljs.LANGUAGES.objectivec = function(){
+  var OBJC_KEYWORDS = {
+    'keyword': {
+      'false': 1, 'int': 1, 'float': 1, 'while': 1, 'private': 1, 'char': 1,
+      'catch': 1, 'export': 1, 'sizeof': 2, 'typedef': 2, 'const': 1,
+      'struct': 1, 'for': 1, 'union': 1, 'unsigned': 1, 'long': 1,
+      'volatile': 2, 'static': 1, 'protected': 1, 'bool': 1, 'mutable': 1,
+      'if': 1, 'public': 1, 'do': 1, 'return': 1, 'goto': 1, 'void': 2,
+      'enum': 1, 'else': 1, 'break': 1, 'extern': 1, 'true': 1, 'class': 1,
+      'asm': 1, 'case': 1, 'short': 1, 'default': 1, 'double': 1, 'throw': 1,
+      'register': 1, 'explicit': 1, 'signed': 1, 'typename': 1, 'try': 1,
+      'this': 1, 'switch': 1, 'continue': 1, 'wchar_t': 1, 'inline': 1,
+      'readonly': 1, 'assign': 1, 'property': 1, 'protocol': 10, 'self': 1,
+      'synchronized': 1, 'end': 1, 'synthesize': 50, 'id': 1, 'optional': 1,
+      'required': 1, 'implementation': 10, 'nonatomic': 1,'interface': 1,
+      'super': 1, 'unichar': 1, 'finally': 2, 'dynamic': 2, 'nil': 1
+    },
+    'built_in': {
+      'YES': 5, 'NO': 5, 'NULL': 1, 'IBOutlet': 50, 'IBAction': 50,
+      'NSString': 50, 'NSDictionary': 50, 'CGRect': 50, 'CGPoint': 50,
+      'NSRange': 50, 'release': 1, 'retain': 1, 'autorelease': 50,
+      'UIButton': 50, 'UILabel': 50, 'UITextView': 50, 'UIWebView': 50,
+      'MKMapView': 50, 'UISegmentedControl': 50, 'NSObject': 50,
+      'UITableViewDelegate': 50, 'UITableViewDataSource': 50, 'NSThread': 50,
+      'UIActivityIndicator': 50, 'UITabbar': 50, 'UIToolBar': 50,
+      'UIBarButtonItem': 50, 'UIImageView': 50, 'NSAutoreleasePool': 50,
+      'UITableView': 50, 'BOOL': 1, 'NSInteger': 20, 'CGFloat': 20,
+      'NSException': 50, 'NSLog': 50, 'NSMutableString': 50,
+      'NSMutableArray': 50, 'NSMutableDictionary': 50, 'NSURL': 50
+    }
+  };
+  return {
+    defaultMode: {
+      keywords: OBJC_KEYWORDS,
+      illegal: '</',
+      contains: [
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.C_NUMBER_MODE,
+        hljs.QUOTE_STRING_MODE,
+        {
+          className: 'string',
+          begin: '\'',
+          end: '[^\\\\]\'',
+          illegal: '[^\\\\][^\']'
+        },
+
+        {
+          className: 'preprocessor',
+          begin: '#import',
+          end: '$',
+          contains: [
+          {
+            className: 'title',
+            begin: '\"',
+            end: '\"'
+          },
+          {
+            className: 'title',
+            begin: '<',
+            end: '>'
+          }
+          ]
+        },
+        {
+          className: 'preprocessor',
+          begin: '#',
+          end: '$'
+        },
+        {
+          className: 'class',
+          begin: 'interface|class|protocol|implementation',
+          end: '({|$)',
+          keywords: {
+            'interface': 1,
+            'class': 1,
+            'protocol': 5,
+            'implementation': 5
+          },
+          contains: [{
+            className: 'id',
+            begin: hljs.UNDERSCORE_IDENT_RE
+          }
+          ]
+        }
+      ]
+    }
+  };
 }();
 /*
 Language: Perl
