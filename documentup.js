@@ -3856,6 +3856,47 @@ hljs.LANGUAGES.coffee = function() {
     }
   };
 }();/*
+Language: C#
+Author: Jason Diamond <jason@diamond.name>
+*/
+
+hljs.LANGUAGES.cs  = {
+  defaultMode: {
+    keywords: {
+        // Normal keywords.
+        'abstract': 1, 'as': 1, 'base': 1, 'bool': 1, 'break': 1, 'byte': 1, 'case': 1, 'catch': 1, 'char': 1, 'checked': 1, 'class': 1, 'const': 1, 'continue': 1, 'decimal': 1, 'default': 1, 'delegate': 1, 'do': 1, 'do': 1, 'double': 1, 'else': 1, 'enum': 1, 'event': 1, 'explicit': 1, 'extern': 1, 'false': 1, 'finally': 1, 'fixed': 1, 'float': 1, 'for': 1, 'foreach': 1, 'goto': 1, 'if': 1, 'implicit': 1, 'in': 1, 'int': 1, 'interface': 1, 'internal': 1, 'is': 1, 'lock': 1, 'long': 1, 'namespace': 1, 'new': 1, 'null': 1, 'object': 1, 'operator': 1, 'out': 1, 'override': 1, 'params': 1, 'private': 1, 'protected': 1, 'public': 1, 'readonly': 1, 'ref': 1, 'return': 1, 'sbyte': 1, 'sealed': 1, 'short': 1, 'sizeof': 1, 'stackalloc': 1, 'static': 1, 'string': 1, 'struct': 1, 'switch': 1, 'this': 1, 'throw': 1, 'true': 1, 'try': 1, 'typeof': 1, 'uint': 1, 'ulong': 1, 'unchecked': 1, 'unsafe': 1, 'ushort': 1, 'using': 1, 'virtual': 1, 'volatile': 1, 'void': 1, 'while': 1,
+        // Contextual keywords.
+        'ascending': 1, 'descending': 1, 'from': 1, 'get': 1, 'group': 1, 'into': 1, 'join': 1, 'let': 1, 'orderby': 1, 'partial': 1, 'select': 1, 'set': 1, 'value': 1, 'var': 1, 'where': 1, 'yield': 1
+    },
+    contains: [
+      {
+        className: 'comment',
+        begin: '///', end: '$', returnBegin: true,
+        contains: [
+          {
+            className: 'xmlDocTag',
+            begin: '///|<!--|-->'
+          },
+          {
+            className: 'xmlDocTag',
+            begin: '</?', end: '>'
+          }
+        ]
+      },
+      hljs.C_LINE_COMMENT_MODE,
+      hljs.C_BLOCK_COMMENT_MODE,
+      {
+        className: 'string',
+        begin: '@"', end: '"',
+        contains: [{begin: '""'}]
+      },
+      hljs.APOS_STRING_MODE,
+      hljs.QUOTE_STRING_MODE,
+      hljs.C_NUMBER_MODE
+    ]
+  }
+};
+/*
 Language: C++
 */
 
@@ -3917,47 +3958,6 @@ hljs.LANGUAGES.cpp = function(){
     }
   };
 }();
-/*
-Language: C#
-Author: Jason Diamond <jason@diamond.name>
-*/
-
-hljs.LANGUAGES.cs  = {
-  defaultMode: {
-    keywords: {
-        // Normal keywords.
-        'abstract': 1, 'as': 1, 'base': 1, 'bool': 1, 'break': 1, 'byte': 1, 'case': 1, 'catch': 1, 'char': 1, 'checked': 1, 'class': 1, 'const': 1, 'continue': 1, 'decimal': 1, 'default': 1, 'delegate': 1, 'do': 1, 'do': 1, 'double': 1, 'else': 1, 'enum': 1, 'event': 1, 'explicit': 1, 'extern': 1, 'false': 1, 'finally': 1, 'fixed': 1, 'float': 1, 'for': 1, 'foreach': 1, 'goto': 1, 'if': 1, 'implicit': 1, 'in': 1, 'int': 1, 'interface': 1, 'internal': 1, 'is': 1, 'lock': 1, 'long': 1, 'namespace': 1, 'new': 1, 'null': 1, 'object': 1, 'operator': 1, 'out': 1, 'override': 1, 'params': 1, 'private': 1, 'protected': 1, 'public': 1, 'readonly': 1, 'ref': 1, 'return': 1, 'sbyte': 1, 'sealed': 1, 'short': 1, 'sizeof': 1, 'stackalloc': 1, 'static': 1, 'string': 1, 'struct': 1, 'switch': 1, 'this': 1, 'throw': 1, 'true': 1, 'try': 1, 'typeof': 1, 'uint': 1, 'ulong': 1, 'unchecked': 1, 'unsafe': 1, 'ushort': 1, 'using': 1, 'virtual': 1, 'volatile': 1, 'void': 1, 'while': 1,
-        // Contextual keywords.
-        'ascending': 1, 'descending': 1, 'from': 1, 'get': 1, 'group': 1, 'into': 1, 'join': 1, 'let': 1, 'orderby': 1, 'partial': 1, 'select': 1, 'set': 1, 'value': 1, 'var': 1, 'where': 1, 'yield': 1
-    },
-    contains: [
-      {
-        className: 'comment',
-        begin: '///', end: '$', returnBegin: true,
-        contains: [
-          {
-            className: 'xmlDocTag',
-            begin: '///|<!--|-->'
-          },
-          {
-            className: 'xmlDocTag',
-            begin: '</?', end: '>'
-          }
-        ]
-      },
-      hljs.C_LINE_COMMENT_MODE,
-      hljs.C_BLOCK_COMMENT_MODE,
-      {
-        className: 'string',
-        begin: '@"', end: '"',
-        contains: [{begin: '""'}]
-      },
-      hljs.APOS_STRING_MODE,
-      hljs.QUOTE_STRING_MODE,
-      hljs.C_NUMBER_MODE
-    ]
-  }
-};
 /*
 Language: CSS
 */
@@ -4306,6 +4306,64 @@ hljs.LANGUAGES.erlang_repl = {
   }
 };
 /*
+Language: Go
+Author: Stephan Kountso aka StepLg <steplg@gmail.com>
+Description: Google go language (golang). For info about language see http://golang.org/
+*/
+
+hljs.LANGUAGES.go = function(){
+  var GO_KEYWORDS = {
+    'keyword': {
+       'break' : 1, 'default' : 1, 'func' : 1, 'interface' : 1, 'select' : 1,
+       'case' : 1, 'map' : 1, 'struct' : 1, 'chan' : 1,
+       'else' : 1, 'goto' : 1, 'package' : 1, 'switch' : 1, 'const' : 1,
+       'fallthrough' : 1, 'if' : 1, 'range' : 1, 'type' : 1, 'continue' : 1,
+       'for' : 1, 'import' : 1, 'return' : 1, 'var' : 1, 'go': 1, 'defer' : 1
+    },
+    'constant': {
+       'true': 1, 'false': 1, 'iota': 1, 'nil': 1
+    },
+    'typename': {
+       'bool': 1, 'byte': 1, 'complex64': 1, 'complex128': 1, 'float32': 1,
+       'float64': 1, 'int8': 1, 'int16': 1, 'int32': 1, 'int64': 1, 'string': 1,
+       'uint8': 1, 'uint16': 1, 'uint32': 1, 'uint64': 1, 'int': 1, 'uint': 1,
+       'uintptr': 1
+   },
+    'built_in': {
+       'append': 1, 'cap': 1, 'close': 1, 'complex': 1, 'copy': 1, 'imag': 1,
+       'len': 1, 'make': 1, 'new': 1, 'panic': 1, 'print': 1, 'println': 1,
+       'real': 1, 'recover': 1
+    }
+  };
+  return {
+    defaultMode: {
+      keywords: GO_KEYWORDS,
+      illegal: '</',
+      contains: [
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.QUOTE_STRING_MODE,
+        {
+          className: 'string',
+          begin: '\'', end: '[^\\\\]\'',
+          relevance: 0
+        },
+        {
+          className: 'string',
+          begin: '`', end: '[^\\\\]`'
+        },
+        {
+          className: 'number',
+          begin: '[^a-zA-Z_0-9](\\-|\\+)?\\d+(\\.\\d+|\\/\\d+)?((d|e|f|l|s)(\\+|\\-)?\\d+)?',
+          relevance: 0
+        },
+        hljs.C_NUMBER_MODE
+      ]
+    }
+  };
+}();
+
+/*
 Language: Erlang
 Description: Erlang is a general-purpose functional language, with strict evaluation, single assignment, and dynamic typing.
 Author: Nikolay Zakharov <nikolay.desh@gmail.com>, Dmitry Kovega <arhibot@gmail.com>
@@ -4506,64 +4564,6 @@ hljs.LANGUAGES.erlang = function(){
     }
   };
 }();
-/*
-Language: Go
-Author: Stephan Kountso aka StepLg <steplg@gmail.com>
-Description: Google go language (golang). For info about language see http://golang.org/
-*/
-
-hljs.LANGUAGES.go = function(){
-  var GO_KEYWORDS = {
-    'keyword': {
-       'break' : 1, 'default' : 1, 'func' : 1, 'interface' : 1, 'select' : 1,
-       'case' : 1, 'map' : 1, 'struct' : 1, 'chan' : 1,
-       'else' : 1, 'goto' : 1, 'package' : 1, 'switch' : 1, 'const' : 1,
-       'fallthrough' : 1, 'if' : 1, 'range' : 1, 'type' : 1, 'continue' : 1,
-       'for' : 1, 'import' : 1, 'return' : 1, 'var' : 1, 'go': 1, 'defer' : 1
-    },
-    'constant': {
-       'true': 1, 'false': 1, 'iota': 1, 'nil': 1
-    },
-    'typename': {
-       'bool': 1, 'byte': 1, 'complex64': 1, 'complex128': 1, 'float32': 1,
-       'float64': 1, 'int8': 1, 'int16': 1, 'int32': 1, 'int64': 1, 'string': 1,
-       'uint8': 1, 'uint16': 1, 'uint32': 1, 'uint64': 1, 'int': 1, 'uint': 1,
-       'uintptr': 1
-   },
-    'built_in': {
-       'append': 1, 'cap': 1, 'close': 1, 'complex': 1, 'copy': 1, 'imag': 1,
-       'len': 1, 'make': 1, 'new': 1, 'panic': 1, 'print': 1, 'println': 1,
-       'real': 1, 'recover': 1
-    }
-  };
-  return {
-    defaultMode: {
-      keywords: GO_KEYWORDS,
-      illegal: '</',
-      contains: [
-        hljs.C_LINE_COMMENT_MODE,
-        hljs.C_BLOCK_COMMENT_MODE,
-        hljs.QUOTE_STRING_MODE,
-        {
-          className: 'string',
-          begin: '\'', end: '[^\\\\]\'',
-          relevance: 0
-        },
-        {
-          className: 'string',
-          begin: '`', end: '[^\\\\]`'
-        },
-        {
-          className: 'number',
-          begin: '[^a-zA-Z_0-9](\\-|\\+)?\\d+(\\.\\d+|\\/\\d+)?((d|e|f|l|s)(\\+|\\-)?\\d+)?',
-          relevance: 0
-        },
-        hljs.C_NUMBER_MODE
-      ]
-    }
-  };
-}();
-
 /*
 Language: Haskell
 Author: Jeremy Hull <sourdrums@gmail.com>
@@ -4934,6 +4934,100 @@ hljs.LANGUAGES.lua = function() {
   };
 }();
 /*
+Language: Objective C
+Author: Valerii Hiora <valerii.hiora@gmail.com>
+*/
+
+hljs.LANGUAGES.objectivec = function(){
+  var OBJC_KEYWORDS = {
+    'keyword': {
+      'false': 1, 'int': 1, 'float': 1, 'while': 1, 'private': 1, 'char': 1,
+      'catch': 1, 'export': 1, 'sizeof': 2, 'typedef': 2, 'const': 1,
+      'struct': 1, 'for': 1, 'union': 1, 'unsigned': 1, 'long': 1,
+      'volatile': 2, 'static': 1, 'protected': 1, 'bool': 1, 'mutable': 1,
+      'if': 1, 'public': 1, 'do': 1, 'return': 1, 'goto': 1, 'void': 2,
+      'enum': 1, 'else': 1, 'break': 1, 'extern': 1, 'true': 1, 'class': 1,
+      'asm': 1, 'case': 1, 'short': 1, 'default': 1, 'double': 1, 'throw': 1,
+      'register': 1, 'explicit': 1, 'signed': 1, 'typename': 1, 'try': 1,
+      'this': 1, 'switch': 1, 'continue': 1, 'wchar_t': 1, 'inline': 1,
+      'readonly': 1, 'assign': 1, 'property': 1, 'protocol': 10, 'self': 1,
+      'synchronized': 1, 'end': 1, 'synthesize': 50, 'id': 1, 'optional': 1,
+      'required': 1, 'implementation': 10, 'nonatomic': 1,'interface': 1,
+      'super': 1, 'unichar': 1, 'finally': 2, 'dynamic': 2, 'nil': 1
+    },
+    'built_in': {
+      'YES': 5, 'NO': 5, 'NULL': 1, 'IBOutlet': 50, 'IBAction': 50,
+      'NSString': 50, 'NSDictionary': 50, 'CGRect': 50, 'CGPoint': 50,
+      'NSRange': 50, 'release': 1, 'retain': 1, 'autorelease': 50,
+      'UIButton': 50, 'UILabel': 50, 'UITextView': 50, 'UIWebView': 50,
+      'MKMapView': 50, 'UISegmentedControl': 50, 'NSObject': 50,
+      'UITableViewDelegate': 50, 'UITableViewDataSource': 50, 'NSThread': 50,
+      'UIActivityIndicator': 50, 'UITabbar': 50, 'UIToolBar': 50,
+      'UIBarButtonItem': 50, 'UIImageView': 50, 'NSAutoreleasePool': 50,
+      'UITableView': 50, 'BOOL': 1, 'NSInteger': 20, 'CGFloat': 20,
+      'NSException': 50, 'NSLog': 50, 'NSMutableString': 50,
+      'NSMutableArray': 50, 'NSMutableDictionary': 50, 'NSURL': 50
+    }
+  };
+  return {
+    defaultMode: {
+      keywords: OBJC_KEYWORDS,
+      illegal: '</',
+      contains: [
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.C_NUMBER_MODE,
+        hljs.QUOTE_STRING_MODE,
+        {
+          className: 'string',
+          begin: '\'',
+          end: '[^\\\\]\'',
+          illegal: '[^\\\\][^\']'
+        },
+
+        {
+          className: 'preprocessor',
+          begin: '#import',
+          end: '$',
+          contains: [
+          {
+            className: 'title',
+            begin: '\"',
+            end: '\"'
+          },
+          {
+            className: 'title',
+            begin: '<',
+            end: '>'
+          }
+          ]
+        },
+        {
+          className: 'preprocessor',
+          begin: '#',
+          end: '$'
+        },
+        {
+          className: 'class',
+          begin: 'interface|class|protocol|implementation',
+          end: '({|$)',
+          keywords: {
+            'interface': 1,
+            'class': 1,
+            'protocol': 5,
+            'implementation': 5
+          },
+          contains: [{
+            className: 'id',
+            begin: hljs.UNDERSCORE_IDENT_RE
+          }
+          ]
+        }
+      ]
+    }
+  };
+}();
+/*
 Language: Nginx
 Author: Peter Leonov <gojpeg@yandex.ru>
 */
@@ -5156,100 +5250,6 @@ hljs.LANGUAGES.nginx = function() {
       ]
     }
   }
-}();
-/*
-Language: Objective C
-Author: Valerii Hiora <valerii.hiora@gmail.com>
-*/
-
-hljs.LANGUAGES.objectivec = function(){
-  var OBJC_KEYWORDS = {
-    'keyword': {
-      'false': 1, 'int': 1, 'float': 1, 'while': 1, 'private': 1, 'char': 1,
-      'catch': 1, 'export': 1, 'sizeof': 2, 'typedef': 2, 'const': 1,
-      'struct': 1, 'for': 1, 'union': 1, 'unsigned': 1, 'long': 1,
-      'volatile': 2, 'static': 1, 'protected': 1, 'bool': 1, 'mutable': 1,
-      'if': 1, 'public': 1, 'do': 1, 'return': 1, 'goto': 1, 'void': 2,
-      'enum': 1, 'else': 1, 'break': 1, 'extern': 1, 'true': 1, 'class': 1,
-      'asm': 1, 'case': 1, 'short': 1, 'default': 1, 'double': 1, 'throw': 1,
-      'register': 1, 'explicit': 1, 'signed': 1, 'typename': 1, 'try': 1,
-      'this': 1, 'switch': 1, 'continue': 1, 'wchar_t': 1, 'inline': 1,
-      'readonly': 1, 'assign': 1, 'property': 1, 'protocol': 10, 'self': 1,
-      'synchronized': 1, 'end': 1, 'synthesize': 50, 'id': 1, 'optional': 1,
-      'required': 1, 'implementation': 10, 'nonatomic': 1,'interface': 1,
-      'super': 1, 'unichar': 1, 'finally': 2, 'dynamic': 2, 'nil': 1
-    },
-    'built_in': {
-      'YES': 5, 'NO': 5, 'NULL': 1, 'IBOutlet': 50, 'IBAction': 50,
-      'NSString': 50, 'NSDictionary': 50, 'CGRect': 50, 'CGPoint': 50,
-      'NSRange': 50, 'release': 1, 'retain': 1, 'autorelease': 50,
-      'UIButton': 50, 'UILabel': 50, 'UITextView': 50, 'UIWebView': 50,
-      'MKMapView': 50, 'UISegmentedControl': 50, 'NSObject': 50,
-      'UITableViewDelegate': 50, 'UITableViewDataSource': 50, 'NSThread': 50,
-      'UIActivityIndicator': 50, 'UITabbar': 50, 'UIToolBar': 50,
-      'UIBarButtonItem': 50, 'UIImageView': 50, 'NSAutoreleasePool': 50,
-      'UITableView': 50, 'BOOL': 1, 'NSInteger': 20, 'CGFloat': 20,
-      'NSException': 50, 'NSLog': 50, 'NSMutableString': 50,
-      'NSMutableArray': 50, 'NSMutableDictionary': 50, 'NSURL': 50
-    }
-  };
-  return {
-    defaultMode: {
-      keywords: OBJC_KEYWORDS,
-      illegal: '</',
-      contains: [
-        hljs.C_LINE_COMMENT_MODE,
-        hljs.C_BLOCK_COMMENT_MODE,
-        hljs.C_NUMBER_MODE,
-        hljs.QUOTE_STRING_MODE,
-        {
-          className: 'string',
-          begin: '\'',
-          end: '[^\\\\]\'',
-          illegal: '[^\\\\][^\']'
-        },
-
-        {
-          className: 'preprocessor',
-          begin: '#import',
-          end: '$',
-          contains: [
-          {
-            className: 'title',
-            begin: '\"',
-            end: '\"'
-          },
-          {
-            className: 'title',
-            begin: '<',
-            end: '>'
-          }
-          ]
-        },
-        {
-          className: 'preprocessor',
-          begin: '#',
-          end: '$'
-        },
-        {
-          className: 'class',
-          begin: 'interface|class|protocol|implementation',
-          end: '({|$)',
-          keywords: {
-            'interface': 1,
-            'class': 1,
-            'protocol': 5,
-            'implementation': 5
-          },
-          contains: [{
-            className: 'id',
-            begin: hljs.UNDERSCORE_IDENT_RE
-          }
-          ]
-        }
-      ]
-    }
-  };
 }();
 /*
 Language: Perl
@@ -5521,6 +5521,66 @@ hljs.LANGUAGES.python = function() {
   };
 }();
 /*
+Language: Scala
+Author: Jan Berkel <jan.berkel@gmail.com>
+*/
+
+hljs.LANGUAGES.scala = function() {
+  var ANNOTATION = {
+    className: 'annotation', begin: '@[A-Za-z]+'
+  };
+  var STRING = {
+    className: 'string',
+    begin: 'u?r?"""', end: '"""',
+    relevance: 10
+  };
+  return {
+    defaultMode: {
+      keywords: { 'type': 1, 'yield': 1, 'lazy': 1, 'override': 1, 'def': 1, 'with': 1, 'val':1, 'var': 1, 'false': 1, 'true': 1, 'sealed': 1, 'abstract': 1, 'private': 1, 'trait': 1,  'object': 1, 'null': 1, 'if': 1, 'for': 1, 'while': 1, 'throw': 1, 'finally': 1, 'protected': 1, 'extends': 1, 'import': 1, 'final': 1, 'return': 1, 'else': 1, 'break': 1, 'new': 1, 'catch': 1, 'super': 1, 'class': 1, 'case': 1,'package': 1, 'default': 1, 'try': 1, 'this': 1, 'match': 1, 'continue': 1, 'throws': 1},
+      contains: [
+        {
+          className: 'javadoc',
+          begin: '/\\*\\*', end: '\\*/',
+          contains: [{
+            className: 'javadoctag',
+            begin: '@[A-Za-z]+'
+          }],
+          relevance: 10
+        },
+        hljs.C_LINE_COMMENT_MODE, hljs.C_BLOCK_COMMENT_MODE,
+        hljs.APOS_STRING_MODE, hljs.QUOTE_STRING_MODE, STRING,
+        {
+          className: 'class',
+          begin: '((case )?class |object |trait )', end: '({|$)',
+          illegal: ':',
+          keywords: {'case' : 1, 'class': 1, 'trait': 1, 'object': 1},
+          contains: [
+            {
+              begin: '(extends|with)',
+              keywords: {'extends': 1, 'with': 1},
+              relevance: 10
+            },
+            {
+              className: 'title',
+              begin: hljs.UNDERSCORE_IDENT_RE
+            },
+            {
+              className: 'params',
+              begin: '\\(', end: '\\)',
+              contains: [
+                hljs.APOS_STRING_MODE, hljs.QUOTE_STRING_MODE, STRING,
+                ANNOTATION
+              ]
+            }
+          ]
+        },
+        hljs.C_NUMBER_MODE,
+        ANNOTATION
+      ]
+    }
+  };
+}();
+/*
 Language: Ruby
 Author: Anton Kovalyov <anton@kovalyov.net>
 Contributors: Peter Leonov <gojpeg@yandex.ru>, Vasily Polovnyov <vast@whiteants.net>, Loren Segal <lsegal@soen.ca>
@@ -5720,66 +5780,6 @@ hljs.LANGUAGES.ruby = function(){
       lexems: RUBY_IDENT_RE,
       keywords: RUBY_KEYWORDS,
       contains: RUBY_DEFAULT_CONTAINS
-    }
-  };
-}();
-/*
-Language: Scala
-Author: Jan Berkel <jan.berkel@gmail.com>
-*/
-
-hljs.LANGUAGES.scala = function() {
-  var ANNOTATION = {
-    className: 'annotation', begin: '@[A-Za-z]+'
-  };
-  var STRING = {
-    className: 'string',
-    begin: 'u?r?"""', end: '"""',
-    relevance: 10
-  };
-  return {
-    defaultMode: {
-      keywords: { 'type': 1, 'yield': 1, 'lazy': 1, 'override': 1, 'def': 1, 'with': 1, 'val':1, 'var': 1, 'false': 1, 'true': 1, 'sealed': 1, 'abstract': 1, 'private': 1, 'trait': 1,  'object': 1, 'null': 1, 'if': 1, 'for': 1, 'while': 1, 'throw': 1, 'finally': 1, 'protected': 1, 'extends': 1, 'import': 1, 'final': 1, 'return': 1, 'else': 1, 'break': 1, 'new': 1, 'catch': 1, 'super': 1, 'class': 1, 'case': 1,'package': 1, 'default': 1, 'try': 1, 'this': 1, 'match': 1, 'continue': 1, 'throws': 1},
-      contains: [
-        {
-          className: 'javadoc',
-          begin: '/\\*\\*', end: '\\*/',
-          contains: [{
-            className: 'javadoctag',
-            begin: '@[A-Za-z]+'
-          }],
-          relevance: 10
-        },
-        hljs.C_LINE_COMMENT_MODE, hljs.C_BLOCK_COMMENT_MODE,
-        hljs.APOS_STRING_MODE, hljs.QUOTE_STRING_MODE, STRING,
-        {
-          className: 'class',
-          begin: '((case )?class |object |trait )', end: '({|$)',
-          illegal: ':',
-          keywords: {'case' : 1, 'class': 1, 'trait': 1, 'object': 1},
-          contains: [
-            {
-              begin: '(extends|with)',
-              keywords: {'extends': 1, 'with': 1},
-              relevance: 10
-            },
-            {
-              className: 'title',
-              begin: hljs.UNDERSCORE_IDENT_RE
-            },
-            {
-              className: 'params',
-              begin: '\\(', end: '\\)',
-              contains: [
-                hljs.APOS_STRING_MODE, hljs.QUOTE_STRING_MODE, STRING,
-                ANNOTATION
-              ]
-            }
-          ]
-        },
-        hljs.C_NUMBER_MODE,
-        ANNOTATION
-      ]
     }
   };
 }();
@@ -6582,7 +6582,7 @@ if (typeof module !== 'undefined') {
 
 }).call(this);
 (function() {
-  var decode64, keyStr;
+  var Base64;
 
   window.DocumentUp = (function() {
 
@@ -6682,7 +6682,7 @@ if (typeof module !== 'undefined') {
               url: "https://api.github.com/repos/" + _this.options.repo + "/git/blobs/" + readme_sha + "?callback=?",
               type: "jsonp",
               success: function(resp) {
-                html = marked(decode64(resp.data.content));
+                html = marked(Base64.decode(resp.data.content));
                 localStorage.setItem(_this.options.repo + ":cached_content", html);
                 localStorage.setItem(_this.options.repo + ":readme_sha", readme_sha);
                 if (!_this.usingCache) return callback(null, html);
@@ -6739,37 +6739,109 @@ if (typeof module !== 'undefined') {
 
   })();
 
-  decode64 = function(input) {
-    var chr1, chr2, chr3, enc1, enc2, enc3, enc4, i, output;
-    output = "";
-    chr1 = void 0;
-    chr2 = void 0;
-    chr3 = "";
-    enc1 = void 0;
-    enc2 = void 0;
-    enc3 = void 0;
-    enc4 = "";
-    i = 0;
-    input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
-    while (true) {
-      enc1 = keyStr.indexOf(input.charAt(i++));
-      enc2 = keyStr.indexOf(input.charAt(i++));
-      enc3 = keyStr.indexOf(input.charAt(i++));
-      enc4 = keyStr.indexOf(input.charAt(i++));
-      chr1 = (enc1 << 2) | (enc2 >> 4);
-      chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
-      chr3 = ((enc3 & 3) << 6) | enc4;
-      output = output + String.fromCharCode(chr1);
-      if (enc3 !== 64) output = output + String.fromCharCode(chr2);
-      if (enc4 !== 64) output = output + String.fromCharCode(chr3);
-      chr1 = chr2 = chr3 = "";
-      enc1 = enc2 = enc3 = enc4 = "";
-      if (!(i < input.length)) break;
+  Base64 = {
+    _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+    encode: function(input) {
+      var chr1, chr2, chr3, enc1, enc2, enc3, enc4, i, output;
+      output = "";
+      chr1 = void 0;
+      chr2 = void 0;
+      chr3 = void 0;
+      enc1 = void 0;
+      enc2 = void 0;
+      enc3 = void 0;
+      enc4 = void 0;
+      i = 0;
+      input = Base64._utf8_encode(input);
+      while (i < input.length) {
+        chr1 = input.charCodeAt(i++);
+        chr2 = input.charCodeAt(i++);
+        chr3 = input.charCodeAt(i++);
+        enc1 = chr1 >> 2;
+        enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+        enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+        enc4 = chr3 & 63;
+        if (isNaN(chr2)) {
+          enc3 = enc4 = 64;
+        } else {
+          if (isNaN(chr3)) enc4 = 64;
+        }
+        output = output + this._keyStr.charAt(enc1) + this._keyStr.charAt(enc2) + this._keyStr.charAt(enc3) + this._keyStr.charAt(enc4);
+      }
+      return output;
+    },
+    decode: function(input) {
+      var chr1, chr2, chr3, enc1, enc2, enc3, enc4, i, output;
+      output = "";
+      chr1 = void 0;
+      chr2 = void 0;
+      chr3 = void 0;
+      enc1 = void 0;
+      enc2 = void 0;
+      enc3 = void 0;
+      enc4 = void 0;
+      i = 0;
+      input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+      while (i < input.length) {
+        enc1 = this._keyStr.indexOf(input.charAt(i++));
+        enc2 = this._keyStr.indexOf(input.charAt(i++));
+        enc3 = this._keyStr.indexOf(input.charAt(i++));
+        enc4 = this._keyStr.indexOf(input.charAt(i++));
+        chr1 = (enc1 << 2) | (enc2 >> 4);
+        chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+        chr3 = ((enc3 & 3) << 6) | enc4;
+        output = output + String.fromCharCode(chr1);
+        if (enc3 !== 64) output = output + String.fromCharCode(chr2);
+        if (enc4 !== 64) output = output + String.fromCharCode(chr3);
+      }
+      output = Base64._utf8_decode(output);
+      return output;
+    },
+    _utf8_encode: function(string) {
+      var c, n, utftext;
+      string = string.replace(/\r\n/g, "\n");
+      utftext = "";
+      n = 0;
+      while (n < string.length) {
+        c = string.charCodeAt(n);
+        if (c < 128) {
+          utftext += String.fromCharCode(c);
+        } else if ((c > 127) && (c < 2048)) {
+          utftext += String.fromCharCode((c >> 6) | 192);
+          utftext += String.fromCharCode((c & 63) | 128);
+        } else {
+          utftext += String.fromCharCode((c >> 12) | 224);
+          utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+          utftext += String.fromCharCode((c & 63) | 128);
+        }
+        n++;
+      }
+      return utftext;
+    },
+    _utf8_decode: function(utftext) {
+      var c, c1, c2, c3, i, string;
+      string = "";
+      i = 0;
+      c = c1 = c2 = 0;
+      while (i < utftext.length) {
+        c = utftext.charCodeAt(i);
+        if (c < 128) {
+          string += String.fromCharCode(c);
+          i++;
+        } else if ((c > 191) && (c < 224)) {
+          c2 = utftext.charCodeAt(i + 1);
+          string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+          i += 2;
+        } else {
+          c2 = utftext.charCodeAt(i + 1);
+          c3 = utftext.charCodeAt(i + 2);
+          string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+          i += 3;
+        }
+      }
+      return string;
     }
-    return unescape(output);
   };
-
-  keyStr = "ABCDEFGHIJKLMNOP" + "QRSTUVWXYZabcdef" + "ghijklmnopqrstuv" + "wxyz0123456789+/" + "=";
 
 }).call(this);
 var style_tag = document.createElement("style");
