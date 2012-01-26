@@ -119,7 +119,7 @@ When you're done, `./scripts/package` to package everything into a single file.
 
 ## TODO
 
-Feel free to take up any of these if your bored:
+Feel free to take up any of these if you're bored:
 
 * Google crawlability
 * Deep linkability
