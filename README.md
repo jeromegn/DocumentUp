@@ -138,6 +138,12 @@ Feel free to take up any of these if you're bored:
 * `http://cdnjs.cloudflare.com/ajax/libs/documentup/0.1.0/documentup.min.js`
 * Initial release
 
+**0.1.1 (Jan 26, 2012)**
+
+* Files now parsed in UTF-8
+* Namespaced localStorage (thanks to [tbranyen](https://github.com/tbranyen))
+* A few README fixes
+
 ## License
 
 Copyright (c) 2012 Jerome Gravel-Niquet
