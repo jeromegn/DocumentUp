@@ -4934,100 +4934,6 @@ hljs.LANGUAGES.lua = function() {
   };
 }();
 /*
-Language: Objective C
-Author: Valerii Hiora <valerii.hiora@gmail.com>
-*/
-
-hljs.LANGUAGES.objectivec = function(){
-  var OBJC_KEYWORDS = {
-    'keyword': {
-      'false': 1, 'int': 1, 'float': 1, 'while': 1, 'private': 1, 'char': 1,
-      'catch': 1, 'export': 1, 'sizeof': 2, 'typedef': 2, 'const': 1,
-      'struct': 1, 'for': 1, 'union': 1, 'unsigned': 1, 'long': 1,
-      'volatile': 2, 'static': 1, 'protected': 1, 'bool': 1, 'mutable': 1,
-      'if': 1, 'public': 1, 'do': 1, 'return': 1, 'goto': 1, 'void': 2,
-      'enum': 1, 'else': 1, 'break': 1, 'extern': 1, 'true': 1, 'class': 1,
-      'asm': 1, 'case': 1, 'short': 1, 'default': 1, 'double': 1, 'throw': 1,
-      'register': 1, 'explicit': 1, 'signed': 1, 'typename': 1, 'try': 1,
-      'this': 1, 'switch': 1, 'continue': 1, 'wchar_t': 1, 'inline': 1,
-      'readonly': 1, 'assign': 1, 'property': 1, 'protocol': 10, 'self': 1,
-      'synchronized': 1, 'end': 1, 'synthesize': 50, 'id': 1, 'optional': 1,
-      'required': 1, 'implementation': 10, 'nonatomic': 1,'interface': 1,
-      'super': 1, 'unichar': 1, 'finally': 2, 'dynamic': 2, 'nil': 1
-    },
-    'built_in': {
-      'YES': 5, 'NO': 5, 'NULL': 1, 'IBOutlet': 50, 'IBAction': 50,
-      'NSString': 50, 'NSDictionary': 50, 'CGRect': 50, 'CGPoint': 50,
-      'NSRange': 50, 'release': 1, 'retain': 1, 'autorelease': 50,
-      'UIButton': 50, 'UILabel': 50, 'UITextView': 50, 'UIWebView': 50,
-      'MKMapView': 50, 'UISegmentedControl': 50, 'NSObject': 50,
-      'UITableViewDelegate': 50, 'UITableViewDataSource': 50, 'NSThread': 50,
-      'UIActivityIndicator': 50, 'UITabbar': 50, 'UIToolBar': 50,
-      'UIBarButtonItem': 50, 'UIImageView': 50, 'NSAutoreleasePool': 50,
-      'UITableView': 50, 'BOOL': 1, 'NSInteger': 20, 'CGFloat': 20,
-      'NSException': 50, 'NSLog': 50, 'NSMutableString': 50,
-      'NSMutableArray': 50, 'NSMutableDictionary': 50, 'NSURL': 50
-    }
-  };
-  return {
-    defaultMode: {
-      keywords: OBJC_KEYWORDS,
-      illegal: '</',
-      contains: [
-        hljs.C_LINE_COMMENT_MODE,
-        hljs.C_BLOCK_COMMENT_MODE,
-        hljs.C_NUMBER_MODE,
-        hljs.QUOTE_STRING_MODE,
-        {
-          className: 'string',
-          begin: '\'',
-          end: '[^\\\\]\'',
-          illegal: '[^\\\\][^\']'
-        },
-
-        {
-          className: 'preprocessor',
-          begin: '#import',
-          end: '$',
-          contains: [
-          {
-            className: 'title',
-            begin: '\"',
-            end: '\"'
-          },
-          {
-            className: 'title',
-            begin: '<',
-            end: '>'
-          }
-          ]
-        },
-        {
-          className: 'preprocessor',
-          begin: '#',
-          end: '$'
-        },
-        {
-          className: 'class',
-          begin: 'interface|class|protocol|implementation',
-          end: '({|$)',
-          keywords: {
-            'interface': 1,
-            'class': 1,
-            'protocol': 5,
-            'implementation': 5
-          },
-          contains: [{
-            className: 'id',
-            begin: hljs.UNDERSCORE_IDENT_RE
-          }
-          ]
-        }
-      ]
-    }
-  };
-}();
-/*
 Language: Nginx
 Author: Peter Leonov <gojpeg@yandex.ru>
 */
@@ -5250,6 +5156,100 @@ hljs.LANGUAGES.nginx = function() {
       ]
     }
   }
+}();
+/*
+Language: Objective C
+Author: Valerii Hiora <valerii.hiora@gmail.com>
+*/
+
+hljs.LANGUAGES.objectivec = function(){
+  var OBJC_KEYWORDS = {
+    'keyword': {
+      'false': 1, 'int': 1, 'float': 1, 'while': 1, 'private': 1, 'char': 1,
+      'catch': 1, 'export': 1, 'sizeof': 2, 'typedef': 2, 'const': 1,
+      'struct': 1, 'for': 1, 'union': 1, 'unsigned': 1, 'long': 1,
+      'volatile': 2, 'static': 1, 'protected': 1, 'bool': 1, 'mutable': 1,
+      'if': 1, 'public': 1, 'do': 1, 'return': 1, 'goto': 1, 'void': 2,
+      'enum': 1, 'else': 1, 'break': 1, 'extern': 1, 'true': 1, 'class': 1,
+      'asm': 1, 'case': 1, 'short': 1, 'default': 1, 'double': 1, 'throw': 1,
+      'register': 1, 'explicit': 1, 'signed': 1, 'typename': 1, 'try': 1,
+      'this': 1, 'switch': 1, 'continue': 1, 'wchar_t': 1, 'inline': 1,
+      'readonly': 1, 'assign': 1, 'property': 1, 'protocol': 10, 'self': 1,
+      'synchronized': 1, 'end': 1, 'synthesize': 50, 'id': 1, 'optional': 1,
+      'required': 1, 'implementation': 10, 'nonatomic': 1,'interface': 1,
+      'super': 1, 'unichar': 1, 'finally': 2, 'dynamic': 2, 'nil': 1
+    },
+    'built_in': {
+      'YES': 5, 'NO': 5, 'NULL': 1, 'IBOutlet': 50, 'IBAction': 50,
+      'NSString': 50, 'NSDictionary': 50, 'CGRect': 50, 'CGPoint': 50,
+      'NSRange': 50, 'release': 1, 'retain': 1, 'autorelease': 50,
+      'UIButton': 50, 'UILabel': 50, 'UITextView': 50, 'UIWebView': 50,
+      'MKMapView': 50, 'UISegmentedControl': 50, 'NSObject': 50,
+      'UITableViewDelegate': 50, 'UITableViewDataSource': 50, 'NSThread': 50,
+      'UIActivityIndicator': 50, 'UITabbar': 50, 'UIToolBar': 50,
+      'UIBarButtonItem': 50, 'UIImageView': 50, 'NSAutoreleasePool': 50,
+      'UITableView': 50, 'BOOL': 1, 'NSInteger': 20, 'CGFloat': 20,
+      'NSException': 50, 'NSLog': 50, 'NSMutableString': 50,
+      'NSMutableArray': 50, 'NSMutableDictionary': 50, 'NSURL': 50
+    }
+  };
+  return {
+    defaultMode: {
+      keywords: OBJC_KEYWORDS,
+      illegal: '</',
+      contains: [
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        hljs.C_NUMBER_MODE,
+        hljs.QUOTE_STRING_MODE,
+        {
+          className: 'string',
+          begin: '\'',
+          end: '[^\\\\]\'',
+          illegal: '[^\\\\][^\']'
+        },
+
+        {
+          className: 'preprocessor',
+          begin: '#import',
+          end: '$',
+          contains: [
+          {
+            className: 'title',
+            begin: '\"',
+            end: '\"'
+          },
+          {
+            className: 'title',
+            begin: '<',
+            end: '>'
+          }
+          ]
+        },
+        {
+          className: 'preprocessor',
+          begin: '#',
+          end: '$'
+        },
+        {
+          className: 'class',
+          begin: 'interface|class|protocol|implementation',
+          end: '({|$)',
+          keywords: {
+            'interface': 1,
+            'class': 1,
+            'protocol': 5,
+            'implementation': 5
+          },
+          contains: [{
+            className: 'id',
+            begin: hljs.UNDERSCORE_IDENT_RE
+          }
+          ]
+        }
+      ]
+    }
+  };
 }();
 /*
 Language: Perl
@@ -6662,7 +6662,7 @@ if (typeof module !== 'undefined') {
       var html, using_cache;
       var _this = this;
       using_cache = false;
-      if (html = localStorage.getItem("cached_content")) {
+      if (html = localStorage.getItem(this.options.repo + ":cached_content")) {
         callback(null, html);
         this.usingCache = true;
       }
@@ -6676,15 +6676,15 @@ if (typeof module !== 'undefined') {
             obj = _ref[_i];
             if (/readme/i.test(obj.path)) readme_sha = obj.sha;
           }
-          last_sha = localStorage.getItem("readme_sha");
+          last_sha = localStorage.getItem(_this.options.repo + ":readme_sha");
           if (readme_sha !== last_sha) {
             return $.ajax({
               url: "https://api.github.com/repos/" + _this.options.repo + "/git/blobs/" + readme_sha + "?callback=?",
               type: "jsonp",
               success: function(resp) {
                 html = marked(decode64(resp.data.content));
-                localStorage.setItem("cached_content", html);
-                localStorage.setItem("readme_sha", readme_sha);
+                localStorage.setItem(_this.options.repo + ":cached_content", html);
+                localStorage.setItem(_this.options.repo + ":readme_sha", readme_sha);
                 if (!_this.usingCache) return callback(null, html);
                 return $.domReady(function() {
                   var refresh_link;
