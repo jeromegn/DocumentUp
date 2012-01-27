@@ -3,13 +3,13 @@ class window.DocumentUp
   # Base template that'll lie in the <body> of the page
   @template = (locals)->
     """
-    <nav id="nav">
-      <header>
+    <div id="nav">
+      <div id="header">
         <a href="#" id="logo">#{locals.name}</a>
-      </header>
+      </div>
       <ul id="sections">
       </ul>
-    </nav>
+    </div>
     <div id="content">
       <div id="loader">
         Loading documentation...
@@ -43,26 +43,55 @@ class window.DocumentUp
       # Hide the location bar if mobile
       if window.navigator && /(iphone|ipad)/i.test(window.navigator.userAgent)
         window.scrollTo(0,1)
+
+      head_node = document.getElementsByTagName("head")[0]
+
+      # Required for stupid IE
+      append_to_head = (options)->
+        el = document.createElement(options.tagName)
+        head_node.appendChild(el)
+
+        if options.tagName == "style" && el.styleSheet #IE
+          options.styleSheet = {}
+          options.styleSheet.cssText = options.innerHTML
+          delete options.innerHTML
+        delete options.tagName
+
+        for option, value of options
+          if typeof value != "string"
+            el[option][subOption] = val for subOption, val of value
+          else
+            el[option] = value
+
+      # Add some styling for older IE
+      if window.navigator && /MSIE (6|7|8)/i.test(window.navigator.userAgent)
+        append_to_head
+          tagName: "style"
+          type: "text/css"
+          innerHTML: "#nav {border-right: 1px solid #ccc};"
+
+      append_to_head
+        tagName: "style"
+        type: "text/css"
+        innerHTML: "a {color: #{@options.color}}"
       
-      if /MSIE (6|7|8)/.test(window.navigator.userAgent)
-        $.getScript "http://html5shim.googlecode.com/svn/trunk/html5.js"
-
       # Meta tags for mobile
-      $("head").append """
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      """
+      append_to_head
+        tagName: "meta"
+        name: "apple-mobile-web-app-capable"
+        content: "yes"
+      
+      append_to_head
+        tagName: "meta"
+        name: "viewport"
+        content: "width=device-width, initial-scale=1.0"
+      
+      # Change document title to the repo's name
+      document.title = @options.name
 
-      $("title").text(@options.name)
       $("body").html @template(@options)
-      $("head").append """
-        <style type="text/css">
-          a {color: #{@options.color}}
-        </style>
-      """
 
       $nav = $("#nav")
-
       $nav.append """
         <div id="github" class="extra">
           <a href="https://github.com/#{@options.repo}">Source on Github</a>
@@ -95,7 +124,7 @@ class window.DocumentUp
           iframe.attr "src", "https://platform.twitter.com/widgets/follow_button.html?screen_name=#{twitter}&show_count=false"
           extra.append(iframe)
           $nav.append extra
-
+      
     @getReadme (err, @html)=>
       return throw err if err
       $.domReady =>
@@ -155,7 +184,7 @@ class window.DocumentUp
         el.id = section_id = "section-#{current_section}"
         $sections.append """
           <li id="for-#{section_id}">
-            <a href="##{section_id}">#{el.textContent}</a>
+            <a href="##{section_id}">#{el.innerText || el.textContent}</a>
           </li>
         """
       else if el.tagName == "H3"
@@ -167,7 +196,7 @@ class window.DocumentUp
           $subsection = $("#for-section-#{current_section} ul")
         $subsection.append """
           <li id="for-#{section_id}">
-            <a href="##{section_id}">#{el.textContent}</a>
+            <a href="##{section_id}">#{el.innerText || el.textContent}</a>
           </li>
         """
     
@@ -265,32 +294,3 @@ Base64 =
         string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63))
         i += 3
     string
-
-# decode64 = (input) ->
-#   output = ""
-#   chr1 = undefined
-#   chr2 = undefined
-#   chr3 = ""
-#   enc1 = undefined
-#   enc2 = undefined
-#   enc3 = undefined
-#   enc4 = ""
-#   i = 0
-#   input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "")
-#   loop
-#     enc1 = keyStr.indexOf(input.charAt(i++))
-#     enc2 = keyStr.indexOf(input.charAt(i++))
-#     enc3 = keyStr.indexOf(input.charAt(i++))
-#     enc4 = keyStr.indexOf(input.charAt(i++))
-#     chr1 = (enc1 << 2) | (enc2 >> 4)
-#     chr2 = ((enc2 & 15) << 4) | (enc3 >> 2)
-#     chr3 = ((enc3 & 3) << 6) | enc4
-#     output = output + String.fromCharCode(chr1)
-#     output = output + String.fromCharCode(chr2)  unless enc3 is 64
-#     output = output + String.fromCharCode(chr3)  unless enc4 is 64
-#     chr1 = chr2 = chr3 = ""
-#     enc1 = enc2 = enc3 = enc4 = ""
-#     break unless i < input.length
-#   unescape output
-
-# keyStr = "ABCDEFGHIJKLMNOP" + "QRSTUVWXYZabcdef" + "ghijklmnopqrstuv" + "wxyz0123456789+/" + "="

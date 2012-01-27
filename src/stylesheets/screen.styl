@@ -19,13 +19,13 @@ body {
   font-weight:normal;
 }
 
-h1, h2, h3, h4, header, nav, #loader {
+h1, h2, h3, h4, #header, #nav, #loader {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 // Layout
 
-header {
+#header {
   border-bottom: 1px solid #ccc;
   #logo {
     color: #333;
@@ -43,6 +43,7 @@ header {
   left: 0;
   width: 250px;
   height: 100%;
+  background: #f9f9f9;
   background: rgba(black, 0.1);
   border-right: 1px solid rgba(black, 0.2);
   box-shadow: rgba(black, 0.1) -1px 0 3px 0 inset;
@@ -67,6 +68,7 @@ header {
         color: #555;
         font-size: 14px;
         &:hover {
+          background: #ddd;
           background: rgba(black, 0.05);
         }
       }
@@ -81,6 +83,7 @@ header {
           padding: 1px 25px;
           font-size: 13px;
           &:hover {
+            background: #ddd;
             background: rgba(black, 0.05);
           }
         }
