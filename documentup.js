@@ -6762,7 +6762,7 @@ if (typeof module !== 'undefined') {
         });
         document.title = _this.options.name;
         $("body").html(_this.template(_this.options));
-        $nav = $("#nav");
+        $("body").append("<a href=\"http://github.com/" + _this.options.repo + "\"><img style=\"position: absolute; top: 0; right: 0; border: 0;\" src=\"https://a248.e.akamai.net/assets.github.com/img/7afbc8b248c68eb468279e8c17986ad46549fb71/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67\" alt=\"Fork me on GitHub\"></a>");        $nav = $("#nav");
         $nav.append("<div id=\"github\" class=\"extra\">\n  <a href=\"https://github.com/" + _this.options.repo + "\">Source on Github</a>\n</div>");
         if (_this.options.issues) {
           $nav.append("<div id=\"github-issues\" class=\"extra\">\n  <a href=\"https://github.com/" + _this.options.repo + "/issues\">Issues</a>\n</div>");
