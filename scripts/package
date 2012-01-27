@@ -51,7 +51,7 @@ Async.map to_build, (path, callback)->
             var compiled_css = '#{css.replace(/\n/gm, "")}';
             var style_tag = document.createElement("style");
             style_tag.type = "text/css"
-            if (style.styleSheet) { //IE
+            if (style_tag.styleSheet) { //IE
               style_tag.cssText = compiled_css;
             } else {
               var textnode = document.createTextNode(compiled_css);
