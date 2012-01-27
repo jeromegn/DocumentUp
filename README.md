@@ -98,7 +98,9 @@ Some intro text if you want.
 
 ## Tests
 
-Work in progress, see: [spec/index.html](http://documentup.com/spec)
+Using [Mocha](http://visionmedia.github.com/mocha) and [chai](http://chaijs.com).
+
+All still very much a work in progress, run the tests in your browser here: [spec/index.html](http://documentup.com/spec)
 
 ## Contributions are welcome
 
