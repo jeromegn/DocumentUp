@@ -75,17 +75,6 @@ class window.DocumentUp
         type: "text/css"
         innerHTML: "a {color: #{@options.color}}"
       
-      # Meta tags for mobile
-      append_to_head
-        tagName: "meta"
-        name: "apple-mobile-web-app-capable"
-        content: "yes"
-      
-      append_to_head
-        tagName: "meta"
-        name: "viewport"
-        content: "width=device-width, initial-scale=1.0"
-      
       # Change document title to the repo's name
       document.title = @options.name
 
