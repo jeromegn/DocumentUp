@@ -6,9 +6,9 @@ Essentially, it parses your readme's markdown into a clean and simple documentat
 
 \* Some configuration required
 
-## Quick dress up
+## Get Started
 
-Simple as pie. Put that in your repository's gh-pages' branch's `index.html`:
+Simple as pie. Put this **recommended setup** in your repository's gh-pages' branch's `index.html`:
 
 ```html
 <!DOCTYPE html>
