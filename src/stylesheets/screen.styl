@@ -10,6 +10,8 @@ html {
 }
 
 body {
+  padding: 0;
+  margin: 0;
   font: 18px/1.4em "Minion Pro", Times, "Times New Roman", serif;
   font-size-adjust:none;
   font-style:normal;
@@ -20,11 +22,6 @@ body {
 h1, h2, h3, h4, header, nav, #loader {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-
-// code, pre {
-//   font-family: "Droid Sans Mono", Monaco, monospace;
-//   font-size: 14px;
-// }
 
 // Layout
 
@@ -195,8 +192,22 @@ header {
   dfn { font-weight: bold; }
   pre, code { margin: 0 0 1.625em; white-space: pre; }
   pre, code, tt { font: 0.8em "Droid Sans Mono", Monaco, monospace; line-height: 1.5; } 
-  code { background: #f8f8ff; padding: 1px 2px; border: 1px solid #ddd; }
-  pre code {padding: 10px 12px;}
+  code { background: #f8f8ff; padding: 1px 2px; border: 1px solid #ddd; word-wrap: break-word; }
+  pre code {padding: 10px 12px; word-wrap: normal; }
   tt { display: block; margin: 1.625em 0; }
   hr { margin-bottom:1.625em; }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5), only screen and (max-width : 480px) {
+  #nav {
+    position: static;
+    width: 100%;
+    height: auto;
+    box-shadow: none;
+    border-bottom: 1px solid #aaa;
+  }
+  #content {
+    margin: 0;
+    padding: 30px;
+  }
 }

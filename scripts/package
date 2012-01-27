@@ -9,8 +9,6 @@ Async = require("async")
 
 assert = require("assert")
 
-console.log "BUILDING ENDER PACKAGE"
-
 to_build = [
   "vendor/javascript/storage-shim.js"
   "vendor/javascript/ender.js"
