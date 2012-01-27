@@ -96,6 +96,10 @@ Some intro text if you want.
 #### This wouldn't show up in the sidebar
 ```
 
+## Tests
+
+Work in progress, see: [spec/index.html](http://documentup.com/spec)
+
 ## Contributions are welcome
 
 If you're a designer or coder and would like to contribute new styles, new features or bug fixes, please don't keep them to yourself, fork the project and send in a pull request!
