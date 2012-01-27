@@ -40,6 +40,19 @@ class window.DocumentUp
 
     # Prepare layout
     $.domReady =>
+      # Hide the location bar if mobile
+      if window.navigator && /(iphone|ipad)/i.test(window.navigator.userAgent)
+        window.scrollTo(0,1)
+      
+      if /MSIE (6|7|8)/.test(window.navigator.userAgent)
+        $.getScript "http://html5shim.googlecode.com/svn/trunk/html5.js"
+
+      # Meta tags for mobile
+      $("head").append """
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      """
+
       $("title").text(@options.name)
       $("body").html @template(@options)
       $("head").append """
