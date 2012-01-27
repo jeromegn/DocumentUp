@@ -48,9 +48,15 @@ Async.map to_build, (path, callback)->
         Stylus(contents).set('filename', path).set('compress', true).use(Nib()).render (err, css)->
           return callback(err) if err
           contents = """
+            var compiled_css = '#{css.replace(/\n/gm, "")}';
             var style_tag = document.createElement("style");
             style_tag.type = "text/css"
-            style_tag.innerHTML = '#{css.replace(/\n/gm, "")}'
+            if (style.styleSheet) { //IE
+              style_tag.cssText = compiled_css;
+            } else {
+              var textnode = document.createTextNode(compiled_css);
+              style_tag.appendChild(textnode);
+            }
             document.getElementsByTagName('head')[0].appendChild(style_tag);
           """
           callback(null, contents)
