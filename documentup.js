@@ -6711,7 +6711,7 @@ if (typeof module !== 'undefined') {
       _ref = this.defaults;
       for (key in _ref) {
         value = _ref[key];
-        if (!this.options[key]) this.options[key] = value;
+        if (this.options[key] === void 0) this.options[key] = value;
       }
       (_base = this.options).name || (_base.name = this.options.repo.replace(/.+\//, ""));
       $.domReady(function() {
