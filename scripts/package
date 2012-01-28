@@ -15,8 +15,8 @@ to_build = [
   "vendor/javascript/highlight.js"
   "vendor/javascript/languages/*"
   "vendor/javascript/marked.js"
-  "src/browser/documentup.coffee"
-  "src/stylesheets/screen.styl"
+  "standalone/browser/documentup.coffee"
+  "standalone/stylesheets/screen.styl"
 ]
 
 Async.map to_build, (path, callback)->
