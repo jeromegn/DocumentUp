@@ -22,9 +22,8 @@ require("sugar")
 Express = require("express")
 
 Coffee  = require("coffee-script")
-compileCS = (file, path, index, isLast, callback)->
-  console.log "Compiling file: #{path}"
-  callback if path.match(/\.coffee$/) then Coffee.compile(file) else file
+
+eco = require("eco")
 
 stylus = require("stylus")
 nib = require("nib")
@@ -34,39 +33,9 @@ compileStylus = (str, path) ->
 
 server = Express.createServer()
 
-eco = require 'eco'
-compileEco = (file, path, index, isLast, callback)->
-  return callback file unless path.match(/\.eco$/)
-  template_name = path.match(/views\/(.+).eco/)[1]
-  callback """
-    (function() {
-      this.JST || (this.JST = {});
-      this.JST['#{template_name}'] = #{eco.precompile file}
-    }).call(this);
-  """
-
 server.register ".eco", eco
 
 FS = require("fs")
-
-assetManager = require('connect-assetmanager')
-assetHandler = require('connect-assetmanager-handlers')
-
-# Nice little list
-assets = require("./config/assets")
-
-# Transform the bare list of files into a 
-# connect-assetmanager readable list
-Object.keys(assets).each (key)->
-  formatted = 
-    files: assets[key]
-    route: new RegExp("/javascripts/#{key}.js")
-    dataType: "javascript"
-    preManipulate:
-      "^": [compileCS, compileEco]
-    path: "#{__dirname}/"
-    debug: true
-  assets[key] = formatted
 
 server = Express.createServer()
 server.configure ->
@@ -89,26 +58,6 @@ server.configure ->
     layout:  "layouts/default.eco"
     release:  new Date().toJSON()
     env:      server.settings.env
-  
-  compileCount = Object.keys(assets).length
-  hasCompiled = 0
-
-  Object.keys(assets).each (key)->
-    assets[key].postManipulate =
-      "^": [
-        (file, path, index, isLast, callback) ->
-          if isLast
-            if ++hasCompiled == compileCount
-              compileCount = 1
-              hasCompiled = 0
-              growl = require("growl").notify
-              growl "Recompliled JS", title: "DocumentUp"
-          callback file
-      ]
-
-  server.use assetManager(assets)
-
-  #server.use bundle
 
 
 server.configure "development", ->
@@ -134,9 +83,6 @@ server.configure "production", ->
   server.use Express.static "#{__dirname}/public", maxAge: 300000
 
 
-#airbrake.trackDeployment server.settings.release, (err, params) ->
-#  if err return console.log err
-#  console.log "Tracked deployment of #{params.rev} to #{params.env}"
 server.on "listening", ->
   console.log "listening"
   

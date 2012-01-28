@@ -5,12 +5,12 @@
   <ul id="sections">
     <% for id, section of @sections: %>
       <li>
-        <a href="<%= @baseUrl && "/#{@baseUrl}/" %><%= id %>"><%= section.name %></a>
+        <a href="#<%= id %>"><%= section.name %></a>
         <% if section.subSections: %>
           <ul>
             <% for sub in section.subSections: %>
               <li>
-                <a href="<%= @baseUrl && "/#{@baseUrl}/" %><%= id %>/<%= sub.id %>"><%= sub.name %></a>
+                <a href="#<%= id %>/<%= sub.id %>"><%= sub.name %></a>
               </li>
             <% end %>
           </ul>
