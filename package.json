@@ -9,7 +9,7 @@
     "url": "git://github.com/jeromegn/documentup.git"
   },
   "engines": {
-    "node": "~0.6.1"
+    "node": "~0.6.8"
   },
   "start": "coffee server.coffee",
   "filename": "documentup.min.js",
