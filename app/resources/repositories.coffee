@@ -13,7 +13,7 @@ files.forEach (file) ->
   return if /DS_Store/.test(file) || /index/.test(file) || /xml/.test(file)
   require("../../vendor/javascript/languages/#{file}")
 
-
+# Custom markdown parsing addition
 Marked = (text) ->
   current_h2 = null
   tokens = marked_.lexer(text)
