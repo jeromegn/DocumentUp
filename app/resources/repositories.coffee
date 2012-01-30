@@ -143,7 +143,10 @@ renderAndCache = (req, res, next)->
 
     sections = generateNavigation(readme)
 
-    config[key] = value for key, value of defaults when config[key] == undefined
+    if config
+      config[key] = value for key, value of defaults when config[key] == undefined
+    else
+      config = defaults
 
     locals = 
       repository: "#{req.params.username}/#{req.params.repository}"
