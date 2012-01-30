@@ -29,6 +29,14 @@ Simple. Put this **recommended setup** in your repository's gh-pages' branch's `
 
 Make sure to change the `"username/repository"` to the repository's name and user's username.
 
+## Known Issues
+
+### UTF-8 encoding
+
+This has been fixed in master and deployed to cdnjs. For some reason, `latest.js` is still cached as the first version of DocumentUp. A quick fix would be to invalidate the cache by using something like that for a script: `http://cdnjs.cloudflare.com/ajax/libs/documentup/latest.min.js?0.1.1`.
+
+Until this is resolved, I'm not sure what else to do.
+
 ## Usage
 
 ### Getting the script
