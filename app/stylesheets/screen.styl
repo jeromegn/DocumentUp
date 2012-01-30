@@ -10,6 +10,8 @@ html {
 }
 
 body {
+  padding: 0;
+  margin: 0;
   font: 18px/1.4em "Minion Pro", Times, "Times New Roman", serif;
   font-size-adjust:none;
   font-style:normal;
@@ -17,22 +19,17 @@ body {
   font-weight:normal;
 }
 
+h1, h2, h3, h4, #header, #nav, #loader {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
 a {
   color: #369;
 }
 
-h1, h2, h3, h4, header, nav, #loader {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-// code, pre {
-//   font-family: "Droid Sans Mono", Monaco, monospace;
-//   font-size: 14px;
-// }
-
 // Layout
 
-header {
+#header {
   border-bottom: 1px solid #ccc;
   #logo {
     color: #333;
@@ -50,6 +47,7 @@ header {
   left: 0;
   width: 250px;
   height: 100%;
+  background: #f9f9f9;
   background: rgba(black, 0.1);
   border-right: 1px solid rgba(black, 0.2);
   box-shadow: rgba(black, 0.1) -1px 0 3px 0 inset;
@@ -74,6 +72,7 @@ header {
         color: #555;
         font-size: 14px;
         &:hover {
+          background: #ddd;
           background: rgba(black, 0.05);
         }
       }
@@ -88,6 +87,7 @@ header {
           padding: 1px 25px;
           font-size: 13px;
           &:hover {
+            background: #ddd;
             background: rgba(black, 0.05);
           }
         }
@@ -107,23 +107,12 @@ header {
   }
 }
 
-#content {
-  margin: 0 40px 0 290px;
-  padding: 30px 0 20px;
-  position: relative;
-  min-height: 100px;
-  max-width: 688px;
-  #loader {
-    color: #888;
-    width: 300px;
-    height: 24px;
-    line-height: 24px;
-    position: absolute;
-    top: 30px;
-    left: 30px;
-    background: url(unquote('data:image/gif;base64,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')) no-repeat center left;
-    padding-left: 32px;
-    font-size: 18px;
+#github-ribbon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  img {
+    border: 0;
   }
 }
 
@@ -149,6 +138,23 @@ header {
 }
 
 #content {
+  margin: 0 40px 0 290px;
+  padding: 30px 0 20px;
+  min-height: 100px;
+  max-width: 688px;
+  #loader {
+    color: #888;
+    width: 300px;
+    height: 24px;
+    line-height: 24px;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    background: url(unquote('data:image/gif;base64,R0lGODlhGAAYAPYAAP///5mZmfn5+dvb27i4uKmpqaCgoNra2v39/c/Pz6CgoJmZmfT09K+vr66urvb29qWlpaSkpPPz8/v7+87Ozvj4+NXV1dTU1Li4uKysrJubm52dnaqqqu7u7uPj46Ojo8LCwvb29ra2tqenp7q6utzc3JycnNfX1/Ly8uzs7J6ensbGxs3NzeDg4MvLy9LS0r+/v/r6+qysrOrq6t7e3tnZ2cTExLS0tLOzs6ioqLGxsefn57W1tcvLy7y8vMHBwd7e3qKiovHx8cfHx+Hh4QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH+GkNyZWF0ZWQgd2l0aCBhamF4bG9hZC5pbmZvACH5BAAFAAAAIf8LTkVUU0NBUEUyLjADAQAAACwAAAAAGAAYAAAHmoAAgoOEhYaHgxUWBA4aCxwkJwKIhBMJBguZmpkqLBOUDw2bo5kKEogMEKSkLYgIoqubK5QJsZsNCIgCCraZBiiUA72ZJZQABMMgxgAFvRyfxpixGx3LANKxHtbNth8hy8i9IssHwwsXxgLYsSYpxrXDz5QIDubKlAwR5q2UErC2poxNoLBukwoX0IxVuIAhQ6YRBC5MskaxUCAAIfkEAAUAAQAsAAAAABgAGAAAB6GAAIKDhIWGh4MVFgQOGhsOGAcxiIQTCQYLmZqZGwkIlA8Nm6OaMgyHDBCkqwsjEoUIoqykNxWFCbOkNoYCCrmaJjWHA7+ZHzOIBMUND5QFvzATlACYsy/TgtWsIpPTz7kyr5TKv8eUB8ULGzSIAtq/CYi46Qswn7AO9As4toUMEfRcHZIgC9wpRBMovNvU6d60ChcwZFigwYGIAwKwaUQUCAAh+QQABQACACwAAAAAGAAYAAAHooAAgoOEhYaHgxUWBA4aCzkkJwKIhBMJBguZmpkqLAiUDw2bo5oyEocMEKSrCxCnhAiirKs3hQmzsy+DAgq4pBogKIMDvpvAwoQExQvHhwW+zYiYrNGU06wNHpSCz746O5TKyzwzhwfLmgQphQLX6D4dhLfomgmwDvQLOoYMEegRyApJkIWLQ0BDEyi426Six4RtgipcwJAhUwQCFypA3IgoEAAh+QQABQADACwAAAAAGAAYAAAHrYAAgoOEhYaHgxUWBA4aCxwkJzGIhBMJBguZmpkGLAiUDw2bo5oZEocMEKSrCxCnhAiirKsZn4MJs7MJgwIKuawqFYIDv7MnggTFozlDLZMABcpBPjUMhpisJiIJKZQA2KwfP0DPh9HFGjwJQobJypoQK0S2B++kF4IC4PbBt/aaPWA5+CdjQiEGEd5FQHFIgqxcHF4dmkBh3yYVLmx5q3ABQ4ZMBUhYEOCtpLdAACH5BAAFAAQALAAAAAAYABgAAAeegACCg4SFhoeDFRYEDhoaDgQWFYiEEwkGC5mamQYJE5QPDZujmg0PhwwQpKsLEAyFCKKsqw0IhAmzswmDAgq5rAoCggO/sxaCBMWsBIIFyqsRgpjPoybS1KMqzdibBcjcmswAB+CZxwAC09gGwoK43LuDCA7YDp+EDBHPEa+GErK5GkigNIGCulEGKNyjBKDCBQwZMmXAcGESw4uUAgEAIfkEAAUABQAsAAAAABgAGAAAB62AAIKDhIWGh4MVFgQOGgscJCcxiIQTCQYLmZqZBiwIlA8Nm6OaGRKHDBCkqwsQp4QIoqyrGZ+DCbOzCYMCCrmsKhWCA7+zJ4IExaM5Qy2TAAXKQT41DIaYrCYiCSmUANisHz9Az4fRxRo8CUKGycqaECtEtgfvpBeCAuD2wbf2mj1gOfgnY0IhBhHeRUBxSIKsXBxeHZpAYd8mFS5seatwAUOGTAVIWBDgraS3QAAh+QQABQAGACwAAAAAGAAYAAAHooAAgoOEhYaHgxUWBA4aCzkkJwKIhBMJBguZmpkqLAiUDw2bo5oyEocMEKSrCxCnhAiirKs3hQmzsy+DAgq4pBogKIMDvpvAwoQExQvHhwW+zYiYrNGU06wNHpSCz746O5TKyzwzhwfLmgQphQLX6D4dhLfomgmwDvQLOoYMEegRyApJkIWLQ0BDEyi426Six4RtgipcwJAhUwQCFypA3IgoEAAh+QQABQAHACwAAAAAGAAYAAAHoYAAgoOEhYaHgxUWBA4aGw4YBzGIhBMJBguZmpkbCQiUDw2bo5oyDIcMEKSrCyMShQiirKQ3FYUJs6Q2hgIKuZomNYcDv5kfM4gExQ0PlAW/MBOUAJizL9OC1awik9PPuTKvlMq/x5QHxQsbNIgC2r8JiLjpCzCfsA70Czi2hQwR9FwdkiAL3ClEEyi829Tp3rQKFzBkWKDBgYgDArBpRBQIADsAAAAAAAAAAAA=')) no-repeat center left;
+    padding-left: 32px;
+    font-size: 18px;
+  }
+
   p { padding:0 0 0.8125em 0; color:#111; font-weight:300;}
 
   p img       { float: left; margin: 0.5em 0.8125em 0.8125em 0; padding: 0; }
@@ -199,8 +205,28 @@ header {
   dfn { font-weight: bold; }
   pre, code { margin: 0 0 1.625em; white-space: pre; }
   pre, code, tt { font: 0.8em "Droid Sans Mono", Monaco, monospace; line-height: 1.5; } 
-  code { background: #f8f8ff; padding: 1px 2px; border: 1px solid #ddd; }
-  pre code {padding: 10px 12px;}
+  code { background: #f8f8ff; padding: 1px 2px; border: 1px solid #ddd; word-wrap: break-word; }
+  pre code {padding: 10px 12px; word-wrap: normal; }
   tt { display: block; margin: 1.625em 0; }
   hr { margin-bottom:1.625em; }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5), only screen and (max-width : 480px) {
+  #nav {
+    position: static;
+    width: 100%;
+    height: auto;
+    box-shadow: none;
+    border-bottom: 1px solid #aaa;
+  }
+  #content {
+    margin: 0;
+    padding: 30px;
+    position: relative;
+  }
+  #github-ribbon {
+    img {
+      width: 100px;
+    }
+  }
 }

@@ -16,7 +16,7 @@ to_build = [
   "vendor/javascript/languages/*"
   "vendor/javascript/marked.js"
   "standalone/browser/documentup.coffee"
-  "standalone/stylesheets/screen.styl"
+  "app/stylesheets/screen.styl"
 ]
 
 Async.map to_build, (path, callback)->
