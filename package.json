@@ -12,7 +12,7 @@
     "node": "~0.6.8"
   },
   "scripts": {
-    "start": "coffee server.coffee",  
+    "start": "coffee server.coffee"
   },
   "filename": "documentup.min.js",
   "dependencies": {
