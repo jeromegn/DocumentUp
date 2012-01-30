@@ -27,7 +27,7 @@ Async.map to_build, (path, callback)->
       return callback(err) if err
       contents = ""
       files.forEach (file, index, arr)->
-        return unless /(js|coffee)$/.test(file)
+        return if !/(js|coffee)$/.test(file) || /index\.js/.test(file)
         File.readFile "#{__dirname}/../#{new_path}#{file}", "utf8", (err, content)->
           if /xml/.test(file)
             contents = content + contents

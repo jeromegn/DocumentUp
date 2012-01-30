@@ -14,8 +14,8 @@ if module.id == "."
     if process.env.NODE_ENV == "development"
       growl = require("growl").notify
       growl "Restarted", title: "DocumentUp"
-  #port = if process.env.NODE_ENV == "development" then 8080 else 80
-  Server.listen 8080#port
+  port = if process.env.NODE_ENV == "development" then 8080 else 80
+  Server.listen port
   return
 
 require("sugar")

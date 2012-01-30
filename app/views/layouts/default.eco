@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title></title>
+    <title><%= @name %></title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/screen.css?<%= @release %>">
   </head>
   <body><%- @body %></body>
