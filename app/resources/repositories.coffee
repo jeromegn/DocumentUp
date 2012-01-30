@@ -13,6 +13,7 @@ files.forEach (file) ->
   return if /DS_Store/.test(file) || /index/.test(file) || /xml/.test(file)
   require("../../vendor/javascript/languages/#{file}")
 
+
 # Custom markdown parsing addition
 Marked = (text) ->
   current_h2 = null
@@ -169,7 +170,7 @@ Server.get "/:username/:repository", renderAndCache
 # Post-Receive hook
 Server.post "/compile", (req, res, next)->
 
-  push = req.body.payload
+  push = JSON.parse(req.body.payload)
   console.log push
 
   recompile = push.commits && push.commits.some (commit)->
