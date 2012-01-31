@@ -2,23 +2,36 @@
 <html>
   <head>
     <title><%= @config.name || @repository.split("/")[1] %></title>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/screen.css?<%= @release %>">
-    <!-- Google Analytics -->
-    <script type="text/javascript">
-
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-5201171-14']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
-    </script>
+    
+    <% if @env == "development": %>
+      <link rel="stylesheet" type="text/css" href="/stylesheets/screen.css?<%= @release %>">
+    <% else: %>
+      <style type="text/css">
+        <%- @css %>
+      </style>
+    <% end %>
+    
     <% if @color: %>
-      a {color: <%= @color %>}
+      <style type="text/css">
+        a {color: <%= @color %>}
+      </style>
+    <% end %>
+
+    <% if @env == "production" && @repository: %>
+      <!-- Google Analytics -->
+      <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-5201171-14']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+      </script>
     <% end %>
   </head>
   <body><%- @body %></body>

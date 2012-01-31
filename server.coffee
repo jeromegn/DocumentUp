@@ -30,6 +30,7 @@ stylus = require("stylus")
 nib = require("nib")
 compileStylus = (str, path) ->
   console.log "COMPILING STYLUS"
+  console.log path
   stylus(str).set('filename', path).set('compress', true).use(nib())
 
 server = Express.createServer()
@@ -41,6 +42,7 @@ FS = require("fs")
 server = Express.createServer()
 server.configure ->
   server.set "root", __dirname
+  server.set "jsonp callback", true
 
   # use Stylus
   server.use stylus.middleware
