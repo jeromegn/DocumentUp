@@ -73,6 +73,7 @@ class Github
   # Get the required files for a project (readme.md and documentup.json)
   @getFilesFor = (repo, callback)=>
     @getMasterTree repo, (err, tree)=>
+      return callback(err) if err
       readme_sha = obj.sha for obj in tree when file_matchers.readme.test(obj.path)
       config_sha = obj.sha for obj in tree when file_matchers.config.test(obj.path)
 
