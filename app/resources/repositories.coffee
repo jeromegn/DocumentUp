@@ -196,27 +196,59 @@ compile = (req, res, readme, config, callback)->
       locals.css = css
       res.render "repositories/show", locals: locals, callback
 
+
+sendHtml = (res, data, status = 200)->
+  if res.req.query.callback
+    json =
+      status: status
+    if status and status != 200
+      json.error = data
+    else
+      json.html = data  
+
+    return res.json(json)
+  else
+    return res.send(data, status)
+
+
 # Handles sending the client the compiled HTML and caching it
 handleRepository = (req, res, next)->
+  console.log "NOT CACHED, generating..."
 
   # If the user requested "/" then he wants the DocumentUp repo
   req.params.username ||= "jeromegn"
   req.params.repository ||= "documentup"
 
   Github.getBlobsFor "#{req.params.username}/#{req.params.repository}", (err, files)->
-    return res.send(err.message, 500) if err
+    return sendHtml(res, err.message, 500) if err
     {readme, config} = files
 
     compile req, res, readme, config, (err, html)->
-      return res.send(err, 500) if err
-      res.send(html)
+      return sendHtml(res, err.message, 500) if err
+      sendHtml(res, html)
       cacheHtml(req.params.username, req.params.repository, html)
     
+
+renderStaticUnlessJSONP = (path)->
+  (req, res, next)->
+    if req.query.callback
+      unless req.params.username and req.params.repository
+        return sendHtml(res, "You need to supply a username and repository", 400)
+      real_path = "#{path}/#{req.params.username}/#{req.params.repository}/index.html"
+      console.log real_path
+      File.readFile "#{real_path}", "utf8", (err, contents)->
+        # Probably not found, so let's generate it
+        return next() if err
+        sendHtml(res, contents)
+
+    else
+      Express.static(path)(req, res, next)
+
 
 Server.get "/", Express.static("#{__dirname}/../../public/compiled/jeromegn/documentup")
 Server.get "/", handleRepository
 
-Server.get "/:username/:repository", Express.static("#{__dirname}/../../public/compiled")
+Server.get "/:username/:repository", renderStaticUnlessJSONP("#{__dirname}/../../public/compiled")
 Server.get "/:username/:repository", handleRepository
 
 # Github Post-Receive Hook
@@ -240,13 +272,14 @@ Server.post "/recompile", (req, res, next)->
 # Compile any markdown, doesn't cache it.
 handleCompileRequest = (req, res, next)->
   config = req.query || req.body
+  content = config.content
 
-  return res.json(error: "Please send markdown content as the `content` parameter", 400) unless config.content
-
-  delete config.content
-  delete config.callback
+  return res.json(error: "Please send markdown content as the `content` parameter", 400) unless content
 
   config.name ||= "undefined"
+
+  # No need to pollute that object
+  delete config.content
 
   locals =
     content: content

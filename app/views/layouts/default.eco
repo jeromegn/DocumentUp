@@ -3,7 +3,7 @@
   <head>
     <title><%= @config.name || @repository.split("/")[1] %></title>
     
-    <% if @env == "development": %>
+    <% if @env == "test": %>
       <link rel="stylesheet" type="text/css" href="/stylesheets/screen.css?<%= @release %>">
     <% else: %>
       <style type="text/css">
