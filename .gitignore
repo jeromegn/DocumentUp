@@ -1,3 +1,4 @@
 node_modules
+Gemfile.lock
 public/compiled/**
 !public/compiled/.gitkeep
