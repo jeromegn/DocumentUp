@@ -1,5 +1,7 @@
 # Documentation sites as a free service
 
+**This site has been generated with DocumentUp** (eat your own dog food, people)
+
 Automatically generated documentation sites for your markdown files! There are various ways of getting your documentation going:
 
 * [Hosted](#hosted)
@@ -34,7 +36,7 @@ Recommended for private Github repositories or local projects.
 
 ### Parameters
 
-`content` **required**  
+**content** (String) *required*
 Markdown content you want converted
 
 All the configuration parameters detailed [options](#options) are also valid.
