@@ -138,7 +138,8 @@ class window.DocumentUp
             url: "https://api.github.com/repos/#{@options.repo}/git/blobs/#{readme_sha}?callback=?"
             type: "jsonp"
             success: (resp)=>
-              html = marked(Base64.decode(resp.data.content))
+              converter = new Showdown.converter()
+              html = converter.makeHtml(Base64.decode(resp.data.content))
               localStorage.setItem(@options.repo + ":cached_content", html)
               localStorage.setItem(@options.repo + ":readme_sha", readme_sha)
               
