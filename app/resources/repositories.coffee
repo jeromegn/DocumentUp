@@ -271,8 +271,9 @@ Server.post "/recompile", (req, res, next)->
 
 # Compile any markdown, doesn't cache it.
 handleCompileRequest = (req, res, next)->
-  config = req.query || req.body
+  config = !Object.isEmpty(req.body) && req.body || !Object.isEmpty(req.query) && req.query
   content = config.content
+  console.log config
 
   return res.json(error: "Please send markdown content as the `content` parameter", 400) unless content
 
