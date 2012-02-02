@@ -1,14 +1,73 @@
-# Document Up your Readmes!
+# Documentation sites as a free service
 
-Instantly beautify your Github repositories' `README.md` with DocumentUp. This site has been generated with it.
+Automatically generated documentation sites for your markdown files! There are various ways of getting your documentation going:
 
-Essentially, it parses your readme's markdown into a clean and simple documentation website. Made especially for your `gh-pages` branch, all you need is a single `index.html` file that includes the DocumentUp script.*
+* [Hosted](#hosted)
+* [On-Demand API](#on-demand-api)
+* [gh-pages](#gh-pages)
 
-\* Some configuration required
+## Hosted
 
-## Get Started
+DocumentUp hosts your documentation sites. Just visit [http://documentup.com/username/repository](http://documentup.com/) to generate a site from your `README.md`.
 
-Simple. Put this **recommended setup** in your repository's gh-pages' branch's `index.html`:
+Recommended if you have a public Github repository.
+
+### Post-Receive Hook
+
+If you want your readme to be recompiled, please add a [Post-Receive Hook](http://help.github.com/post-receive-hooks/) to your Github repository pointing to: `http://documentup.com/recompile`
+
+Right now that's the only strategy, for the sake of simplicity.
+
+### Configuration
+
+Add a `documentup.json` file to the root of your repository. Refer to the [options](#options) section below for its contents. Feel free to consult this repository's [`documentup.json`](https://github.com/jeromegn/DocumentUp/blob/master/documentup.json)
+
+## On-Demand API
+
+POST or JSONP called on `http://documentup.com/compiled`
+
+Generates a standalone documentation HTML file. The CSS is embedded and the file doesn't rely on any external resources. Therefore, it can be viewed offline.
+
+Recommended for private Github repositories or local projects.
+
+### Parameters
+
+`content` **required**  
+Markdown content you want converted
+
+All the configuration parameters detailed [options](#options) are also valid.
+
+### POST example
+
+```shell
+curl -X POST -d "content=# test" http://documentup.com/compiled
+```
+
+### JSONP example with jQuery
+
+```javascript
+$.ajax({
+  url: "http://documentup.com/compiled",
+  dataType: "jsonp",
+  data: {
+    content: "# test",
+    name: "Test JSONP!"
+  },
+  success: function(resp){
+    // `status` is always provided
+    if (resp.status == 200) {
+      // Write to your document
+      document.open();
+      document.write(resp.html);
+      document.close();
+    }
+  }
+});
+```
+
+## gh-pages
+
+For those wanting to stay within the comfort of their gh-pages branch, it's still possible by using an `index.html` file similar to this:
 
 ```html
 <!DOCTYPE html>
@@ -18,7 +77,7 @@ Simple. Put this **recommended setup** in your repository's gh-pages' branch's `
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/documentup/latest.min.js"></script>
+    <script src="documentup.min.js"></script>
     <script>
       DocumentUp.document("username/repository");
     </script>
@@ -29,60 +88,9 @@ Simple. Put this **recommended setup** in your repository's gh-pages' branch's `
 
 Make sure to change the `"username/repository"` to the repository's name and user's username.
 
-## Known Issues
+### Configuration
 
-### UTF-8 encoding
-
-This has been fixed in master and deployed to cdnjs. For some reason, `latest.js` is still cached as the first version of DocumentUp. A quick fix would be to invalidate the cache by using something like that for a script: `http://cdnjs.cloudflare.com/ajax/libs/documentup/latest.min.js?0.1.1`.
-
-Until this is resolved, I'm not sure what else to do.
-
-## Usage
-
-### Getting the script
-
-**Recommended**  
-Use [CDNJS](http://cdnjs.com) with this script `src`: `http://cdnjs.cloudflare.com/ajax/libs/documentup/latest.min.js`
-
-**Also good**  
-Download it from this repository There's a minified version of it named `documentup.min.js`
-
-### Instantiation
-
-DocumentUp, in its simplest form, accepts a single argument. A string representing a public repository's "route":
-
-```javascript
-DocumentUp.document("username/repository");
-```
-
-It can be enhanced with an option object like so:
-
-```javascript
-DocumentUp.document({
-  repo:  "username/repository",
-  color: "green"
-});
-```
-
-### Options
-
-**repo** (String) *required*  
-Github repository in the form of `username/repository`
-
-**name** (String) *default: repository name*  
-Name of your project. It'll appear in the header of the sidebar. Defaults to the `repository` substring of the `repo` option.
-
-**color** (String) *default: "#336699"*  
-CSS-like color representing the color for the links both in the sidebar and the content.
-
-**issues** (Boolean or String) *default: true*
-Adds a link to the sidebar for the issues tab of the repository if `true`. Also accepts a string if your issues are managed elsewhere.
-
-**travis** (Boolean) *default: false*  
-Indicate if the project is being tested by [Travis-CI](http://travis-ci.org/). If `true`, it'll add the small travis badge in the sidebar.
-
-**twitter** (String *or* Array of strings) *default: null*  
-Add follow buttons for one or more Twitter accounts to your sidebar. Useful to gather followers.
+`DocumentUp.document` accepts either a String or an Object representing your desired configuration. If an object is used, remember to add a `repo` option containing the path `"username/repository"` to your github repository.
 
 ## Formatting guide
 
@@ -104,49 +112,38 @@ Some intro text if you want.
 #### This wouldn't show up in the sidebar
 ```
 
-## Tests
+## Options
 
-Using [Mocha](http://visionmedia.github.com/mocha) and [chai](http://chaijs.com).
+**name** (String) *default: repository name*  
+Name of your project. It'll appear in the header of the sidebar. Defaults to the `repository` substring of the `repo` option.
 
-All still very much a work in progress, run the tests in your browser here: [spec/index.html](http://documentup.com/spec)
+**color** (String) *default: "#336699"*  
+CSS-like color representing the color for the links both in the sidebar and the content.
 
-## Contributions are welcome
+**issues** (Boolean or String) *default: true*
+Adds a link to the sidebar for the issues tab of the repository if `true`. Also accepts a string if your issues are managed elsewhere.
 
-If you're a designer or coder and would like to contribute new styles, new features or bug fixes, please don't keep them to yourself, fork the project and send in a pull request!
+**travis** (Boolean) *default: false*  
+Indicate if the project is being tested by [Travis-CI](http://travis-ci.org/). If `true`, it'll add the small travis badge in the sidebar.
 
-## Local development
-
-### Requirements
-
-* Node.js (preferrably > 0.6)
-* npm
-
-### Project structure
-
-`src/browser/documentup.coffee`: DocumentUp Class definition  
-`src/stylesheets/screen.styl`: Styles for the documentation
-
-### Setup your environment
-
-Simply `npm install`
-
-### Build cool shit
-
-When you're done, `./scripts/package` to package everything into a single file.
+**twitter** (String *or* Array of strings) *default: null*  
+Add follow buttons for one or more Twitter accounts to your sidebar. Useful to gather followers.
 
 ## Roadmap
 
-* iOS and IE8+ compatibility
 * Themes
-* Bring Your Own Markdown Source
 * Multi-page aggregation
 
 ## Thank you
 
 * Thanks for the few well documented project sites out there for the inspiration.
-* Thanks to [CDNJS](http://cdnjs.com) for being so helpful and hosting this project.
+* Thanks to [CDNJS](http://cdnjs.com) who originally offered hosting for this project.
 
 ## Changelog
+
+#### Hosted version (Feb 2, 2012)
+
+Versioning is going to be difficult now since this is now a service. Deployment will be continuous.
 
 #### 0.1.1 (Jan 26, 2012)
 

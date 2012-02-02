@@ -44,12 +44,6 @@ server.configure ->
   server.set "root", __dirname
   server.set "jsonp callback", true
 
-  # use Stylus
-  server.use stylus.middleware
-    src: "#{__dirname}/app"
-    dest: "#{__dirname}/public"
-    compile: compileStylus
-
   server.use Express.query()
   server.use Express.bodyParser()
   server.use Express.cookieParser()
@@ -73,6 +67,14 @@ server.configure "development", ->
     server.use Express.profiler()
   server.error Express.errorHandler(dumpExceptions: true, showStack: true)
 
+  # use Stylus
+  server.use stylus.middleware
+    src: "#{__dirname}/app"
+    dest: "#{__dirname}/public"
+    compile: compileStylus
+
+  server.use server.router
+
   server.use Express.static "#{__dirname}/public"
 
 
@@ -83,15 +85,13 @@ server.configure "production", ->
   server.use Express.logger()
   server.use Express.responseTime()
 
+  server.use server.router
+
   server.use Express.static "#{__dirname}/public", maxAge: 300000
 
 
 server.on "listening", ->
   console.log "listening"
-  
-  server.configure ->
-    server.use server.router
-
 
   FS.readdir "#{__dirname}/app/resources/", (error, files)->
     for file in files

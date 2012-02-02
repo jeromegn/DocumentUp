@@ -211,48 +211,6 @@ sendHtml = (res, data, status = 200)->
     return res.send(data, status)
 
 
-# Handles sending the client the compiled HTML and caching it
-handleRepository = (req, res, next)->
-  console.log "NOT CACHED, generating..."
-
-  # If the user requested "/" then he wants the DocumentUp repo
-  req.params.username ||= "jeromegn"
-  req.params.repository ||= "documentup"
-
-  Github.getBlobsFor "#{req.params.username}/#{req.params.repository}", (err, files)->
-    return sendHtml(res, err.message, 500) if err
-    {readme, config} = files
-
-    compile req, res, readme, config, (err, html)->
-      return sendHtml(res, err.message, 500) if err
-      sendHtml(res, html)
-      cacheHtml(req.params.username, req.params.repository, html)
-    
-
-# Weird hack to either send HTML or send a
-# JSON response with the `html` key
-renderStaticUnlessJSONP = (path)->
-  (req, res, next)->
-    if req.query.callback
-      unless req.params.username and req.params.repository
-        return sendHtml(res, "You need to supply a username and repository", 400)
-      real_path = "#{path}/#{req.params.username}/#{req.params.repository}/index.html"
-      console.log real_path
-      File.readFile "#{real_path}", "utf8", (err, contents)->
-        # Probably not found, so let's generate it
-        return next() if err
-        sendHtml(res, contents)
-
-    else
-      Express.static(path)(req, res, next)
-
-
-Server.get "/", Express.static("#{__dirname}/../../public/compiled/jeromegn/documentup")
-Server.get "/", handleRepository
-
-Server.get "/:username/:repository", renderStaticUnlessJSONP("#{__dirname}/../../public/compiled")
-Server.get "/:username/:repository", handleRepository
-
 # Github Post-Receive Hook
 #
 # Checks if the generated documentation needs to be regenerated and takes action
@@ -277,7 +235,7 @@ handleCompileRequest = (req, res, next)->
   content = config.content
   console.log config
 
-  return res.json(error: "Please send markdown content as the `content` parameter", 400) unless content
+  return sendHtml(res, "Please send markdown content as the `content` parameter", 400) unless content
 
   config.name ||= "undefined"
 
@@ -290,9 +248,53 @@ handleCompileRequest = (req, res, next)->
 
   compile req, res, content, config, (err, html)->
     console.log err if err
-    return res.json(error: "Error while compiling your content", 500) if err
-    res.json(html: html)
+    return sendHtml(res, "Error while compiling your content", 500) if err
+    sendHtml(res, html)
 
 Server.post "/compiled", handleCompileRequest
 Server.get "/compiled", handleCompileRequest
+
+
+# Handles sending the client the compiled HTML and caching it
+handleRepository = (req, res, next)->
+  return next() if req.params.username == "stylesheets" || req.params.username == "images"
+  console.log "NOT CACHED, generating..."
+
+  # If the user requested "/" then he wants the DocumentUp repo
+  req.params.username ||= "jeromegn"
+  req.params.repository ||= "documentup"
+
+  Github.getBlobsFor "#{req.params.username}/#{req.params.repository}", (err, files)->
+    return sendHtml(res, err.message, 500) if err
+    {readme, config} = files
+
+    compile req, res, readme, config, (err, html)->
+      return sendHtml(res, err.message, 500) if err
+      sendHtml(res, html)
+      cacheHtml(req.params.username, req.params.repository, html)
     
+
+# Weird hack to either send HTML or send a
+# JSON response with the `html` key
+renderStaticUnlessJSONP = (path)->
+  (req, res, next)->
+    return next() if req.params.username == "stylesheets" || req.params.username == "images"
+    if req.query.callback
+      unless req.params.username and req.params.repository
+        return sendHtml(res, "You need to supply a username and repository", 400)
+      real_path = "#{path}/#{req.params.username}/#{req.params.repository}/index.html"
+      console.log real_path
+      File.readFile "#{real_path}", "utf8", (err, contents)->
+        # Probably not found, so let's generate it
+        return next() if err
+        sendHtml(res, contents)
+
+    else
+      Express.static(path)(req, res, next)
+
+
+Server.get "/", Express.static("#{__dirname}/../../public/compiled/jeromegn/documentup")
+Server.get "/", handleRepository
+
+Server.get "/:username/:repository", renderStaticUnlessJSONP("#{__dirname}/../../public/compiled")
+Server.get "/:username/:repository", handleRepository
