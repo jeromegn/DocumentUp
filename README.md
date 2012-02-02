@@ -16,6 +16,8 @@ Recommended if you have a public Github repository.
 
 If you want your readme to be recompiled, please add a [Post-Receive Hook](http://help.github.com/post-receive-hooks/) to your Github repository pointing to: `http://documentup.com/recompile`
 
+*I'm still testing this feature. The URL shouldn't change though.*
+
 Right now that's the only strategy, for the sake of simplicity.
 
 ### Configuration
