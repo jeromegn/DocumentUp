@@ -265,6 +265,8 @@ handleRepository = (req, res, next)->
   req.params.username ||= "jeromegn"
   req.params.repository ||= "documentup"
 
+  res.redirect("/", 301) if req.params.username == "username" && req.params.repository == "repository"
+
   req.params.username = req.params.username.toLowerCase()
   req.params.repository = req.params.repository.toLowerCase()
 
