@@ -202,6 +202,7 @@ sendHtml = (res, data, status = 200)->
     json =
       status: status
     if status and status != 200
+      console.log "ERROR SENT BACK: #{data}"
       json.error = data
     else
       json.html = data  
@@ -225,8 +226,8 @@ Server.post "/recompile", (req, res, next)->
 
   if recompile
     splitted = push.repository.url.replace(/(http|https):\/\/github.com/, "").split("/")
-    req.params.username = splitted[0]
-    req.params.repository = splitted[1]
+    req.params.username = splitted[0].toLowerCase()
+    req.params.repository = splitted[1].toLowerCase()
     return handleRepository(req, res, next)
 
 
@@ -259,11 +260,15 @@ Server.get "/compiled", handleCompileRequest
 # Handles sending the client the compiled HTML and caching it
 handleRepository = (req, res, next)->
   return next() if req.params.username == "stylesheets" || req.params.username == "images"
-  console.log "NOT CACHED, generating..."
 
   # If the user requested "/" then he wants the DocumentUp repo
   req.params.username ||= "jeromegn"
   req.params.repository ||= "documentup"
+
+  req.params.username = req.params.username.toLowerCase()
+  req.params.repository = req.params.repository.toLowerCase()
+
+  console.log "COMPILING REPOSITORY: #{req.params.username}/#{req.params.repository}"
 
   Github.getBlobsFor "#{req.params.username}/#{req.params.repository}", (err, files)->
     return sendHtml(res, err.message, 500) if err
