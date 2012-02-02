@@ -2,83 +2,18 @@
 
 File = require("fs")
 Uglify = require("uglify-js")
-Coffee = require("coffee-script")
-Stylus = require("stylus")
-Nib = require("nib")
-Async = require("async")
 
-assert = require("assert")
+file = File.readFileSync("#{__dirname}/../documentup.js", "utf8")
 
-to_build = [
-  "vendor/javascript/storage-shim.js"
-  "vendor/javascript/ender.js"
-  "vendor/javascript/highlight.js"
-  "vendor/javascript/languages/*"
-  "vendor/javascript/marked.js"
-  "standalone/documentup.coffee"
-  "app/stylesheets/screen.styl"
-]
-
-Async.map to_build, (path, callback)->
-  if /\*$/.test(path)
-    console.log "CONCATENATING ALL FILES UNDER: #{path}"
-    new_path = path.replace "*", ""
-    File.readdir "#{__dirname}/../#{new_path}", (err, files)->
-      return callback(err) if err
-      contents = ""
-      files.forEach (file, index, arr)->
-        return if !/(js|coffee)$/.test(file) || /index\.js/.test(file)
-        File.readFile "#{__dirname}/../#{new_path}#{file}", "utf8", (err, content)->
-          if /xml/.test(file)
-            contents = content + contents
-          else
-            contents += content
-          callback(null, contents) if index == arr.length - 1
-  else
-    console.log "CONCATENATING #{path}"
-    contents = File.readFile "#{__dirname}/../#{path}", "utf8", (err, contents)->
-      return callback(err) if err
-      if /coffee$/.test(path)
-        try
-          contents = Coffee.compile(contents)
-        catch e
-          return callback(e)
-        callback(null, contents)
-      else if /styl$/.test(path)
-        Stylus(contents).set('filename', path).set('compress', true).use(Nib()).render (err, css)->
-          return callback(err) if err
-          contents = """
-            var compiled_css = document.createTextNode('#{css.replace(/\n/gm, "")}');
-            var style_tag = document.createElement("style");
-            style_tag.type = "text/css"
-            document.getElementsByTagName('head')[0].appendChild(style_tag);
-            if (style_tag.styleSheet) { // IE
-              style_tag.styleSheet.cssText = compiled_css.nodeValue;
-            } else {
-              style_tag.appendChild(compiled_css);
-            }
-          """
-          callback(null, contents)
-      else
-        callback(err, contents)
-
-, (err, contents) ->
-  return throw err if err
-  contents = contents.join("")
-  File.writeFile "#{__dirname}/../documentup.js", contents, (err)->
-    if err
-      console.log "AN ERROR OCCURED WHEN ATTEMPTING TO SAVE UNCOMPRESSED FILE"
-      console.log(err)
-    console.log "UNCOMPRESSED FILE SAVED TO: #{__dirname}/../documentup.js"
-  try
-    ast = Uglify.parser.parse(contents)
-    ast = Uglify.uglify.ast_mangle(ast)
-    ast = Uglify.uglify.ast_squeeze(ast)
-    final_code = Uglify.uglify.gen_code(ast)
-    File.writeFile "#{__dirname}/../documentup.min.js", final_code, (err)->
-      throw err if err
-      console.log "COMPRESSED FILE SAVED TO: #{__dirname}/../documentup.min.js"
-  catch e
-    console.log "AN ERROR OCCURED WHEN ATTEMPTING TO SAVE COMPRESSED FILE"
-    console.log(e)
+try
+  ast = Uglify.parser.parse(file)
+  ast = Uglify.uglify.ast_mangle(ast)
+  ast = Uglify.uglify.ast_squeeze(ast)
+  final_code = Uglify.uglify.gen_code(ast)
+  File.writeFile "#{__dirname}/../documentup.min.js", final_code, (err)->
+    throw err if err
+    console.log "COMPRESSED FILE SAVED TO: documentup.min.js"
+catch e
+  console.error "AN ERROR OCCURED WHEN ATTEMPTING TO SAVE COMPRESSED FILE"
+  console.error(e)
   
