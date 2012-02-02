@@ -226,8 +226,8 @@ Server.post "/recompile", (req, res, next)->
 
   if recompile
     splitted = push.repository.url.replace(/(http|https):\/\/github.com/, "").split("/")
-    req.params.username = splitted[0].toLowerCase()
-    req.params.repository = splitted[1].toLowerCase()
+    req.params.username = splitted[1].toLowerCase()
+    req.params.repository = splitted[2].toLowerCase()
     return handleRepository(req, res, next)
 
 
