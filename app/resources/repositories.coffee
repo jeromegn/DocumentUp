@@ -217,6 +217,7 @@ sendHtml = (res, data, status = 200)->
 Server.post "/recompile", (req, res, next)->
 
   push = JSON.parse(req.body.payload)
+  console.log push
 
   recompile = push.commits && push.commits.some (commit)->
     return commit.modified && commit.modified.some (modified)->
