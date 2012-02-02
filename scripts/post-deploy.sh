@@ -1,2 +1,3 @@
 npm install
-sudo NODE_ENV=production ./node_modules/.bin/coffee server.coffee
+sudo /etc/init.d/documentup stop
+sudo /etc/init.d/documentup start
