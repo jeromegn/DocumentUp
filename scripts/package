@@ -15,7 +15,7 @@ to_build = [
   "vendor/javascript/highlight.js"
   "vendor/javascript/languages/*"
   "vendor/javascript/marked.js"
-  "standalone/browser/documentup.coffee"
+  "standalone/documentup.coffee"
   "app/stylesheets/screen.styl"
 ]
 

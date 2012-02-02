@@ -229,6 +229,8 @@ handleRepository = (req, res, next)->
       cacheHtml(req.params.username, req.params.repository, html)
     
 
+# Weird hack to either send HTML or send a
+# JSON response with the `html` key
 renderStaticUnlessJSONP = (path)->
   (req, res, next)->
     if req.query.callback
@@ -265,7 +267,7 @@ Server.post "/recompile", (req, res, next)->
   if recompile
     splitted = push.repository.url.replace(/(http|https):\/\/github.com/, "").split("/")
     req.params.username = splitted[0]
-    req.params.repository = splitted[0]
+    req.params.repository = splitted[1]
     return handleRepository(req, res, next)
 
 
@@ -291,6 +293,6 @@ handleCompileRequest = (req, res, next)->
     return res.json(error: "Error while compiling your content", 500) if err
     res.json(html: html)
 
-Server.post "/compile", handleCompileRequest
-Server.get "/compile", handleCompileRequest
+Server.post "/compiled", handleCompileRequest
+Server.get "/compiled", handleCompileRequest
     
