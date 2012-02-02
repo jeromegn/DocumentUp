@@ -1,3 +1,5 @@
+![DocumentUp](http://documentup.com/images/logo.png)
+
 # Documentation sites as a free service
 
 **This site has been generated with DocumentUp** (eat your own dog food, people)
@@ -142,6 +144,7 @@ Add follow buttons for one or more Twitter accounts to your sidebar. Useful to g
 
 * Thanks for the few well documented project sites out there for the inspiration.
 * Thanks to [CDNJS](http://cdnjs.com) who originally offered hosting for this project.
+* Thanks to [Jean-Marc Denis](http://jeanmarcdenis.me/) for the freely downloadable bow tie I used in the logo.
 
 ## Changelog
 
