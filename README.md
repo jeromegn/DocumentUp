@@ -46,9 +46,11 @@ All the configuration parameters detailed [options](#options) are also valid.
 Pipe the response HTML into a file and open it. Example using `curl`:
 
 ```shell
-curl -X POST -d "name=DocumentUp&content=`cat README.md`" \
+curl -X POST --data-urlencode content@README.md \
 http://documentup.com/compiled > index.html && open index.html
 ```
+
+**Note:** If the file you're trying to pass contain ampersands, you need to manually change them to %26. Else the URL will break.
 
 ### JSONP example with jQuery
 
