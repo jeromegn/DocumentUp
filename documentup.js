@@ -24,6 +24,8 @@ DocumentUp.document = function (opts) {
       document.open();
       document.write(resp.html);
       document.close();
+      if (opts.afterRender && typeof opts.afterRender === "function")
+        opts.afterRender()
     }
   }
 

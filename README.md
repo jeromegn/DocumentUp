@@ -43,10 +43,11 @@ All the configuration parameters detailed [options](#options) are also valid.
 
 ### POST example
 
-Pipe the response HTML into a file and open it.
+Pipe the response HTML into a file and open it. Example using `curl`:
 
 ```shell
-curl -X POST -d "name=DocumentUp&content=`cat README.md`"
+curl -X POST -d "name=DocumentUp&content=`cat README.md`" \
+http://documentup.com/compiled > index.html %26%26 open index.html
 ```
 
 ### JSONP example with jQuery
@@ -79,10 +80,6 @@ For those wanting to stay within the comfort of their gh-pages branch, it's stil
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
     <script src="documentup.min.js"></script>
     <script>
       DocumentUp.document("username/repository");
@@ -98,9 +95,32 @@ Make sure to change the `"username/repository"` to the repository's name and use
 
 `DocumentUp.document` accepts either a String or an Object representing your desired configuration. If an object is used, remember to add a `repo` option containing the path `"username/repository"` to your github repository.
 
+All options detailed in the [options](#options) section are available.
+
+In addition to those, one special option is available to "gh-pages version" of DocumentUp:
+
+**afterRender** (Function)  
+A function to be executed after the document has been replaced with the compiled HTML.
+
+### Example
+
+```javascript
+DocumentUp.document({
+  repo:  "jeromegn/documentup",
+  name: "DocumentUp",
+  twitter: [
+    "jeromegn",
+    "DocumentUp"
+  ],
+  afterRender: function(){
+    alert("rendered");
+  }
+});
+```
+
 ### What this script does
 
-It used to a 200+ kilobytes script, not it's about 500 bytes. It does what's written in the JSONP section, without the jQuery dependency. It uses a endpoint like: `http://documentup.com/username/repository?callback=` to fetch the cached copy of the repository and then replaces the page's html with the generated documentation.
+It does what's written in the JSONP section, without the jQuery dependency. It uses a endpoint like: `http://documentup.com/username/repository?callback=` to fetch the cached copy of the repository and then replaces the page's html with the generated documentation.
 
 ## Formatting guide
 

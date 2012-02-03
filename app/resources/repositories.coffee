@@ -1,9 +1,7 @@
 Server = require("../../server")
 marked_ = require("marked")
-Request = require("request")
 Express = require("express")
 File = require("fs")
-Async = require("async")
 
 Github = require("../../lib/github")
 
@@ -27,7 +25,6 @@ files.forEach (file) ->
 # add browsable IDs (via /#some-id) to each heading
 Marked = (text) ->
   current_h2 = null
-  console.log text
   tokens = marked_.lexer(text)
   l = tokens.length
   i = 0
@@ -82,10 +79,7 @@ generateTableOfContents = (markdown)->
 
 
 # Reusable regex to find the right files
-file_matchers =
-  readme: /readme/i
-  config: /documentup\.json/i
-
+file_matchers = require("../../lib/matchers")
 
 compile_dir = "#{__dirname}/../../public/compiled"
 
@@ -186,7 +180,7 @@ Server.post "/recompile", (req, res, next)->
 # Compile any markdown, doesn't cache it.
 handleCompileRequest = (req, res, next)->
   config = !Object.isEmpty(req.body) && req.body || !Object.isEmpty(req.query) && req.query
-  content = config.content
+  content = "#{config.content}"
 
   return sendHtml(res, "Please send markdown content as the `content` parameter", 400) unless content
 

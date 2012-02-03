@@ -1,3 +1,9 @@
+Request = require("request")
+Async = require("async")
+
+file_matchers = require("./matchers")
+
+
 # Static class to handle Github API requests
 class Github
 
