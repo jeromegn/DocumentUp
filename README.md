@@ -10,7 +10,7 @@ Automatically generated documentation sites for your markdown files! There are v
 
 ## Hosted
 
-DocumentUp hosts your documentation sites. Just visit [http://documentup.com/username/repository](http://documentup.com/) to generate a site from your `README.md`.
+DocumentUp hosts your documentation sites. Just visit `http://documentup.com/username/repository` to generate a site from your `README.md`.
 
 Recommended if you have a public Github repository.
 
@@ -43,8 +43,10 @@ All the configuration parameters detailed [options](#options) are also valid.
 
 ### POST example
 
+Pipe the response HTML into a file and open it.
+
 ```shell
-curl -X POST -d "content=# test" http://documentup.com/compiled
+curl -X POST -d "name=DocumentUp&content=`cat README.md`"
 ```
 
 ### JSONP example with jQuery

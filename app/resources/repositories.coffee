@@ -5,6 +5,8 @@ Express = require("express")
 File = require("fs")
 Async = require("async")
 
+Github = require("../../lib/github")
+
 # Load highlighter and languages
 # I need to make this global or else the syntax highlighters
 # won't know what to attach to.
@@ -25,6 +27,7 @@ files.forEach (file) ->
 # add browsable IDs (via /#some-id) to each heading
 Marked = (text) ->
   current_h2 = null
+  console.log text
   tokens = marked_.lexer(text)
   l = tokens.length
   i = 0
@@ -82,57 +85,6 @@ generateTableOfContents = (markdown)->
 file_matchers =
   readme: /readme/i
   config: /documentup\.json/i
-
-
-# Static class to handle Github API requests
-class Github
-
-  # Get the required files for a repo (readme.md and documentup.json)
-  # 
-  # - After getting the master tree, select the right SHAs
-  # - Then go get each of the blobs
-  @getBlobsFor = (repo, callback)=>
-    @getMasterTree repo, (err, tree)=>
-      return callback(err) if err
-      readme_sha = obj.sha for obj in tree when file_matchers.readme.test(obj.path)
-      config_sha = obj.sha for obj in tree when file_matchers.config.test(obj.path)
-
-      Async.parallel
-
-        readme: (callback)=>
-          @getBlob readme_sha, repo, callback
-        
-        config: (callback)=>
-          return callback(null, null) if !config_sha
-          @getBlob config_sha, repo, callback
-      
-      , (err, results)->
-        return callback(err) if err
-        callback null, readme: results.readme, config: JSON.parse(results.config)
-
-  # Gets one blob from the sha and repository
-  @getBlob = (sha, repo, callback)=>
-    Request
-      method: "GET"
-      url: "https://api.github.com/repos/#{repo}/git/blobs/#{sha}"
-      # Required to not get a base64 encoded string
-      headers:
-        "Accept": "application/vnd.github-blob.raw"
-      (err, resp, body)->
-        return callback(err) if err
-        callback(null, body)
-
-  # Gets the master tree of a repository
-  @getMasterTree = (repo, callback)=>
-    Request
-      method: "GET"
-      url: "https://api.github.com/repos/#{repo}/git/trees/master"
-      (err, resp, body)=>
-        return callback(err) if err
-        data = JSON.parse(body)
-        return callback(new Error(data.message)) if data.message
-        tree = data.tree
-        callback(null, tree)
 
 
 compile_dir = "#{__dirname}/../../public/compiled"
@@ -235,7 +187,6 @@ Server.post "/recompile", (req, res, next)->
 handleCompileRequest = (req, res, next)->
   config = !Object.isEmpty(req.body) && req.body || !Object.isEmpty(req.query) && req.query
   content = config.content
-  console.log config
 
   return sendHtml(res, "Please send markdown content as the `content` parameter", 400) unless content
 
@@ -288,10 +239,14 @@ renderStaticUnlessJSONP = (path)->
   (req, res, next)->
     return next() if req.params.username == "stylesheets" || req.params.username == "images"
     if req.query.callback
+      
       unless req.params.username and req.params.repository
         return sendHtml(res, "You need to supply a username and repository", 400)
+      
+      req.params.username = req.params.username.toLowerCase()
+      req.params.repository = req.params.repository.toLowerCase()
       real_path = "#{path}/#{req.params.username}/#{req.params.repository}/index.html"
-      console.log real_path
+
       File.readFile "#{real_path}", "utf8", (err, contents)->
         # Probably not found, so let's generate it
         return next() if err
