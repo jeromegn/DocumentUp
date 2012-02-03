@@ -47,7 +47,7 @@ Pipe the response HTML into a file and open it. Example using `curl`:
 
 ```shell
 curl -X POST -d "name=DocumentUp&content=`cat README.md`" \
-http://documentup.com/compiled > index.html %26%26 open index.html
+http://documentup.com/compiled > index.html && open index.html
 ```
 
 ### JSONP example with jQuery
