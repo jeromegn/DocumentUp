@@ -87,7 +87,7 @@ server.configure "production", ->
 
   server.use server.router
 
-  server.use Express.static "#{__dirname}/public", maxAge: 300000
+  server.use Express.static "#{__dirname}/public", maxAge: 1000 * 60 * 60 * 24 * 14
 
 
 server.on "listening", ->

@@ -69,7 +69,7 @@ generateTableOfContents = (markdown)->
       current_section = id
       sections[id] =
         name: n
-    else
+    else if sections[current_section]
       sections[current_section]["subSections"] ||= []
       sections[current_section]["subSections"].push
         id:   id
