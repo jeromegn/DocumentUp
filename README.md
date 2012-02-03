@@ -96,6 +96,10 @@ Make sure to change the `"username/repository"` to the repository's name and use
 
 `DocumentUp.document` accepts either a String or an Object representing your desired configuration. If an object is used, remember to add a `repo` option containing the path `"username/repository"` to your github repository.
 
+### What this script does
+
+It used to a 200+ kilobytes script, not it's about 500 bytes. It does what's written in the JSONP section, without the jQuery dependency. It uses a endpoint like: `http://documentup.com/username/repository?callback=` to fetch the cached copy of the repository and then replaces the page's html with the generated documentation.
+
 ## Formatting guide
 
 Just like you normally would. DocumentUp also supports "Github Flavored Markdown" and we recommend you use it for syntax highlighting.

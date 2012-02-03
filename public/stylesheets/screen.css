@@ -54,7 +54,7 @@ a{color:#369}
 #content p{padding:0 0 .8125em 0;color:#111;font-weight:300;zoom:1}
 #content p:before,#content p:after{content:"";display:table}
 #content p:after{clear:both}
-#content p img{float:left;margin:.5em .8125em .8125em 0;padding:0}
+#content p img{float:left;margin:.5em .8125em .8125em 0;padding:0;max-width:100%}
 #content h1,#content h2,#content h3,#content h4,#content h5,#content h6{font-weight:normal;color:#333;line-height:1.2em}
 #content h1{font-size:2.125em;margin-bottom:.765em}
 #content h2{font-size:1.7em;margin:.855em 0}
