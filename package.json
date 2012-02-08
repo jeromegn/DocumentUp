@@ -27,8 +27,6 @@
   },
   "devDependencies": {
     "uglify-js":     "1.2.5",
-    "ender":         "0.8.3",
-    "async":         "0.1.15",
     "growl":         "~1.2.0"
   }
 }

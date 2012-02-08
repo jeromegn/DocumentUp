@@ -221,6 +221,9 @@ handleRepository = (req, res, next)->
     return sendHtml(res, err.message, 500) if err
     {readme, config} = files
 
+    if req.query && req.query.config
+      config = JSON.parse(req.query.config)
+
     compile req, res, readme, config, (err, html)->
       return sendHtml(res, err.message, 500) if err
       sendHtml(res, html)
