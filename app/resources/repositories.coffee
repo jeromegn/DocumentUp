@@ -39,7 +39,10 @@ Marked = (text) ->
       else if token.depth == 3
         token.depth = "#{token.depth} id='#{current_h2}/#{to_param}'"
     else if token.type is "code"
-      token.text = hljs.highlightAuto(token.text).value
+      if token.lang in Object.keys(hljs.LANGUAGES)
+        token.text = hljs.highlight(token.lang, token.text).value
+      else
+        token.text = hljs.highlightAuto(token.text).value
       token.escaped = true;
     i++
   text = marked_.parser(tokens)
