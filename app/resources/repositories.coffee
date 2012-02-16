@@ -90,7 +90,7 @@ compile_dir = "#{__dirname}/../../public/compiled"
 # 
 # Tries to create the dirs if they don't exist and
 # then writes the compiled file to it.
-cacheHtml = (username, repository, html)->
+cacheHtml = (username, repository, html, callback)->
 
   try File.mkdirSync "#{compile_dir}/#{username}"
   try File.mkdirSync "#{compile_dir}/#{username}/#{repository}"
@@ -98,6 +98,7 @@ cacheHtml = (username, repository, html)->
   File.writeFile "#{compile_dir}/#{username}/#{repository}/index.html", html, (err)->
     return console.log err if err
     console.log "CACHED: #{username}/#{repository}"
+    callback(null, html) if callback
 
 
 # Defaults for all repos
@@ -180,6 +181,7 @@ Server.post "/recompile", (req, res, next)->
     return handleRepository(req, res, next)
 
 
+
 # Compile any markdown, doesn't cache it.
 handleCompileRequest = (req, res, next)->
   config = !Object.isEmpty(req.body) && req.body || !Object.isEmpty(req.query) && req.query
@@ -206,7 +208,7 @@ Server.get "/compiled", handleCompileRequest
 
 
 # Handles sending the client the compiled HTML and caching it
-handleRepository = (req, res, next)->
+handleRepository = (req, res, next, callback)->
   return next() if req.params.username == "stylesheets" || req.params.username == "images"
 
   # If the user requested "/" then he wants the DocumentUp repo
@@ -229,8 +231,7 @@ handleRepository = (req, res, next)->
 
     compile req, res, readme, config, (err, html)->
       return sendHtml(res, err.message, 500) if err
-      sendHtml(res, html)
-      cacheHtml(req.params.username, req.params.repository, html)
+      cacheHtml(req.params.username, req.params.repository, html, callback)
     
 
 # Weird hack to either send HTML or send a
@@ -260,4 +261,11 @@ Server.get "/", Express.static("#{__dirname}/../../public/compiled/jeromegn/docu
 Server.get "/", handleRepository
 
 Server.get "/:username/:repository", renderStaticUnlessJSONP("#{__dirname}/../../public/compiled")
-Server.get "/:username/:repository", handleRepository
+Server.get "/:username/:repository", (req, res, next)->
+  handleRepository req, res, next, (err, html)->
+    sendHtml(res, html)
+
+# Manual recompile
+Server.get "/:username/:repository/recompile", (req, res, next)->
+  handleRepository req, res, next, (err, html)->
+    res.redirect "/#{req.params.username}/#{req.params.repository}"

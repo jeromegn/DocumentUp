@@ -22,6 +22,12 @@ If you want your readme to be recompiled, please add a [Post-Receive Hook](http:
 
 Right now that's the only strategy, for the sake of simplicity.
 
+### Manual Recompile
+
+Visit `http://documentup.com/username/repository/recompile` to manually tell the server to recompile your readme.
+
+Useful when changes are made to the stylesheets on the server but the compilation hasn't been triggered for a while.
+
 ### Configuration
 
 Add a `documentup.json` file to the root of your repository. Refer to the [options](#options) section below for its contents. Feel free to consult this repository's [`documentup.json`](https://github.com/jeromegn/DocumentUp/blob/master/documentup.json)
