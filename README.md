@@ -167,6 +167,10 @@ Indicate if the project is being tested by [Travis-CI](http://travis-ci.org/). I
 **twitter** (String *or* Array of strings) *default: null*  
 Add follow buttons for one or more Twitter accounts to your sidebar. Useful to gather followers.
 
+**google_analytics** (String) *default: null*  
+This is your Google Analytics "UA" unique ID. Adds GA tracking to your generated documentation.  
+e.g.: "UA-5201171-14"
+
 ## Roadmap
 
 * Themes

@@ -1,31 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <base href="<% if @env == "development": %>http://localhost:8080/<% else: %>http://documentup.com/<% end %>">
     <meta charset="utf-8">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= @config.name || @repository.split("/")[1] %></title>
     
-    <% if @env == "development": %>
-      <link rel="stylesheet" type="text/css" href="/stylesheets/screen.css?<%= @release %>">
-    <% else: %>
-      <style type="text/css">
-        <%- @css %>
-      </style>
-    <% end %>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/screen.css">
     
-    <% if @color: %>
+    <% if @config.color: %>
       <style type="text/css">
-        a {color: <%= @color %>}
+        a {color: <%= @config.color %>}
       </style>
     <% end %>
 
-    <% if @env == "production" && @repository: %>
+    <% if @config.google_analytics: %>
       <!-- Google Analytics -->
       <script type="text/javascript">
 
         var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-5201171-14']);
+        _gaq.push(['_setAccount', '<%= @config.google_analytics %>']);
         _gaq.push(['_trackPageview']);
 
         (function() {

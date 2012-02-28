@@ -103,10 +103,11 @@ cacheHtml = (username, repository, html, callback)->
 
 # Defaults for all repos
 defaults =
-  twitter: null
-  issues: true
-  travis: false
-  ribbon: true
+  twitter:          null
+  issues:           true
+  travis:           false
+  ribbon:           true
+  google_analytics: null
 
 stylus = require("stylus")
 nib = require("nib")
@@ -138,13 +139,8 @@ compile = (req, res, readme, config, callback)->
     config: config
   
   locals.repository = "#{req.params.username}/#{req.params.repository}" if req.params.username && req.params.repository
-
-  styl_path = "#{__dirname}/../stylesheets/screen.styl"
-  File.readFile styl_path, "utf8", (err, contents)->
-    stylus(contents).set('filename', styl_path).set('compress', true).use(nib()).render (err, css)->
-      return callback(err) if err
-      locals.css = css
-      res.render "repositories/show", locals: locals, callback
+  
+  res.render "repositories/show", locals: locals, callback
 
 
 sendHtml = (res, data, status = 200)->
@@ -258,7 +254,9 @@ renderStaticUnlessJSONP = (path)->
 
 
 Server.get "/", Express.static("#{__dirname}/../../public/compiled/jeromegn/documentup")
-Server.get "/", handleRepository
+Server.get "/", (req, res, next)->
+  handleRepository req, res, next, (err, html)->
+    sendHtml(res, html)
 
 Server.get "/:username/:repository", renderStaticUnlessJSONP("#{__dirname}/../../public/compiled")
 Server.get "/:username/:repository", (req, res, next)->
