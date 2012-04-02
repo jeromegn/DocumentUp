@@ -136,6 +136,8 @@ It does what's written in the JSONP section, without the jQuery dependency. It u
 
 Just like you normally would. DocumentUp also supports "Github Flavored Markdown" and we recommend you use it for syntax highlighting.
 
+It doesn't support tables as it is supported on Github, but you can use inline HTML.
+
 h1's (# in markdown) will appear as first level navigation in the sidebar while h2's (##) will appear under them as sub-navigation.
 
 Example:
