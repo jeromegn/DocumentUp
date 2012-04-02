@@ -26,9 +26,9 @@ respond_with_html = (res, data, status = 200)->
 Server.post "/recompile", (req, res, next)->
 
   console.log "IN POST RECEIVE HOOK"
-  console.log req.body.payload
 
-  push = req.body.payload
+  push = JSON.parse(req.body.payload)
+  console.log push
 
   recompile = push.commits && push.commits.some (commit)->
     return commit.modified && commit.modified.some (modified)->

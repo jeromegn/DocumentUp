@@ -3,8 +3,9 @@ assert  = require("assert")
 Browser = require("zombie")
 Async   = require("async")
 request = require("request")
+File    = require("fs")
 
-post_receive = require("./fixtures/post_receive.json")
+post_receive = File.readFileSync("#{__dirname}/fixtures/post_receive", "utf8")
 
 
 describe "Hosted", ->
@@ -16,7 +17,7 @@ describe "Hosted", ->
     statusCode = body = headers = null
     
     before (done)->
-      request.post "http://localhost:3003/recompile", json: post_receive, (err, response, body)->
+      request.post "http://localhost:3003/recompile", form: payload: post_receive, (err, response, body)->
         { statusCode, headers, body } = response
         done()
 
