@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= @config.name || @repository.split("/")[1] %></title>
+    <title><%= @config.name || @name.split("/")[1] %></title>
     
-    <link rel="stylesheet" type="text/css" href="<% if @env == "production": %>http://documentup.com<% end %>/stylesheets/screen.css">
+    <link rel="stylesheet" type="text/css" href="<% if @env == "production": %>http://documentup.com<% else: %>http://localhost:8080<% end %>/stylesheets/screen.css">
     
     <% if @config.color: %>
       <style type="text/css">

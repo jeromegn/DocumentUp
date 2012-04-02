@@ -3,7 +3,7 @@
 @import "normalize";
 
 @import "github";
-@import "fonts";
+//@import "fonts";
 
 html {
   height: 100%;
@@ -12,7 +12,7 @@ html {
 body {
   padding: 0;
   margin: 0;
-  font: 18px/1.4em Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
+  font: 16px/1.4em Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
   font-size-adjust:none;
   font-style:normal;
   font-variant:normal;
@@ -209,11 +209,35 @@ a {
   em, dfn { font-style: italic; }
   dfn { font-weight: bold; }
   pre, code { margin: 0 0 1.625em; white-space: pre; }
-  pre, code, tt { font: 0.8em "Droid Sans Mono", Monaco, monospace; line-height: 1.5; } 
-  code { background: #f8f8ff; padding: 1px 2px; border: 1px solid #ddd; word-wrap: break-word; }
+  pre, code, tt { 
+    font-size: 0.9em;
+    font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+    line-height: 1.5;
+  } 
+  code { background: #f8f8ff; padding: 1px 2px; border: 1px solid #ddd; }
   pre code {padding: 10px 12px; word-wrap: normal; }
   tt { display: block; margin: 1.625em 0; }
   hr { margin-bottom:1.625em; }
+
+  table {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    width: 100%;
+  }
+  th, td {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+  }
+  th {
+    background: #eee;
+    padding: 7px 10px;
+  }
+  td {
+    font-size: 0.9em;
+    border-color: #ddd;
+  }
+  tbody tr:nth-child(2n) {
+    background: #f5f5f5;
+  }
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5), only screen and (max-width : 480px) {

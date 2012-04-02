@@ -36,7 +36,7 @@ Add a `documentup.json` file to the root of your repository. Refer to the [optio
 
 POST or JSONP called on `http://documentup.com/compiled`
 
-Generates a standalone documentation HTML file. The CSS is embedded and the file doesn't rely on any external resources. Therefore, it can be viewed offline.
+Generates a standalone documentation HTML file.
 
 Recommended for private Github repositories or local projects.
 
@@ -178,8 +178,8 @@ e.g.: "UA-5201171-14"
 
 ## Thank you
 
-* Thanks for the few well documented project sites out there for the inspiration.
-* Thanks to [CDNJS](http://cdnjs.com) who originally offered hosting for this project.
+* Thanks for, the few, well documented project sites out there for the inspiration.
+* Thanks to [CDNJS](http://cdnjs.com) who **originally** offered hosting for this project.
 * Thanks to [Jean-Marc Denis](http://jeanmarcdenis.me/) for the freely downloadable bow tie I used in the logo.
 
 ## Changelog
@@ -196,7 +196,6 @@ Versioning is going to be difficult now since this is now a service. Deployment 
 
 #### 0.1.0 (Jan 25, 2012)
 
-* `http://cdnjs.cloudflare.com/ajax/libs/documentup/0.1.0/documentup.min.js`
 * Initial release
 
 ## License
