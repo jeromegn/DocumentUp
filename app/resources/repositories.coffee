@@ -25,8 +25,10 @@ respond_with_html = (res, data, status = 200)->
 # Checks if the generated documentation needs to be regenerated and takes action
 Server.post "/recompile", (req, res, next)->
 
-  push = JSON.parse(req.body.payload)
-  console.log push
+  console.log "IN POST RECEIVE HOOK"
+  console.log req.body.payload
+
+  push = req.body.payload
 
   recompile = push.commits && push.commits.some (commit)->
     return commit.modified && commit.modified.some (modified)->
@@ -39,6 +41,8 @@ Server.post "/recompile", (req, res, next)->
       repo.update (err, repo)->
         return next(err) if err
         res.send 200
+  else
+    res.send 200
 
 
 

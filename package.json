@@ -20,7 +20,7 @@
     "express":       "2.5.1",
     "stylus":        "~0.19.2",
     "nib":           "~0.3.0",
-    "request":       "2.2.0",
+    "request":       "~2.9.153",
     "coffee-script": "1.2.0",
     "sugar":         "1.2.0",
     "eco":           "1.1.0-rc-3",
