@@ -99,6 +99,8 @@ For those wanting to stay within the comfort of their gh-pages branch, it's stil
 
 Make sure to change the `"username/repository"` to the repository's name and user's username.
 
+Use the `documentup.min.js` file in this repository, not the one what used to be on cdnjs.com, it's deprecated.
+
 ### Configuration
 
 `DocumentUp.document` accepts either a String or an Object representing your desired configuration. If an object is used, remember to add a `repo` option containing the path `"username/repository"` to your github repository.
