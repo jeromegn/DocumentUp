@@ -1,3 +1,3 @@
 module.exports =
-  readme: /readme/i
+  readme: /readme\.md/i
   config: /documentup\.json/i
