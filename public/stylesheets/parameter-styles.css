@@ -1,11 +1,12 @@
 ﻿#content dl.param-list {
-    margin: 8px 0;
+    margin: 0;
 }
 #content dl .param-name {
     color: #666;
     float: left;
     margin-right: 16px;
     min-width: 160px;
+    clear: both;
 }
 #content dl .param-type {
     -moz-border-radius: 5px;
@@ -52,8 +53,9 @@
 #content dl .param-desc
 {
     float:left;
-    margin-right: 8px;
+    margin-right: 0;
     margin-left: 0;
+    width: 350px
 }
 #content dl .param-default-value {
     display: table;
@@ -61,6 +63,8 @@
     border: solid 1px ghostWhite;
     font-style:italic;
     color: #666;
+    clear:both;
+    margin-left:275px;
 }
 #content .param-list, #content .param-name, #content .param-type, #content .param-desc, #content .param-default-value {
 white-space: normal;
