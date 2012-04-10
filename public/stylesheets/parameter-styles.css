@@ -26,11 +26,15 @@
     background: #EDB1B1;
     color: #4C0000;
 }
+#content dl .param-type-exception {
+    background:#990000;
+    color:#FF9999;
+}
 #content dl .param-type-array {
     background: #EDD5B1;
     color: #4C2D00;
 }
-#content dl .param-type-number,.param-type-int, .param-type-integer {
+#content dl .param-type-number,#content dl .param-type-int, #content dl .param-type-integer {
     background: #B1C9ED;
     color: #001E4C;
 }
