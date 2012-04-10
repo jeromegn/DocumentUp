@@ -1,0 +1,67 @@
+﻿#content dl.param-list {
+    margin: 8px 0;
+}
+#content dl .param-name {
+    color: #666;
+    float: left;
+    margin-right: 16px;
+    min-width: 160px;
+}
+#content dl .param-type {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background: #CCC;
+    float: left;
+    font-size: .75em;
+    font-style: normal;
+    font-weight: 700;
+    margin: 0 8px 0 0;
+    min-width: 80px;
+    padding: 2px 5px;
+    text-align: center;
+}
+#content dl .param-type-object {
+    background: #EDB1B1;
+    color: #4C0000;
+}
+#content dl .param-type-array {
+    background: #EDD5B1;
+    color: #4C2D00;
+}
+#content dl .param-type-number,.param-type-int, .param-type-integer {
+    background: #B1C9ED;
+    color: #001E4C;
+}
+#content dl .param-type-string {
+    background: #E1EDB1;
+    color: #3D4C00;
+}
+#content dl .param-type-function {
+    background: #CFB1ED;
+    color: #26004C;
+}
+#content dl .param-type-boolean {
+    background: #B1EDC9;
+    color: #004C1E;
+}
+#content dl .param-type-regexp {
+    background:#CC00FF;
+    color:#660066;
+}
+#content dl .param-desc
+{
+    float:left;
+    margin-right: 8px;
+    margin-left: 0;
+}
+#content dl .param-default-value {
+    display: table;
+    min-height: 26px;
+    border: solid 1px ghostWhite;
+    font-style:italic;
+    color: #666;
+}
+#content .param-list, #content .param-name, #content .param-type, #content .param-desc, #content .param-default-value {
+white-space: normal;
+}
