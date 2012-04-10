@@ -168,7 +168,7 @@ class Repository
     toc = {}
     navigation.forEach (token, i, arr)->
       id =   token.text.parameterize()
-      n  =   token.text.replace(/\(.*\)/g,"");
+      n  =   token.text
       
       if token.depth == 2
         current_section = id
