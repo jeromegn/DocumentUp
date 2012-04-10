@@ -27,7 +27,7 @@
     "marked":        "~0.2.3",
     "async":         "~0.1.18",
     "redis":         "~0.7.1",
-    "package-descriptors":"~0.0.2"
+    "parameter-descriptors":"~0.0.2"
   },
   "devDependencies": {
     "uglify-js":     "1.2.5",

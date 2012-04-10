@@ -4,6 +4,7 @@ File    = require("fs")
 marked_ = require("marked")
 redis   = require("redis").createClient()
 hljs    = require("../../lib/highlighter.js")
+params   = require("parameter-descriptors").jsonParseAndRender
 
 # Modification of the markdown parser
 #
@@ -27,6 +28,8 @@ Marked = (text) ->
     else if token.type is "code"
       if token.lang in Object.keys(hljs.LANGUAGES)
         token.text = hljs.highlight(token.lang, token.text).value
+      else if token.lang == "params"
+        token.text = params(token.text)
       else
         token.text = hljs.highlightAuto(token.text).value
       token.escaped = true;
