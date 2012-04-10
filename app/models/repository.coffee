@@ -28,12 +28,10 @@ Marked = (text) ->
     else if token.type is "code"
       if token.lang in Object.keys(hljs.LANGUAGES)
         token.text = hljs.highlight(token.lang, token.text).value
-      else if token.lang == "params"
-        token.text = params(token.text)
       else
         token.text = hljs.highlightAuto(token.text).value
       token.escaped = true;
-    else if true && (token.text.substr(0, 6).toLowerCase() == "@param" || token.text.substr(0, 7).toLowerCase() == "@return"
+    else if token.type == "paragraph" && token.text && (token.text.substr(0, 6).toLowerCase() == "@param" || token.text.substr(0, 7).toLowerCase() == "@return")
       token.text = params(token.text);
       token.escaped = true;
     i++
