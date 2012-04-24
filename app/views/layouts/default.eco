@@ -7,6 +7,7 @@
     <title><%= @config.name || @name.split("/")[1] %></title>
     
     <link rel="stylesheet" type="text/css" href="<% if @env == "production": %>http://documentup.com<% else: %>http://localhost:8080<% end %>/stylesheets/screen.css">
+    <link rel="stylesheet" type="text/css" href="<% if @env == "production": %>http://documentup.com<% else: %>http://localhost:8080<% end %>/stylesheets/parameter-styles.css">
     
     <% if @config.color: %>
       <style type="text/css">

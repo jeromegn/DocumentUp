@@ -4,6 +4,7 @@ File    = require("fs")
 marked_ = require("marked")
 redis   = require("redis").createClient()
 hljs    = require("../../lib/highlighter.js")
+params   = require("parameter-descriptors").parseAndRenderParams
 
 # Modification of the markdown parser
 #
@@ -29,6 +30,9 @@ Marked = (text) ->
         token.text = hljs.highlight(token.lang, token.text).value
       else
         token.text = hljs.highlightAuto(token.text).value
+      token.escaped = true;
+    else if token.type == "paragraph" && token.text && (token.text.substr(0, 6).toLowerCase() == "@param" || token.text.substr(0, 7).toLowerCase() == "@return")
+      token.text = params(token.text);
       token.escaped = true;
     i++
   text = marked_.parser(tokens)
