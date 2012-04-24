@@ -56,7 +56,7 @@ curl -X POST --data-urlencode content@README.md \
 http://documentup.com/compiled > index.html && open index.html
 ```
 
-**Note:** If the file you're trying to pass contain ampersands, you need to manually change them to %26. Else the URL will break.
+**Note:** If the file you're trying to pass contain ampersands, you need to manually change them to %26. Otherwise the URL will break.
 
 ### JSONP example with jQuery
 
