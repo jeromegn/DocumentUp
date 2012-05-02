@@ -76,11 +76,11 @@ Server.get "/compiled", compile_route
 
 Server.get "/", (req, res, next)->
   Repository.populate "jeromegn/documentup", (err, repo)->
-    res.render "repositories/show", locals: repo
+    render_repo req, res, repo
 
 
-render_repo = (res, repo)->
-  res.render "repositories/show", locals: repo, (err, html)->
+render_repo = (req, res, repo)->
+  res.render "repositories/show", locals: repo, theme: req.query.theme || repo.config.theme, (err, html)->
     respond_with_html res, html
 
 
@@ -93,9 +93,9 @@ Server.get "/:username/:repository", (req, res, next)->
       repo.setConfig(config)
       repo.save (err, repo)->
         return next(err) if err
-        render_repo res, repo
+        render_repo req, res, repo
     else
-      render_repo res, repo
+      render_repo req, res, repo
 
 
 # Manual recompile

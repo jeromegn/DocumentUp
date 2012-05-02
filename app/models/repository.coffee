@@ -44,6 +44,7 @@ class Repository
     travis:           false
     ribbon:           true
     google_analytics: null
+    theme:            null
 
 
   constructor: (@name)->
