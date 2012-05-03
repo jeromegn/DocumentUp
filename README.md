@@ -30,7 +30,7 @@ Useful when changes are made to the stylesheets on the server but the compilatio
 
 ### Configuration
 
-Add a `documentup.json` file to the root of your repository. Refer to the [options](#options) section below for its contents. Feel free to consult this repository's [`documentup.json`](https://github.com/jeromegn/DocumentUp/blob/master/documentup.json)
+Add a `.documentup.json` dotfile file to the root of your repository. Refer to the [options](#options) section below for its contents. Feel free to consult this repository's [`.documentup.json`](https://github.com/jeromegn/DocumentUp/blob/master/.documentup.json)
 
 ## On-Demand API
 
