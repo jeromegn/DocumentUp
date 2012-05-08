@@ -2,9 +2,9 @@ process.env.NODE_ENV = "test"
 
 Async   = require("async")
 Browser = require("zombie")
-#Replay  = require("replay")
+Replay  = require("replay")
 server  = require("../server")
-
+File    = require("fs")
 
 Helper =
 
@@ -23,9 +23,8 @@ Browser.site = "localhost:3003"
 
 
 # To capture and record API calls, run with environment variable RECORD=true
-# Replay.fixtures = "#{__dirname}/replay"
-# Replay.networkAccess = false
-# Replay.localhost "localhost"
-# Replay.ignore "mt1.googleapis.com"
+Replay.fixtures = "#{__dirname}/replay"
+Replay.networkAccess = false
+Replay.localhost "localhost"
 
 module.exports = Helper

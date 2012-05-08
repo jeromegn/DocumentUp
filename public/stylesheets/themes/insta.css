@@ -1,0 +1,12 @@
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-family:inherit;font-size:100%;vertical-align:baseline}
+body{line-height:1;color:#000;background:#fff}
+ol,ul{list-style:none}
+table{border-collapse:separate;border-spacing:0;vertical-align:middle}
+caption,th,td{text-align:left;font-weight:normal;vertical-align:middle}
+a img{border:none}
+body{font-family:"Helvetica Neue","Helvetica",Arial,sans-serif;font-size:13px}
+#container{width:960px;margin:50px auto}
+#nav{float:left}
+#header{position:absolute;top:0;left:0;width:100%;line-height:50px;background:-webkit-gradient(linear, left top, left bottom, color-stop(0, #4981ad), color-stop(1, #225785));background:-webkit-linear-gradient(top, #4981ad 0%, #225785 100%);background:-moz-linear-gradient(top, #4981ad 0%, #225785 100%);background:linear-gradient(top, #4981ad 0%, #225785 100%);}
+#header a{color:#fff;text-decoration:none;display:block;margin:0 auto;width:960px;font-size:24px;font-weight:bold}
+#content{width:720px;padding:10px 0 80px 40px;float:left}

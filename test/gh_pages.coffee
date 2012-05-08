@@ -13,18 +13,17 @@ describe "GH Pages", ->
 
   browser = new Browser()
 
-  before Helper.setup
+  #before Helper.setup
   before Helper.once
 
   describe "viewing", ->
     before (done)->
-      browser.visit "file://localhost/#{__dirname}/fixtures/gh_page_test.html", ->
-        console.log browser.resources
+      browser.visit "/gh_pages_test", ->
         browser.wait for_html_replaced, done
 
     it "should work", ->
       assert.equal browser.statusCode, 200
 
     it "should show the repository name", ->
-      console.log browser.query("#logo")
+      console.log browser.html()
       assert.equal browser.query("#logo").textContent, "DocumentUp"
