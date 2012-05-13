@@ -4,6 +4,7 @@ global-reset();
 body {
   font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
   font-size: 13px;
+  line-height: 20px;
 }
 
 #container {
@@ -13,6 +14,10 @@ body {
 
 #nav {
   float: left;
+  background-color: #EFF2F5;
+  border-left: 1px solid #C3CFD9;
+  border-right: 1px solid #C3CFD9;
+  width: 215px;
 }
 
 #header {
@@ -28,13 +33,57 @@ body {
     display: block;
     margin: 0 auto;
     width: 960px;
-    font-size: 24px;
+    font-size: 21px;
+    text-shadow: rgba(black, 0.3) 0 1px 1px;
     font-weight: bold;
   }
 }
 
+#sections {
+  margin-bottom: 15px;
+  li {
+    transition: all 0.2s ease;
+    position: relative;
+    &:hover {
+      box-shadow: rgba(black, 0.3) 0 0 3px;
+      z-index: 2;
+    }
+  }
+  a {
+    color: #3F729B;
+    display: block;
+    font-weight: bold;
+    text-decoration: none;
+    background: linear-gradient(top, #FEFEFE, #FBFBFB);
+    padding: 9px 5px 10px 15px;
+    font-size: 13px;
+    border-bottom: 1px solid #C3CFD9;
+    transition: all 0.2s ease;
+    &:hover {
+      color: #1C5380;
+    }
+    &:active {
+      background: #F1F2F4;
+      border-bottom-color: #C3CFD9;
+    }
+  }
+  li ul {
+    display: none;
+  }
+}
+
+.extra {
+  padding: 5px 5px 5px 15px;
+}
+
 #content {
-  width: 720px;
-  padding: 10px 0 80px 40px;
+  width: 700px;
+  padding: 40px 0 80px 40px;
   float: left;
+}
+
+#github-ribbon {
+  position: absolute;
+  top: 0;
+  right: 0;
 }

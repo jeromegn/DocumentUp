@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable:no;">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <!-- Home screen icon  Mathias Bynens mathiasbynens.be/notes/touch-icons -->
+  <!-- For iPhone 4 with high-resolution Retina display: -->
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/icon-homescreen-retina.png">
+  <!-- For first-generation iPad: -->
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/icon-homescreen-ipad.png">
+  <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+  <link rel="apple-touch-icon-precomposed" href="/images/icon-homescreen-non-retina.png">
+
+  <script>
+    (function () {
+      var a;
+      if (navigator.platform === "iPad") {
+        a = window.orientation !== 90 || window.orientation === -90 ? "/images/startup-tablet-landscape.png" : "/images/startup-tablet-portrait.png"
+      } else {
+        a = window.devicePixelRatio === 2 ? "/images/startup-retina.png" : "/images/startup.png"
+      }
+      document.write('<link rel="apple-touch-startup-image" href="' + a + '"/>')
+    })()
+  </script>
+
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+  <title>DocumentUp</title>
+
+  <link rel="stylesheet" type="text/css" href="stylesheets/mobile.css">
+
+  <script type="text/javascript" src="http://use.typekit.com/hjp0pft.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+</head>
+<body>
+  <header class="fake"></header>
+  <div id="document-view" class="view">
+    <header>
+      <h1>DocumentUp</h1>
+      <a href="#" class="button-toc"></a>
+    </header>
+    <div class="content">
+      <section>
+        <p><img src="http://documentup.com/images/logo.png" alt="DocumentUp">
+        </p>
+        <p><strong>This site has been generated with DocumentUp</strong> (eat your own dog food, people)
+
+        </p>
+        <p>Automatically generated documentation sites for your markdown files! There are various ways of getting your documentation going:
+
+        </p>
+        <ul>
+        <li><a href="#hosted">Hosted</a></li>
+        <li><a href="#on-demand-api">On-Demand API</a></li>
+        <li><a href="#gh-pages">gh-pages</a></li>
+        </ul>
+        <h2 id="hosted">Hosted</h2>
+        <p>DocumentUp hosts your documentation sites. Just visit <code>http://documentup.com/username/repository</code> to generate a site from your <code>README.md</code>.
+
+        </p>
+        <p>Recommended if you have a public Github repository.
+
+        </p>
+        <h3 id="hosted/post-receive-hook">Post-Receive Hook</h3>
+        <p>If you want your readme to be recompiled, please add a <a href="http://help.github.com/post-receive-hooks/">Post-Receive Hook</a> to your Github repository pointing to: <code>http://documentup.com/recompile</code>
+
+        </p>
+        <p><em>I'm still testing this feature. The URL shouldn't change though.</em>
+
+        </p>
+        <p>Right now that's the only strategy, for the sake of simplicity.
+
+        </p>
+        <h3 id="hosted/manual-recompile">Manual Recompile</h3>
+        <p>Visit <code>http://documentup.com/username/repository/recompile</code> to manually tell the server to recompile your readme.
+
+        </p>
+        <p>Useful when changes are made to the stylesheets on the server but the compilation hasn't been triggered for a while.
+
+        </p>
+        <h3 id="hosted/configuration">Configuration</h3>
+        <p>Add a <code>.documentup.json</code> dotfile file to the root of your repository. Refer to the <a href="#options">options</a> section below for its contents. Feel free to consult this repository's <a href="https://github.com/jeromegn/DocumentUp/blob/master/.documentup.json"><code>.documentup.json</code></a>
+
+        </p>
+        <h2 id="on-demand-api">On-Demand API</h2>
+        <p>POST or JSONP called on <code>http://documentup.com/compiled</code>
+
+        </p>
+        <p>Generates a standalone documentation HTML file.
+
+        </p>
+        <p>Recommended for private Github repositories or local projects.
+
+        </p>
+        <h3 id="on-demand-api/parameters">Parameters</h3>
+        <p><strong>content</strong> (String) <em>required</em>
+        Markdown content you want converted
+
+        </p>
+        <p>All the configuration parameters detailed <a href="#options">options</a> are also valid.
+
+        </p>
+        <h3 id="on-demand-api/post-example">POST example</h3>
+        <p>Pipe the response HTML into a file and open it. Example using <code>curl</code>:
+
+        </p>
+        <pre><code class="shell">curl -<span class="built_in">X</span> POST --data-urlencode content@README<span class="preprocessor">.md</span> \
+        <span class="label">http:</span>//documentup<span class="preprocessor">.com</span>/compiled &gt; index<span class="preprocessor">.html</span> &amp;&amp; open index<span class="preprocessor">.html</span></code></pre>
+        <p><strong>Note:</strong> If the file you're trying to pass contain ampersands, you need to manually change them to %26. Otherwise the URL will break.
+
+        </p>
+        <h3 id="on-demand-api/jsonp-example-with-jquery">JSONP example with jQuery</h3>
+        <pre><code class="javascript">$.ajax({
+          url: <span class="string">"http://documentup.com/compiled"</span>,
+          dataType: <span class="string">"jsonp"</span>,
+          data: {
+            content: <span class="string">"# test"</span>,
+            name: <span class="string">"Test JSONP!"</span>
+          },
+          success: <span class="function"><span class="keyword">function</span><span class="params">(resp)</span>{</span>
+            <span class="comment">// `status` is always provided</span>
+            <span class="keyword">if</span> (resp.status == <span class="number">200</span>) {
+              <span class="comment">// Write to your document</span>
+              document.open();
+              document.write(resp.html);
+              document.close();
+            }
+          }
+        });</code></pre>
+        <h2 id="gh-pages">gh-pages</h2>
+        <p>For those wanting to stay within the comfort of their gh-pages branch, it's still possible by using an <code>index.html</code> file similar to this:
+
+        </p>
+        <pre><code class="html"><span class="doctype">&lt;!DOCTYPE html&gt;</span>
+        <span class="tag">&lt;<span class="title">html</span>&gt;</span>
+          <span class="tag">&lt;<span class="title">head</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"documentup.min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript">
+              DocumentUp.document(<span class="string">"username/repository"</span>);
+            </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+          <span class="tag">&lt;/<span class="title">head</span>&gt;</span>
+          <span class="tag">&lt;<span class="title">body</span>&gt;</span><span class="tag">&lt;/<span class="title">body</span>&gt;</span>
+        <span class="tag">&lt;/<span class="title">html</span>&gt;</span></code></pre>
+        <p>Make sure to change the <code>"username/repository"</code> to the repository's name and user's username.
+
+        </p>
+        <p>Use the <code>documentup.min.js</code> file in this repository, not the one what used to be on cdnjs.com, it's deprecated.
+
+        </p>
+        <h3 id="gh-pages/configuration">Configuration</h3>
+        <p><code>DocumentUp.document</code> accepts either a String or an Object representing your desired configuration. If an object is used, remember to add a <code>repo</code> option containing the path <code>"username/repository"</code> to your github repository.
+
+        </p>
+        <p>All options detailed in the <a href="#options">options</a> section are available.
+
+        </p>
+        <p>In addition to those, one special option is available to "gh-pages version" of DocumentUp:
+
+        </p>
+        <p><strong>afterRender</strong> (Function)<br>A function to be executed after the document has been replaced with the compiled HTML.
+
+        </p>
+        <h3 id="gh-pages/example">Example</h3>
+        <pre><code class="javascript">DocumentUp.document({
+          repo:  <span class="string">"jeromegn/documentup"</span>,
+          name: <span class="string">"DocumentUp"</span>,
+          twitter: [
+            <span class="string">"jeromegn"</span>,
+            <span class="string">"DocumentUp"</span>
+          ],
+          afterRender: <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
+            alert(<span class="string">"rendered"</span>);
+          }
+        });</code></pre>
+        <h3 id="gh-pages/what-this-script-does">What this script does</h3>
+        <p>It does what's written in the JSONP section, without the jQuery dependency. It uses a endpoint like: <code>http://documentup.com/username/repository?callback=</code> to fetch the cached copy of the repository and then replaces the page's html with the generated documentation.
+
+        </p>
+        <h2 id="formatting-guide">Formatting guide</h2>
+        <p>Just like you normally would. DocumentUp also supports "Github Flavored Markdown" and we recommend you use it for syntax highlighting.
+
+        </p>
+        <p>It doesn't support tables as it is supported on Github, but you can use inline HTML.
+
+        </p>
+        <p>h1's (# in markdown) will appear as first level navigation in the sidebar while h2's (##) will appear under them as sub-navigation.
+
+        </p>
+        <p>Example:
+
+        </p>
+        <pre><code class="plain"><span class="preprocessor"># Project name / Title (won't appear in the sidebar)</span>
+
+        Some intro text if you want.
+
+        <span class="preprocessor">## Top level-navigation</span>
+
+        <span class="preprocessor">### Sub-navigation</span>
+
+        <span class="preprocessor">#### This wouldn't show up in the sidebar</span></code></pre>
+        <h2 id="options">Options</h2>
+        <p><strong>name</strong> (String) <em>default: repository name</em><br>Name of your project. It'll appear in the header of the sidebar. Defaults to the <code>repository</code> substring of the <code>repo</code> option.
+
+        </p>
+        <p><strong>color</strong> (String) <em>default: "#336699"</em><br>CSS-like color representing the color for the links both in the sidebar and the content.
+
+        </p>
+        <p><strong>issues</strong> (Boolean or String) <em>default: true</em>
+        Adds a link to the sidebar for the issues tab of the repository if <code>true</code>. Also accepts a string if your issues are managed elsewhere.
+
+        </p>
+        <p><strong>travis</strong> (Boolean) <em>default: false</em><br>Indicate if the project is being tested by <a href="http://travis-ci.org/">Travis-CI</a>. If <code>true</code>, it'll add the small travis badge in the sidebar.
+
+        </p>
+        <p><strong>twitter</strong> (String <em>or</em> Array of strings) <em>default: null</em><br>Add follow buttons for one or more Twitter accounts to your sidebar. Useful to gather followers.
+
+        </p>
+        <p><strong>google_analytics</strong> (String) <em>default: null</em><br>This is your Google Analytics "UA" unique ID. Adds GA tracking to your generated documentation.<br>e.g.: "UA-5201171-14"
+
+        </p>
+        <h2 id="roadmap">Roadmap</h2>
+        <ul>
+        <li>Themes</li>
+        <li>Multi-page aggregation</li>
+        </ul>
+        <h2 id="thank-you">Thank you</h2>
+        <ul>
+        <li>Thanks for, the few, well documented project sites out there for the inspiration.</li>
+        <li>Thanks to <a href="http://cdnjs.com">CDNJS</a> who <strong>originally</strong> offered hosting for this project.</li>
+        <li>Thanks to <a href="http://jeanmarcdenis.me/">Jean-Marc Denis</a> for the freely downloadable bow tie I used in the logo.</li>
+        </ul>
+        <h2 id="changelog">Changelog</h2>
+        <h4>Hosted version (Feb 2, 2012)</h4>
+        <p>Versioning is going to be difficult now since this is now a service. Deployment will be continuous.
+
+        </p>
+        <h4>0.1.1 (Jan 26, 2012)</h4>
+        <ul>
+        <li>Files now parsed in UTF-8</li>
+        <li>Namespaced repositories in localStorage (thanks to <a href="https://github.com/tbranyen">tbranyen</a>)</li>
+        <li>A few README fixes</li>
+        </ul>
+        <h4>0.1.0 (Jan 25, 2012)</h4>
+        <ul>
+        <li>Initial release</li>
+        </ul>
+        <h2 id="license">License</h2>
+        <p>Copyright (c) 2012 Jerome Gravel-Niquet
+
+        </p>
+        <p>Permission is hereby granted, free of charge, to any person obtaining
+        a copy of this software and associated documentation files (the
+        "Software"), to deal in the Software without restriction, including
+        without limitation the rights to use, copy, modify, merge, publish,
+        distribute, sublicense, and/or sell copies of the Software, and to
+        permit persons to whom the Software is furnished to do so, subject to
+        the following conditions:
+
+        </p>
+        <p>The above copyright notice and this permission notice shall be
+        included in all copies or substantial portions of the Software.
+
+        </p>
+        <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+        EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+        MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+        NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+        LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+        OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+        WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+        </p>
+      </section>
+    </div>
+  </div>
+  <div id="toc-view" class="view side-list hidden">
+    <!--header>Table of Contents</header-->
+    <header class="small">Table of Contents</header>
+    <div class="content">
+      <section>
+        <ul>      
+          <li>
+            <a href="#hosted">Hosted</a>
+          </li>
+          <li>
+            <a href="#on-demand-api">On-Demand API</a>
+          </li>
+          <li>
+            <a href="#gh-pages">gh-pages</a>
+          </li>
+          <li>
+            <a href="#formatting-guide">Formatting guide</a>
+          </li>
+          <li>
+            <a href="#options">Options</a>
+          </li>
+          <li>
+            <a href="#roadmap">Roadmap</a>
+          </li>
+          <li>
+            <a href="#thank-you">Thank you</a>
+          </li>
+          <li>
+            <a href="#changelog">Changelog</a>
+          </li>
+          <li>
+            <a href="#license">License</a>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </div>
+  
+  <script src="javascripts/libs/zepto.js"></script>
+  <!--script src="javascripts/libs/jquery.transit.js"></script>
+  <script src="javascripts/libs/jquery.swipe-events.js"></script-->
+  <script src="javascripts/main.js"></script>
+</body>
+</html>

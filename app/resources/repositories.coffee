@@ -85,7 +85,7 @@ render_repo = (req, res, repo)->
 
 
 Server.get "/:username/:repository", (req, res, next)->
-  return next() if req.params.username == "stylesheets" || req.params.username == "images"
+  return next() if req.params.username == "stylesheets" || req.params.username == "javascripts" || req.params.username == "images"
   return res.redirect("/", 301) if req.params.username == "username" && req.params.repository == "repository"
   
   Repository.populate "#{req.params.username}/#{req.params.repository}", (err, repo)->

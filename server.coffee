@@ -93,11 +93,14 @@ server.configure "production", ->
 server.on "listening", ->
   console.log "listening"
 
-  FS.readdir "#{__dirname}/app/resources/", (error, files)->
-    for file in files
-      if /\.coffee$/.test(file)
-        require "#{__dirname}/app/resources/#{file}"
+  # FS.readdir "#{__dirname}/app/resources/", (error, files)->
+  #   for file in files
+  #     if /\.coffee$/.test(file)
+  #       require "#{__dirname}/app/resources/#{file}"
     
-    server.emit "loaded"
+  require("./app/resources/repositories.coffee")
+  require("./app/resources/site.coffee")
+
+  server.emit "loaded"
 
 module.exports = server
