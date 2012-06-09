@@ -1,0 +1,13 @@
+GET /widgets/src
+accept-encoding: identity
+host: platform.twitter.com
+
+403 HTTP/1.1
+content-type: application/xml
+date: Sat, 09 Jun 2012 21:35:00 GMT
+transfer-encoding: chunked
+connection: keep-alive, Transfer-Encoding
+p3p: CP="CAO DSP LAW CURa ADMa DEVa TAIa PSAa PSDa IVAa IVDa OUR BUS IND UNI COM NAV INT"
+
+<?xml version="1.0" encoding="UTF-8"?>
+<Error><Code>AccessDenied</Code><Message>Access Denied</Message><RequestId>34F1D56D49032F5C</RequestId><HostId>wjVwMZGgWP2QSuN0a/qp3/xdS6a2lkVBJ0sHD7NNVdIGlFZqbHAyDr8wf8iTug2y</HostId></Error>

@@ -25,10 +25,7 @@ respond_with_html = (res, data, status = 200)->
 # Checks if the generated documentation needs to be regenerated and takes action
 Server.post "/recompile", (req, res, next)->
 
-  console.log "IN POST RECEIVE HOOK"
-
   push = JSON.parse(req.body.payload)
-  console.log push
 
   recompile = push.commits && push.commits.some (commit)->
     return commit.modified && commit.modified.some (modified)->
@@ -89,6 +86,7 @@ Server.get "/:username/:repository", (req, res, next)->
   return res.redirect("/", 301) if req.params.username == "username" && req.params.repository == "repository"
   
   Repository.populate "#{req.params.username}/#{req.params.repository}", (err, repo)->
+    return next(err) if err
     if (config = req.query.config && Repository.createConfig(JSON.parse(req.query.config))) && !Object.equal(repo.config, config)
       repo.setConfig(config)
       repo.save (err, repo)->

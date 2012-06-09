@@ -2,7 +2,9 @@ Github  = require("../../lib/github")
 Async   = require("async")
 File    = require("fs")
 marked_ = require("marked")
-redis   = require("redis").createClient()
+redis   = require("../../config/redis")
+config  = require("../../config")
+ns      = config.redis.namespace
 hljs    = require("../../lib/highlighter.js")
 
 # Modification of the markdown parser
@@ -55,7 +57,6 @@ class Repository
 
 
   getFiles: (callback)->
-    console.log "GET GITHUB FILES"
     Github.getBlobsFor @name, (err, files)=>
       return callback(err) if err
       @source = files.readme
@@ -69,27 +70,25 @@ class Repository
     return conf
 
   setConfig: (config)->
-    console.log "SET CONFIG"
     @config = Repository.createConfig(config)
     return @config
 
 
   # Retrieve from the DB
   retrieve: (callback)->
-    console.log "RETRIEVE"
     Async.parallel
       config: (done)=>
-        redis.get "docup:repo:#{@name}:config", (err, config)->
+        redis.get "#{ns}:repo:#{@name}:config", (err, config)->
           done(err, JSON.parse(config))
       source: (done)=>
-        redis.get "docup:repo:#{@name}:source", done
+        redis.get "#{ns}:repo:#{@name}:source", done
       compiled: (done)=>
-        redis.get "docup:repo:#{@name}:compiled", done
+        redis.get "#{ns}:repo:#{@name}:compiled", done
       toc: (done)=>
-        redis.get "docup:repo:#{@name}:toc", (err, toc)->
+        redis.get "#{ns}:repo:#{@name}:toc", (err, toc)->
           done(err, JSON.parse(toc))
       updated_at: (done)=>
-        redis.get "docup:repo:#{@name}:updated_at", (err, updated_at)->
+        redis.get "#{ns}:repo:#{@name}:updated_at", (err, updated_at)->
           done(err, parseInt(updated_at, 10))
     , (err, repo)=>
       return callback(err) if err
@@ -100,25 +99,23 @@ class Repository
 
   # Save to the DB
   save: (callback)->
-    console.log "SAVE"
     Async.parallel
       config: (done)=>
-        redis.set "docup:repo:#{@name}:config", JSON.stringify(@config), done
+        redis.set "#{ns}:repo:#{@name}:config", JSON.stringify(@config), done
       source: (done)=>
-        redis.set "docup:repo:#{@name}:source", @source, done
+        redis.set "#{ns}:repo:#{@name}:source", @source, done
       compiled: (done)=>
-        redis.set "docup:repo:#{@name}:compiled", @compiled, done
+        redis.set "#{ns}:repo:#{@name}:compiled", @compiled, done
       toc: (done)=>
-        redis.set "docup:repo:#{@name}:toc", JSON.stringify(@toc), done
+        redis.set "#{ns}:repo:#{@name}:toc", JSON.stringify(@toc), done
       updated_at: (done)=>
-        redis.set "docup:repo:#{@name}:updated_at", Date.now(), done
+        redis.set "#{ns}:repo:#{@name}:updated_at", Date.now(), done
     , (err, repo)=>
       callback(err, this)
 
 
   # Waterfall the requirements to compile a repo's readme
   compile: (callback)->
-    console.log "COMPILE"
     if @source
       Repository.compile @source, (err, contents)=>
         return callback(err) if err
@@ -182,7 +179,6 @@ class Repository
 
 
   update: (callback)->
-    console.log "UPDATE"
     @getFiles (err, repo)=>
       return callback(err) if err
       @compile (err, compiled)=>
@@ -192,7 +188,6 @@ class Repository
 
 
   @populate = (name, callback)->
-    console.log "POPULATE"
     name = name.toLowerCase()
     Repository.list[name] ||= new Repository(name)
     repo = Repository.list[name]

@@ -1,1 +1,81 @@
-{"pusher":{"name":"jeromegn","email":"jeromegn@gmail.com"},"repository":{"name":"DocumentUp","size":264,"has_wiki":true,"created_at":"2012/01/22 09:41:35 -0800","private":false,"watchers":313,"language":"CoffeeScript","fork":false,"url":"https://github.com/jeromegn/DocumentUp","pushed_at":"2012/04/02 09:28:55 -0700","has_downloads":true,"open_issues":8,"homepage":"http://documentup.com","has_issues":true,"forks":25,"description":"Pretty documentation generator for Github projects with proper Readme.","owner":{"name":"jeromegn","email":"jeromegn@gmail.com"}},"forced":false,"after":"a852ad83065775cb9e9bfae8c09852eb8778ad7e","head_commit":{"modified":["README.md"],"added":[],"author":{"name":"Jerome Gravel-Niquet","username":"jeromegn","email":"jeromegn@gmail.com"},"removed":[],"timestamp":"2012-04-02T09:28:49-07:00","url":"https://github.com/jeromegn/DocumentUp/commit/a852ad83065775cb9e9bfae8c09852eb8778ad7e","id":"a852ad83065775cb9e9bfae8c09852eb8778ad7e","distinct":true,"message":"changed readme to test post receive hook","committer":{"name":"Jerome Gravel-Niquet","username":"jeromegn","email":"jeromegn@gmail.com"}},"deleted":false,"commits":[{"modified":["README.md"],"added":[],"author":{"name":"Jerome Gravel-Niquet","username":"jeromegn","email":"jeromegn@gmail.com"},"removed":[],"timestamp":"2012-04-02T09:28:49-07:00","url":"https://github.com/jeromegn/DocumentUp/commit/a852ad83065775cb9e9bfae8c09852eb8778ad7e","id":"a852ad83065775cb9e9bfae8c09852eb8778ad7e","distinct":true,"message":"changed readme to test post receive hook","committer":{"name":"Jerome Gravel-Niquet","username":"jeromegn","email":"jeromegn@gmail.com"}}],"ref":"refs/heads/master","before":"e15e502291182fef4405fe7ed162ae6aa1e36ae4","compare":"https://github.com/jeromegn/DocumentUp/compare/e15e502...a852ad8","created":false}
+{
+    "after": "a852ad83065775cb9e9bfae8c09852eb8778ad7e",
+    "before": "e15e502291182fef4405fe7ed162ae6aa1e36ae4",
+    "commits": [
+        {
+            "added": [],
+            "author": {
+                "email": "jeromegn@gmail.com",
+                "name": "Jerome Gravel-Niquet",
+                "username": "jeromegn"
+            },
+            "committer": {
+                "email": "jeromegn@gmail.com",
+                "name": "Jerome Gravel-Niquet",
+                "username": "jeromegn"
+            },
+            "distinct": true,
+            "id": "a852ad83065775cb9e9bfae8c09852eb8778ad7e",
+            "message": "changed readme to test post receive hook",
+            "modified": [
+                "README.md"
+            ],
+            "removed": [],
+            "timestamp": "2012-04-02T09:28:49-07:00",
+            "url": "https://github.com/jeromegn/DocumentUp/commit/a852ad83065775cb9e9bfae8c09852eb8778ad7e"
+        }
+    ],
+    "compare": "https://github.com/jeromegn/DocumentUp/compare/e15e502...a852ad8",
+    "created": false,
+    "deleted": false,
+    "forced": false,
+    "head_commit": {
+        "added": [],
+        "author": {
+            "email": "jeromegn@gmail.com",
+            "name": "Jerome Gravel-Niquet",
+            "username": "jeromegn"
+        },
+        "committer": {
+            "email": "jeromegn@gmail.com",
+            "name": "Jerome Gravel-Niquet",
+            "username": "jeromegn"
+        },
+        "distinct": true,
+        "id": "a852ad83065775cb9e9bfae8c09852eb8778ad7e",
+        "message": "changed readme to test post receive hook",
+        "modified": [
+            "README.md"
+        ],
+        "removed": [],
+        "timestamp": "2012-04-02T09:28:49-07:00",
+        "url": "https://github.com/jeromegn/DocumentUp/commit/a852ad83065775cb9e9bfae8c09852eb8778ad7e"
+    },
+    "pusher": {
+        "email": "jeromegn@gmail.com",
+        "name": "jeromegn"
+    },
+    "ref": "refs/heads/master",
+    "repository": {
+        "created_at": "2012/01/22 09:41:35 -0800",
+        "description": "Pretty documentation generator for Github projects with proper Readme.",
+        "fork": false,
+        "forks": 25,
+        "has_downloads": true,
+        "has_issues": true,
+        "has_wiki": true,
+        "homepage": "http://documentup.com",
+        "language": "CoffeeScript",
+        "name": "DocumentUp",
+        "open_issues": 8,
+        "owner": {
+            "email": "jeromegn@gmail.com",
+            "name": "jeromegn"
+        },
+        "private": false,
+        "pushed_at": "2012/04/02 09:28:55 -0700",
+        "size": 264,
+        "url": "https://github.com/jeromegn/DocumentUp",
+        "watchers": 313
+    }
+}
