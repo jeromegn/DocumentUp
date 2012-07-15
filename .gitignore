@@ -1,5 +1,3 @@
 node_modules
-Gemfile.lock
-public/compiled/**
-!public/compiled/.gitkeep
-log
+log/*
+public/stylesheets/**
