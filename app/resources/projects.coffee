@@ -93,18 +93,16 @@ Server.get "/:username/:project_name", (req, res, next)->
   
   Project.load req.params.username, req.params.project_name, (error, project)->
     return next(error) if error
-    if (config = req.query.config && Project.createConfig(JSON.parse(req.query.config))) && !Object.equal(project.config, config)
-      project.setConfig(config)
+    if (config = req.query.config && Project.makeConfig(JSON.parse(req.query.config))) && !Object.equal(project.config, config)
+      project.config = config
       project.save (error, project)->
         return next(error) if error
-        res.render "projects/show", locals:
-          project: project
-          theme: req.query.theme || project.config.theme
+        res.render "projects/show", locals: {project: project, theme: req.query.theme || project.config.theme}, (error, html)->
+          respond_with_html(res, html)
 
     else
-      res.render "projects/show", locals:
-        project: project
-        theme: req.query.theme || project.config.theme
+      res.render "projects/show", locals: {project: project, theme: req.query.theme || project.config.theme}, (error, html)->
+          respond_with_html(res, html)
 
 
 # Manual recompile
