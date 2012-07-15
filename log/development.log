@@ -1,0 +1,93 @@
+2012-06-10T18:47:31.020Z - info: GET https://api.github.com/repos/jeromegn/documentup/git/trees/master
+2012-06-10T18:47:31.517Z - info: GET https://api.github.com/repos/jeromegn/documentup/git/trees/master => 200
+2012-06-10T18:47:31.521Z - info: Terminated process 10479 status 0
+2012-06-10T18:48:16.043Z - info: GET https://api.github.com/repos/jeromegn/documentup/git/trees/master
+2012-06-10T18:48:16.383Z - info: GET https://api.github.com/repos/jeromegn/documentup/git/trees/master => 200
+2012-06-10T18:48:16.387Z - info: Terminated process 10495 status 0
+2012-06-10T18:51:08.037Z - info: GET https://api.github.com/repos/jeromegn/documentup/git/trees/master
+2012-06-10T18:51:08.754Z - info: GET https://api.github.com/repos/jeromegn/documentup/git/trees/master => 200
+2012-06-10T18:51:08.761Z - info: GET https://raw.github.com/[object Object]
+2012-06-10T18:51:09.566Z - info: GET https://raw.github.com/[object Object] => 404
+2012-06-10T18:51:09.573Z - info: Terminated process 10525 status 2
+2012-06-15T16:25:24.638Z - info: undefined undefined
+2012-06-15T16:25:24.644Z - error: undefined undefined => Invalid protocol
+2012-06-15T16:26:51.310Z - info: GET https://api.github.com/repos/jeromegn/documentup/readme
+2012-06-15T16:26:56.100Z - info: GET https://api.github.com/repos/jeromegn/documentup/readme => 200
+2012-06-15T16:29:04.002Z - info: GET https://api.github.com/repos/jeromegn/documentup/readme
+2012-06-15T16:29:04.797Z - info: GET https://api.github.com/repos/jeromegn/documentup/readme => 200
+2012-06-15T16:29:16.591Z - info: Terminated process 33008 status undefined
+2012-06-15T16:30:59.551Z - info: GET https://api.github.com/repos/jeromegn/documentup/readme
+2012-06-15T16:31:00.308Z - info: GET https://api.github.com/repos/jeromegn/documentup/readme => 200
+2012-06-15T16:33:10.356Z - info: GET https://api.github.com/repos/bobthecow/mustache.php/readme
+2012-06-15T16:33:10.955Z - info: GET https://api.github.com/repos/bobthecow/mustache.php/readme => 200
+2012-06-29T15:58:16.199Z - info: GET https://api.github.com/repos/jeromegn/documentup/readme
+2012-06-29T15:58:16.200Z - info: GET https://raw.github.com/jeromegn/documentup/master/.documentup.json
+2012-06-29T15:58:16.622Z - info: GET https://raw.github.com/jeromegn/documentup/master/.documentup.json => 200
+2012-06-29T15:58:17.487Z - info: GET https://api.github.com/repos/jeromegn/documentup/readme => 200
+2012-06-29T15:58:17.548Z - info: 127.0.0.1 - "GET / HTTP/1.1" 204 - "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.43 Safari/536.11" - 1350 ms
+2012-06-29T16:00:51.981Z - info: 127.0.0.1 - "GET / HTTP/1.1" 204 - "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.43 Safari/536.11" - 19 ms
+2012-07-03T13:35:06.998Z - info: GET https://api.github.com/repos/jeromegn/documentup/readme
+2012-07-03T13:35:07.000Z - info: GET https://raw.github.com/jeromegn/documentup/master/.documentup.json
+2012-07-03T13:35:07.645Z - info: GET https://raw.github.com/jeromegn/documentup/master/.documentup.json => 200
+2012-07-03T13:35:07.667Z - info: GET https://api.github.com/repos/jeromegn/documentup/readme => 200
+2012-07-03T13:35:07.754Z - info: 127.0.0.1 - "GET / HTTP/1.1" 200 15806 "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 757 ms
+2012-07-03T13:35:07.969Z - info: 127.0.0.1 - "GET /stylesheets/screen.css HTTP/1.1" 200 10339 "http://localhost:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 210 ms
+2012-07-03T13:35:08.552Z - info: 127.0.0.1 - "GET /favicon.ico HTTP/1.1" 200 1404 "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 3 ms
+2012-07-03T14:06:08.750Z - info: 127.0.0.1 - "GET /jeromegn/documentup HTTP/1.1" 200 15806 "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 22 ms
+2012-07-03T14:06:08.759Z - info: 127.0.0.1 - "GET /stylesheets/screen.css HTTP/1.1" 304 - "http://localhost:8080/jeromegn/documentup" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 2 ms
+2012-07-03T14:28:27.668Z - info: 127.0.0.1 - "GET / HTTP/1.1" 200 15806 "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 27 ms
+2012-07-03T14:28:27.963Z - info: 127.0.0.1 - "GET /stylesheets/screen.css HTTP/1.1" 200 10339 "http://localhost:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 289 ms
+2012-07-03T14:30:01.386Z - info: 127.0.0.1 - "GET / HTTP/1.1" 200 15806 "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 21 ms
+2012-07-03T14:30:01.621Z - info: 127.0.0.1 - "GET /stylesheets/screen.css HTTP/1.1" 200 10339 "http://localhost:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 228 ms
+2012-07-03T14:30:01.960Z - info: 127.0.0.1 - "GET /favicon.ico HTTP/1.1" 304 - "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 1 ms
+2012-07-03T14:34:02.172Z - info: GET https://api.github.com/repos/jeromegn/DocumentUp/readme
+2012-07-03T14:34:02.174Z - info: GET https://raw.github.com/jeromegn/DocumentUp/master/.documentup.json
+2012-07-03T14:34:02.437Z - info: GET https://raw.github.com/jeromegn/DocumentUp/master/.documentup.json => 200
+2012-07-03T14:34:02.438Z - info: GET https://api.github.com/repos/jeromegn/DocumentUp/readme => 200
+2012-07-03T14:34:02.484Z - info: 127.0.0.1 - "GET / HTTP/1.1" 200 15723 "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 313 ms
+2012-07-03T14:34:02.699Z - info: 127.0.0.1 - "GET /stylesheets/screen.css HTTP/1.1" 200 10339 "http://localhost:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 209 ms
+2012-07-03T14:34:03.156Z - info: 127.0.0.1 - "GET /favicon.ico HTTP/1.1" 304 - "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 1 ms
+2012-07-03T14:34:19.366Z - info: 127.0.0.1 - "GET / HTTP/1.1" 200 15806 "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 16 ms
+2012-07-03T14:34:19.374Z - info: 127.0.0.1 - "GET /stylesheets/screen.css HTTP/1.1" 304 - "http://localhost:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 2 ms
+2012-07-03T14:34:19.607Z - info: 127.0.0.1 - "GET /favicon.ico HTTP/1.1" 304 - "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 1 ms
+2012-07-03T14:36:27.845Z - info: 127.0.0.1 - "GET / HTTP/1.1" 200 15807 "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 17 ms
+2012-07-03T14:36:28.069Z - info: 127.0.0.1 - "GET /stylesheets/screen.css HTTP/1.1" 200 10339 "http://localhost:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 218 ms
+2012-07-03T14:36:28.575Z - info: 127.0.0.1 - "GET /favicon.ico HTTP/1.1" 304 - "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 2 ms
+2012-07-03T14:36:39.899Z - info: 127.0.0.1 - "GET / HTTP/1.1" 200 15807 "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 16 ms
+2012-07-03T14:36:39.907Z - info: 127.0.0.1 - "GET /stylesheets/screen.css HTTP/1.1" 304 - "http://localhost:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 3 ms
+2012-07-03T15:12:08.329Z - info: 127.0.0.1 - "GET / HTTP/1.1" 200 15772 "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 19 ms
+2012-07-03T15:12:08.537Z - info: 127.0.0.1 - "GET /stylesheets/screen.css HTTP/1.1" 200 10339 "http://localhost:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 202 ms
+2012-07-03T15:12:09.329Z - info: 127.0.0.1 - "GET /favicon.ico HTTP/1.1" 304 - "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 1 ms
+2012-07-04T17:03:03.042Z - info: GET https://api.github.com/repos/jeromegn/DocumentUp/readme
+2012-07-04T17:03:03.043Z - info: GET https://raw.github.com/jeromegn/DocumentUp/master/.documentup.json
+2012-07-04T17:03:03.331Z - info: GET https://raw.github.com/jeromegn/DocumentUp/master/.documentup.json => 200
+2012-07-04T17:03:03.689Z - info: GET https://api.github.com/repos/jeromegn/DocumentUp/readme => 200
+2012-07-04T17:03:03.754Z - info: 127.0.0.1 - "GET / HTTP/1.1" 200 15207 "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 714 ms
+2012-07-04T17:03:04.034Z - info: 127.0.0.1 - "GET /stylesheets/screen.css HTTP/1.1" 200 10339 "http://localhost:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 268 ms
+2012-07-04T17:10:56.759Z - info: 127.0.0.1 - "GET /jeromegn/documentup HTTP/1.1" 200 15207 "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 17 ms
+2012-07-04T17:10:56.962Z - info: 127.0.0.1 - "GET /stylesheets/screen.css HTTP/1.1" 200 10339 "http://localhost:8080/jeromegn/documentup" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 197 ms
+2012-07-04T17:11:01.928Z - info: 127.0.0.1 - "GET /jeromegn/DocumentUp HTTP/1.1" 200 15207 "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 23 ms
+2012-07-04T17:11:01.936Z - info: 127.0.0.1 - "GET /stylesheets/screen.css HTTP/1.1" 304 - "http://localhost:8080/jeromegn/DocumentUp" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 2 ms
+2012-07-04T19:15:08.995Z - info: 127.0.0.1 - "GET /jeromegn/DocumentUp HTTP/1.1" 200 15200 "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 20 ms
+2012-07-04T19:15:09.249Z - info: 127.0.0.1 - "GET /stylesheets/screen.css HTTP/1.1" 200 10339 "http://localhost:8080/jeromegn/DocumentUp" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 248 ms
+2012-07-04T19:15:09.867Z - info: 127.0.0.1 - "GET /favicon.ico HTTP/1.1" 304 - "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 2 ms
+2012-07-04T19:37:32.066Z - info: 127.0.0.1 - "POST /compiled HTTP/1.1" 204 - "" "undefined" - 11 ms
+2012-07-04T19:39:42.095Z - info: 127.0.0.1 - "POST /compiled HTTP/1.1" 204 - "" "undefined" - 11 ms
+2012-07-04T19:40:02.508Z - info: 127.0.0.1 - "POST /compiled HTTP/1.1" 204 - "" "undefined" - 15 ms
+2012-07-04T19:40:08.674Z - info: 127.0.0.1 - "POST /compiled HTTP/1.1" 204 - "" "undefined" - 28 ms
+2012-07-04T19:40:39.452Z - info: 127.0.0.1 - "POST /compiled HTTP/1.1" 204 - "" "undefined" - 15 ms
+2012-07-04T19:44:09.818Z - info: 127.0.0.1 - "POST /compiled HTTP/1.1" 204 - "" "undefined" - 12 ms
+2012-07-04T19:44:52.590Z - info: 127.0.0.1 - "POST /compiled HTTP/1.1" 204 - "" "undefined" - 15 ms
+2012-07-04T19:45:12.621Z - info: 127.0.0.1 - "POST /compiled HTTP/1.1" 204 - "" "undefined" - 19 ms
+2012-07-04T20:01:48.304Z - info: 127.0.0.1 - "POST /compiled HTTP/1.1" 204 - "" "undefined" - 5 ms
+2012-07-04T20:03:00.652Z - info: 127.0.0.1 - "POST /compiled HTTP/1.1" 204 - "" "undefined" - 13 ms
+2012-07-04T20:22:46.013Z - info: 127.0.0.1 - "POST /compiled HTTP/1.1" 200 625 "" "undefined" - 19 ms
+2012-07-04T20:25:36.858Z - info: 127.0.0.1 - "POST /compiled HTTP/1.1" 200 625 "" "undefined" - 15 ms
+2012-07-04T20:26:02.501Z - info: 127.0.0.1 - "POST /compiled HTTP/1.1" 200 625 "" "undefined" - 21 ms
+2012-07-04T21:08:53.814Z - info: 127.0.0.1 - "POST /compiled HTTP/1.1" 200 625 "" "undefined" - 16 ms
+2012-07-07T18:33:26.021Z - info: GET https://api.github.com/repos/jeromegn/DocumentUp/readme
+2012-07-07T18:33:26.022Z - info: GET https://raw.github.com/jeromegn/DocumentUp/master/.documentup.json
+2012-07-07T18:33:26.342Z - info: GET https://api.github.com/repos/jeromegn/DocumentUp/readme => 200
+2012-07-07T18:33:26.655Z - info: GET https://raw.github.com/jeromegn/DocumentUp/master/.documentup.json => 200
+2012-07-07T18:33:26.720Z - info: 127.0.0.1 - "GET / HTTP/1.1" 200 15200 "" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 701 ms
+2012-07-07T18:33:27.144Z - info: 127.0.0.1 - "GET /stylesheets/screen.css HTTP/1.1" 200 10339 "http://localhost:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.47 Safari/536.11" - 268 ms

@@ -1,0 +1,11 @@
+GET REGEXP /\/repos\/test\/.+\/readme/
+accept: application/vnd.github.beta.raw+json
+host: api.github.com
+
+200 HTTP/1.1
+
+# h1
+
+## h2
+
+Some paragraph

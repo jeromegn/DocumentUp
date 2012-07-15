@@ -1,0 +1,13 @@
+GET /test/invalid/master/.documentup.json
+accept: application/vnd.github.beta.raw+json
+host: raw.github.com
+
+200 HTTP/1.1
+
+{
+  "name": "DocumentUp",
+  "twitter": [
+    "jeromegn",
+    "DocumentUp"
+  ],
+  "google_analytics": "UA-5201171-14"

@@ -6,11 +6,14 @@ Replay  = require("replay")
 Express = require("express")
 server  = require("../../server")
 File    = require("fs")
+Chai    = require('chai')
+redis   = require("../../config/redis")
 
-Helper =
-  # Call this once before running all tests.
-  listen: (callback)->
-    server.listen(3003, callback)
+listen = (callback)->
+  server.listen(3003, callback)
+
+flush_redis = (callback)->
+  redis.flushall callback
 
 Browser.site = "localhost:3003"
 
@@ -19,4 +22,6 @@ Replay.fixtures = "#{__dirname}/../replay"
 Replay.networkAccess = false
 Replay.localhost "localhost"
 
-module.exports = Helper
+module.exports.listen      = listen
+module.exports.flush_redis = flush_redis
+module.exports.assert      = Chai.assert

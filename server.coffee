@@ -20,24 +20,20 @@ if module.id == "."
 
 require("sugar")
 
-Express = require("express")
+Express    = require("express")
+RedisStore = require('connect-redis')(Express)
+Eco        = require("eco")
+Stylus     = require("stylus")
+Nib        = require("nib")
+FS         = require("fs")
+logger     = require("./config/logger")
 
-Coffee  = require("coffee-script")
-
-eco = require("eco")
-
-stylus = require("stylus")
-nib = require("nib")
 compileStylus = (str, path) ->
-  console.log "COMPILING STYLUS"
-  console.log path
-  stylus(str).set('filename', path).set('compress', true).use(nib())
+  Stylus(str).set('filename', path).set('compress', true).use(Nib())
 
 server = Express.createServer()
 
-server.register ".eco", eco
-
-FS = require("fs")
+server.register ".eco", Eco
 
 server = Express.createServer()
 server.configure ->
@@ -47,7 +43,11 @@ server.configure ->
   server.use Express.query()
   server.use Express.bodyParser()
   server.use Express.cookieParser()
+  
+  server.use logger.middleware()
 
+  server.use Express.session(secret: "c96dbcc746d551ea0665da4a23536280", store: new RedisStore)
+  
   # Templates and views
   server.set "views", "#{__dirname}/app/views"
   server.set "view engine", "eco"
@@ -62,13 +62,12 @@ server.configure "development", ->
     console.log "Caught exception: #{error}"
     console.log error.stack.split("\n")
 
-  server.use Express.logger(buffer: false)
   if process.env.DEBUG
     server.use Express.profiler()
   server.error Express.errorHandler(dumpExceptions: true, showStack: true)
 
   # use Stylus
-  server.use stylus.middleware
+  server.use Stylus.middleware
     src: "#{__dirname}/app"
     dest: "#{__dirname}/public"
     compile: compileStylus
@@ -82,7 +81,6 @@ server.configure "production", ->
   
   server.error Express.errorHandler()
 
-  server.use Express.logger()
   server.use Express.responseTime()
 
   server.use server.router
@@ -91,15 +89,9 @@ server.configure "production", ->
 
 
 server.on "listening", ->
-  console.log "listening"
-
-  # FS.readdir "#{__dirname}/app/resources/", (error, files)->
-  #   for file in files
-  #     if /\.coffee$/.test(file)
-  #       require "#{__dirname}/app/resources/#{file}"
-    
-  require("./app/resources/repositories.coffee")
-  require("./app/resources/site.coffee")
+  require("./app/resources/users")
+  require("./app/resources/projects")
+  require("./app/resources/site")
 
   server.emit "loaded"
 

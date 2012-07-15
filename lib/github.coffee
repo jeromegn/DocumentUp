@@ -1,57 +1,102 @@
 Request = require("request")
-Async = require("async")
+Async   = require("async")
+logger  = require("../config/logger")
 
 file_matchers = require("./matchers")
 
+GITHUB_API = "https://api.github.com"
+GITHUB_RAW = "https://raw.github.com"
 
 # Static class to handle Github API requests
 class Github
 
-  # Get the required files for a repo (readme.md and documentup.json)
-  # 
-  # - After getting the master tree, select the right SHAs
-  # - Then go get each of the blobs
-  @getBlobsFor = (repo, callback)=>
-    @getMasterTree repo, (err, tree)=>
-      return callback(err) if err
-      readme_sha = obj.sha for obj in tree when file_matchers.readme.test(obj.path)
-      config_sha = obj.sha for obj in tree when file_matchers.config.test(obj.path)
+  constructor: (@accessToken)->
 
-      Async.parallel
 
-        readme: (callback)=>
-          @getBlob readme_sha, repo, callback
-        
-        config: (callback)=>
-          return callback(null, null) if !config_sha
-          @getBlob config_sha, repo, callback
-      
-      , (err, results)->
-        return callback(err) if err
-        callback null, readme: results.readme, config: JSON.parse(results.config)
+  post: (params, callback)->
+    params = Object.clone(params)
+    params.method = "POST"
+    @_request(params, callback)
 
-  # Gets one blob from the sha and repository
-  @getBlob = (sha, repo, callback)=>
-    Request
-      method: "GET"
-      url: "https://api.github.com/repos/#{repo}/git/blobs/#{sha}"
-      # Required to not get a base64 encoded string
-      headers:
-        "Accept": "application/vnd.github-blob.raw"
-      (err, resp, body)->
-        return callback(err) if err
-        callback(null, body)
 
-  # Gets the master tree of a repository
-  @getMasterTree = (repo, callback)=>
-    Request
-      method: "GET"
-      url: "https://api.github.com/repos/#{repo}/git/trees/master"
-      (err, resp, body)=>
-        return callback(err) if err
-        data = JSON.parse(body)
-        return callback(new Error(data.message)) if data.message
-        tree = data.tree
-        callback(null, tree)
+  get: (params, callback)->
+    params = Object.clone(params)
+    @_request(params, callback)
+
+
+  getFile: (path, callback)->
+    @_getRaw path: path, callback
+
+
+  _headers: ->
+    headers =
+      "Accept": "application/vnd.github.beta.raw+json"
+
+    # Got an access token kiddo?
+    headers["Authorization"] = "token #{@accessToken}" if @accessToken
+
+    return headers
+
+
+  # Get a file's raw contents
+  _getRaw: (params, callback)->
+    params.headers = @_headers()
+    params.method = "GET"
+
+    # Build URL
+    params.url    = "#{GITHUB_RAW}/#{params.path}"
+    delete params.path
+
+    logger.info "#{params.method} #{params.url}"
+
+    try
+    
+      Request params, (error, response, body)->
+        if error
+          logger.error "#{params.method} #{params.url} => #{error.message}"
+          return callback(error)
+
+        logger.info "#{params.method} #{params.url} => #{response.statusCode}"
+
+        callback(null, response.statusCode, body)
+    
+    catch error
+      logger.error "#{params.method} #{params.url} => #{error.message}"
+      process.nextTick ->
+        callback error
+
+
+  _request: (params, callback)->
+    params.headers = @_headers()
+
+    # Default to GET
+    params.method = "GET"
+
+    # Build URL
+    params.url    = "#{GITHUB_API}/#{params.path}"
+    delete params.path
+
+    logger.info "#{params.method} #{params.url}"
+
+    try
+    
+      Request params, (error, response, body)->
+        if error
+          logger.error "#{params.method} #{params.url} => #{error.message}"
+          return callback(error)
+
+        logger.info "#{params.method} #{params.url} => #{response.statusCode}"
+
+        if body && body.length > 0
+          try
+            body = JSON.parse(body)
+          catch error
+        callback(null, response.statusCode, body)
+    
+    catch error
+      logger.error "#{params.method} #{params.url} => #{error.message}"
+      process.nextTick ->
+        callback error
+
 
 module.exports = Github

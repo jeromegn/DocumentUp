@@ -4,22 +4,22 @@
     <meta charset="utf-8">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= @config.name || @name.split("/")[1] %></title>
+    <title><%= @project.config.name || @project.project_name %></title>
     
     <link rel="stylesheet" type="text/css" href="<% if @env == "production": %>http://documentup.com<% else: %>http://localhost:8080<% end %>/stylesheets/<% if @theme: %>themes/<%= @theme %>.css<% else: %>screen.css<% end %>">
     
-    <% if @config.color: %>
+    <% if @project.config.color: %>
       <style type="text/css">
-        a {color: <%= @config.color %>}
+        a {color: <%= @project.config.color %>}
       </style>
     <% end %>
 
-    <% if @config.google_analytics: %>
+    <% if @project.config.google_analytics && @env == "production": %>
       <!-- Google Analytics -->
       <script type="text/javascript">
 
         var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', '<%= @config.google_analytics %>']);
+        _gaq.push(['_setAccount', '<%= @project.config.google_analytics %>']);
         _gaq.push(['_trackPageview']);
 
         (function() {

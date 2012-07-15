@@ -1,4 +1,5 @@
 --compilers coffee:coffee-script
---globals hljs
---timeout 10000
 --reporter spec
+--growl
+--timeout 5s
+--globals result

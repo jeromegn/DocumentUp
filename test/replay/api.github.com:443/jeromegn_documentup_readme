@@ -1,17 +1,8 @@
-GET /repos/jeromegn/documentup/git/blobs/44ef788b4ab3d2a51638c3729e1ce5228096c3cc
-accept: application/vnd.github-blob.raw
+GET /repos/jeromegn/DocumentUp/readme
+accept: application/vnd.github.beta.raw+json
 host: api.github.com
 
 200 HTTP/1.1
-server: nginx/1.0.13
-date: Mon, 28 May 2012 19:00:40 GMT
-content-type: application/vnd.github-blob.raw
-connection: keep-alive
-status: 200 OK
-x-ratelimit-limit: 5000
-etag: "c2afe8f94d573a75b24d28d921b3eb48"
-x-ratelimit-remaining: 4995
-content-length: 7515
 
 ![DocumentUp](http://documentup.com/images/logo.png)
 
