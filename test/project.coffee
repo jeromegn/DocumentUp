@@ -14,16 +14,11 @@ describe "Project", ->
 
   describe "class methods", ->
     describe "load", ->
-      # Clear the cache
-      before ->
-        Project._cache = {}
       before (done)->
         Project.load "jeromegn", "DocumentUp", (error, @project)=>
           done(error)
       it "should return a project object", ->
         assert @project instanceof Project
-      it "should cache the project", ->
-        assert.equal Project._cache["jeromegn/documentup"], @project
       describe "should have set the property", ->
         it "username", ->
           assert.equal @project.username, "jeromegn"

@@ -9,8 +9,6 @@ ns       = config.redis.namespace
 github = new Github()
 
 class Project
-  @_cache = {}
-
   @defaults =
     source:           "github"
     twitter:          []
@@ -35,15 +33,12 @@ class Project
   # Simple constructor
   constructor: (@username, @project_name)->
     name = Project._normalizeName(@username, @project_name)
-    return project if project = Project._cache[name]
 
     Object.defineProperty this, "config",
       get: -> return @_config || Project.defaults
       set: (config)->
         @_config = Project.makeConfig(config)
         return @_config
-
-    Project._cache[name] = this
 
     return this
 
