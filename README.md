@@ -18,10 +18,6 @@ Recommended if you have a public Github repository.
 
 If you want your readme to be recompiled, please add a [Post-Receive Hook](http://help.github.com/post-receive-hooks/) to your Github repository pointing to: `http://documentup.com/recompile`
 
-*I'm still testing this feature. The URL shouldn't change though.*
-
-Right now that's the only strategy, for the sake of simplicity.
-
 ### Manual Recompile
 
 Visit `http://documentup.com/username/repository/recompile` to manually tell the server to recompile your readme.
@@ -156,28 +152,64 @@ Some intro text if you want.
 
 ## Options
 
-**name** (String) *default: repository name*  
+### name
+
+*String, default: repository name*
+
 Name of your project. It'll appear in the header of the sidebar. Defaults to the `repository` substring of the `repo` option.
 
-**color** (String) *default: "#336699"*  
+### color
+
+*String, default: "#336699"*
+
 CSS-like color representing the color for the links both in the sidebar and the content.
 
-**issues** (Boolean or String) *default: true*
+### theme
+
+*String, default: null*
+
+Name of the theme to use. Refer to the [themes](#themes) sections.
+
+### issues
+
+*Boolean, default: true*
+
 Adds a link to the sidebar for the issues tab of the repository if `true`. Also accepts a string if your issues are managed elsewhere.
 
-**travis** (Boolean) *default: false*  
+### travis
+
+*Boolean) *default: false*
+
 Indicate if the project is being tested by [Travis-CI](http://travis-ci.org/). If `true`, it'll add the small travis badge in the sidebar.
 
-**twitter** (String *or* Array of strings) *default: null*  
+### twitter
+
+*String / Array of strings, default: null*
+
 Add follow buttons for one or more Twitter accounts to your sidebar. Useful to gather followers.
 
-**google_analytics** (String) *default: null*  
+### google_analytics
+
+*String default: null*
+
 This is your Google Analytics "UA" unique ID. Adds GA tracking to your generated documentation.  
 e.g.: "UA-5201171-14"
 
+## Themes
+
+### Default
+
+The one you're looking at now.
+
+### V1
+
+For the nostalgic. Use `v1` in your `theme` config option.
+
+![V1](http://documentup.com/images/v1.png)
+
 ## Roadmap
 
-* Themes
+* Private repositories
 * Multi-page aggregation
 
 ## Thank you
