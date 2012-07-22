@@ -148,6 +148,7 @@ class Project
       readme: (done)=>
         github.get path: "repos/#{@name}/readme", (error, status, content)->
           return done(error) if error
+          return done(new Error("Can't fetch README for #{@name}")) if status != 200
           done(null, status: status, content: content)
     , (error, results)=>
       return callback(error) if error
