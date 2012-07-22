@@ -178,7 +178,7 @@ Adds a link to the sidebar for the issues tab of the repository if `true`. Also 
 
 ### travis
 
-*Boolean) *default: false*
+*Boolean default: false*
 
 Indicate if the project is being tested by [Travis-CI](http://travis-ci.org/). If `true`, it'll add the small travis badge in the sidebar.
 
