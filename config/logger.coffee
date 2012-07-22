@@ -3,10 +3,11 @@
 # The logger supports the logging methods debug, info, warning, error and alert. (Please don't use other logging
 # levels)
 
-
 Path    = require("path")
 Winston = require("winston")
 config  = require("./index")
+
+console.dir config
 
 require('winston-loggly')
 
