@@ -156,7 +156,8 @@ class Project
       @source = results.readme.content
 
       @_compile()
-      callback(null)
+
+      @save callback
 
 
   @load: (username, project_name, callback)->
