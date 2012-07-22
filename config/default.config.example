@@ -11,5 +11,9 @@ redis:
   port:       6379
 
 github:
-  client_id:     process.env.GITHUB_CLIENT_ID
-  client_secret: process.env.GITHUB_CLIENT_SECRET
+  client_id:     "YOUR GITHUB CLIENT ID"
+  client_secret: "YOUR GITHUB CLIENT SECRET"
+
+loggly:
+  subdomain: "YOUR LOGGLY SUBDOMAIN"
+  inputToken: "YOUR LOGGLY INPUT TOKEN"
