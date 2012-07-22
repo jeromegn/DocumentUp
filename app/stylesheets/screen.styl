@@ -11,15 +11,12 @@ html {
 body {
   padding: 0;
   margin: 0;
-  font: 16px/1.4em Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
+  font: 14px/22px "adelle", Georgia, sans-serif;
   font-size-adjust:none;
   font-style:normal;
   font-variant:normal;
   font-weight:normal;
-}
-
-h1, h2, h3, h4, #header, #nav, #loader {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: #F4F6EC;
 }
 
 a {
@@ -28,73 +25,62 @@ a {
 
 // Layout
 
+#container {
+  width: 922px;
+  margin: 0 auto;
+}
+
 #header {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 3px solid rgba(black, 0.1);
+  padding-bottom: 10px;
+  margin-bottom: 10px;
   #logo {
-    color: #333;
-    font-size: 18px;
+    color: #111;
+    font-size: 25px;
     font-weight: bold;
-    padding: 10px 15px;
-    line-height: 1.2em;
+    padding: 10px 0;
     text-decoration: none;
   }
 }
 
 #nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 250px;
-  height: 100%;
-  background: #f9f9f9;
-  background: rgba(black, 0.1);
-  border-right: 1px solid rgba(black, 0.2);
-  box-shadow: rgba(black, 0.1) -1px 0 3px 0 inset;
-  text-shadow: rgba(white, 0.7) 0 1px 0;
-  overflow-x: hidden;
-  overflow-y: auto;
+  float: left;
+  width: 230px;
+  margin-right: 30px;
+  margin-top: 40px;
   a {
     display: block;
     font-weight: bold;
     text-decoration: none;
   }
   #sections {
-    margin-bottom: 5px;
-    border-bottom: 1px solid #ccc;
-    background: #f1f1f1;
-    box-shadow: rgba(black, 0.15) 0 0 5px;
+    list-style-type: none;
+    border-bottom: 3px solid rgba(black, 0.1);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
     > li {
-      border-bottom: 1px solid rgba(black, 0.05);
-      border-top: 1px solid rgba(white, 0.5);
       > a {
-        padding: 5px 15px;
-        color: #555;
+        padding: 5px 0;
+        color: #444;
         font-size: 14px;
-        &:hover {
-          background: #ddd;
-          background: rgba(black, 0.05);
-        }
       }
       &:last-child {
-        border-bottom: 1px solid rgba(white, 0.5);
       }
     }
     ul {
       margin-bottom: 6px;
       li {
+        list-style-type: none;
         a {
-          padding: 1px 25px;
+          padding: 1px 15px;
           font-size: 13px;
-          &:hover {
-            background: #ddd;
-            background: rgba(black, 0.05);
-          }
+          font-weight: normal;
         }
       }
     }
   }
   .extra {
-    padding: 5px 15px;
+    padding: 5px 0;
     min-height: 1.4em;
     a {
       color: #555;
@@ -119,32 +105,17 @@ a {
   }
 }
 
-#refresh {
-  z-index: 3;
-  position: fixed;
-  display: block;
-  top: 0;
-  left: 50%;
-  width: 320px;
-  margin-left: -160px;
-  font-family: "Helvetica Neue", "Helvetica", arial, sans-serif;
-  line-height: 1.4em;
-  padding: 10px;
-  color: #fff;
-  text-shadow: rgba(black, 0.3) 0 1px 1px;
-  font-weight: bold;
-  font-size: 13px;
-  text-decoration: none;
-  text-align: center;
-  background: #666;
-  border-radius: bottom 5px;
-}
-
 #content {
-  margin: 0 40px 0 290px;
-  padding: 30px 0 20px;
+  padding: 30px 30px 20px 30px;
   min-height: 100px;
-  max-width: 688px;
+  max-width: 600px;
+  background: #fff;
+  float: left;
+  border: 1px solid rgba(black, 0.2);
+  border-bottom: 0;
+  border-radius: 3px 3px 0 0;
+  margin-top: 15px;
+
   #loader {
     color: #888;
     width: 300px;
@@ -158,20 +129,19 @@ a {
     font-size: 18px;
   }
 
-  p { padding:0 0 0.8125em 0; color:#111; font-weight:300; clearfix();}
+  p { padding:0 0 0.8125em 0; color:#444; clearfix();}
 
   p img       { float: left; margin: 0.5em 0.8125em 0.8125em 0; padding: 0; }
   img { max-width: 100%; }
 
 
-  h1,h2,h3,h4,h5,h6 { font-weight:normal; color: #333; line-height: 1.2em; }
+  h1,h2,h3,h4,h5,h6 { font-weight:bold; line-height: 1.2em; }
 
-  h1 { font-size: 2.125em; margin-bottom: 0.765em; }
-  h2 { font-size: 1.7em;  margin: 0.855em 0; }
-  h3 { font-size: 1.3em;  margin: 0.956em 0; }
-  h4 { font-size: 1.1em;  margin: 1.161em 0; }
-  h5,h6 { font-size: 1em; font-weight: bold;  margin: 1.238em 0; }
-
+  h1 { font-size: 2.125em; margin-bottom: 0.4em; }
+  h2 { font-size: 1.7em;  margin: 0.855em 0 0.4em; color: #CC333F; }
+  h3 { font-size: 1.3em;  margin: 0.956em 0 0.4em; }
+  h4 { font-size: 1.1em;  margin: 1.161em 0 0.4em; }
+  h5,h6 { font-size: 1em; font-weight: bold;  margin: 1.238em 0 0.4em; }
 
 
   ul{list-style-position:outside;}
@@ -209,7 +179,7 @@ a {
   dfn { font-weight: bold; }
   pre, code { margin: 0 0 1.625em; white-space: pre; }
   pre, code, tt { 
-    font-size: 0.9em;
+    font-size: 1em;
     font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
     line-height: 1.5;
   } 
@@ -240,17 +210,27 @@ a {
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5), only screen and (max-width : 480px) {
-  #nav {
-    position: static;
+  #container {
     width: 100%;
-    height: auto;
-    box-shadow: none;
-    border-bottom: 1px solid #aaa;
+  }
+  #nav {
+    width: 100%;
+    margin-top: 10px;
+    float: none;
+    #sections, #header, .extra {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
   }
   #content {
+    border-radius: 0;
+    border-width: 1px
+    float: none;
     margin: 0;
-    padding: 30px;
-    position: relative;
+    width: 100%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
   }
 
   #github-ribbon {
