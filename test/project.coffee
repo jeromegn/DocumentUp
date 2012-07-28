@@ -37,10 +37,8 @@ describe "Project", ->
           assert.deepEqual @project.config, config
         it "source", ->
           assert.isString @project.source
-          assert.lengthOf @project.source, 7515
         it "compiled", ->
           assert.isString @project.compiled
-          assert.lengthOf @project.compiled, 11376
         it "toc", ->
           toc =
             'hosted':
