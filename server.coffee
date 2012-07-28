@@ -47,7 +47,7 @@ server.configure ->
   server.use logger.middleware()
 
   server.use Express.session(secret: "c96dbcc746d551ea0665da4a23536280", store: new RedisStore)
-  
+
   # Templates and views
   server.set "views", "#{__dirname}/app/views"
   server.set "view engine", "eco"
@@ -73,20 +73,24 @@ server.configure "development", ->
     compile: compileStylus
 
   server.use server.router
-
   server.use Express.static "#{__dirname}/public"
 
 
 server.configure "production", ->
-  
   server.error Express.errorHandler()
-
   server.use Express.responseTime()
-
   server.use server.router
-
   server.use Express.static "#{__dirname}/public", maxAge: 1000 * 60 * 60 * 24 * 14
 
+
+server.configure ->
+  server.use (error, req, res, next)->
+    logger.error(error)
+    res.render "errors/500", layout: "layouts/error", status: 500
+  
+  # 404 error
+  server.use (req, res, next)->
+    res.render "errors/404", layout: "layouts/error", status: 404
 
 server.on "listening", ->
   require("./app/resources/users")

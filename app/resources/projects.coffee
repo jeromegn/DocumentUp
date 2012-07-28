@@ -1,6 +1,7 @@
 Server   = require("../../server")
 Project  = require("../models/project")
 Markdown = require("../../lib/markdown")
+Github   = require("../../lib/github")
 
 # Reusable regex to find the right files
 file_matchers = require("../../lib/matchers")
@@ -74,7 +75,7 @@ Server.get "/compiled", compile_route
 
 
 Server.get "/", (req, res, next)->
-  Project.load "jeromegn", "DocumentUp", (error, project)->
+  Project.load "jeromegn", "DocumentUp", req.session.access_token, (error, project)->
     render_project req, res, project
 
 
@@ -88,25 +89,42 @@ Server.get "/:username/:project_name", (req, res, next)->
   return next() if req.params.username == "stylesheets" || req.params.username == "javascripts" || req.params.username == "images"
   return res.redirect("/", 301) if req.params.username == "username" && req.params.project_name == "repository"
   
-  Project.load req.params.username, req.params.project_name, (error, project)->
-    return next(error) if error
-    if (config = req.query.config && Project.makeConfig(JSON.parse(req.query.config))) && !Object.equal(project.config, config)
-      project.config = config
-      project.save (error, project)->
-        return next(error) if error
-        res.render "projects/show", locals: {project: project, theme: req.query.theme || project.config.theme}, (error, html)->
-          respond_with_html(res, html)
+  if req.query.auth
+    return res.redirect Github.oauthUrl("/#{req.params.username}/#{req.params.project_name}")
 
-    else
-      res.render "projects/show", locals: {project: project, theme: req.query.theme || project.config.theme}, (error, html)->
-          respond_with_html(res, html)
+  if code = req.query.code
+    Github.getAccessToken code, (error, access_token)->
+      return next(error) if error
+      return next() unless access_token
+      
+      req.session.access_token = access_token
+      return res.redirect "/#{req.params.username}/#{req.params.project_name}"
+  else
+    Project.load req.params.username, req.params.project_name, req.session.access_token, (error, project)->
+      return next(error) if error
+      return next() unless project
+      if (config = req.query.config && Project.makeConfig(JSON.parse(req.query.config))) && !Object.equal(project.config, config)
+        project.config = config
+        project.save (error, project)->
+          return next(error) if error
+          res.render "projects/show", locals: {project: project, theme: req.query.theme || project.config.theme}, (error, html)->
+            respond_with_html(res, html)
+
+      else
+        res.render "projects/show", locals: {project: project, theme: req.query.theme || project.config.theme}, (error, html)->
+            respond_with_html(res, html)
+
+Server.get "/:username/:project_name", (req, res, next)->
+  return next() if req.params.username == "stylesheets" || req.params.username == "javascripts" || req.params.username == "images"
+  res.render "projects/404", layout: "layouts/error", locals:
+    project: "#{req.params.username}/#{req.params.project_name}"
 
 
 # Manual recompile
 Server.get "/:username/:project_name/recompile", (req, res, next)->
-  Project.load req.params.username, req.params.project_name, (error, project)->
+  Project.load req.params.username, req.params.project_name, req.session.access_token, (error, project)->
     return next(error) if error
-    project.update (error)->
+    project.update (req.session.access_token || null), (error)->
       return next(error) if error
       res.redirect "/#{project.name}", 302
 

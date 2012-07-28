@@ -1,27 +1,6 @@
-@import "nib";
-
-@import "normalize";
-
 @import "syntax/tomorrow";
 
-html {
-  height: 100%;
-}
-
-body {
-  padding: 0;
-  margin: 0;
-  font: 14px/22px "adelle", Georgia, sans-serif;
-  font-size-adjust:none;
-  font-style:normal;
-  font-variant:normal;
-  font-weight:normal;
-  background: #F4F6EC;
-}
-
-a {
-  color: #369;
-}
+@import "base"
 
 // Layout
 
@@ -108,11 +87,10 @@ a {
 #content {
   padding: 30px 30px 20px 30px;
   min-height: 100px;
-  max-width: 600px;
+  width: 600px;
   background: #fff;
   float: left;
   border: 1px solid rgba(black, 0.2);
-  border-bottom: 0;
   border-radius: 3px 3px 0 0;
   margin-top: 15px;
 
@@ -129,9 +107,12 @@ a {
     font-size: 18px;
   }
 
-  p { padding:0 0 0.8125em 0; color:#444; clearfix();}
+  > p { 
+    clearfix()
+  }
+  p { padding:0 0 0.8125em 0; color:#444;}
 
-  p img       { float: left; margin: 0.5em 0.8125em 0.8125em 0; padding: 0; }
+  p img { float: left; margin: 0.5em 0.8125em 0.8125em 0; padding: 0; }
   img { max-width: 100%; }
 
 
@@ -143,11 +124,12 @@ a {
   h4 { font-size: 1.1em;  margin: 1.161em 0 0.4em; }
   h5,h6 { font-size: 1em; font-weight: bold;  margin: 1.238em 0 0.4em; }
 
+  > h1, > h2 {margin-top: 0}
 
   ul{list-style-position:outside;}
   li ul, 
   li ol  { margin:0 1.625em;  }
-  ul, ol { margin: 0 0 1.625em 1em; }
+  ul, ol { margin: 0 0 1.625em 1.25em; }
 
 
   dl { margin: 0 0 1.625em 0; }

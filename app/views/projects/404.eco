@@ -1,0 +1,3 @@
+<h1>Not found</h1>
+<p>Maybe there's a typo in there?<br>Or maybe this is a private repository?<br>If so, <a href="/<%= @project %>?auth=1">login</a>.</p>
+<a href="/">Return home</a>

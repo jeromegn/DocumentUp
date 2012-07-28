@@ -16,6 +16,7 @@ class Project
     ribbon:           true
     google_analytics: null
     theme:            null
+    private:          false
 
   @_normalizeName: (username, project_name)->    
     return "#{username}/#{project_name}".toLowerCase()
@@ -78,7 +79,7 @@ class Project
 
 
   # Retrieve from the DB
-  _retrieve: (callback)->
+  _retrieve: (access_token, callback)->
     redis.hgetall @redisKey, (error, result)=>
       return callback(error) if error
       return callback(null, this) unless result
@@ -86,8 +87,14 @@ class Project
         @[key] = value for key, value of @_parse(result)
       catch error
         callback(error)
-      callback(null, this)
 
+      if @config.private
+        Github.authorize access_token, @username, @project_name, (error, authorized)=>
+          return callback(error) if error
+          return callback() unless authorized
+          callback(null, this)
+      else
+        callback(null, this)
 
   _saveable: ->
     return {
@@ -122,8 +129,8 @@ class Project
 
 
   # Gets the readme and config from Github
-  update: (callback)->
-    github = new Github()
+  update: (access_token, callback)->
+    github = new Github(access_token)
     
     Async.parallel
       config: (done)=>
@@ -142,16 +149,26 @@ class Project
           done(null, status: status, content: content)
 
       readme: (done)=>
-        github.get path: "repos/#{@name}/readme", (error, status, content)->
+        github.get path: "repos/#{@name}/readme", (error, status, content)=>
           return done(error) if error
-          return done(new Error("Can't fetch README for #{@name}")) if status != 200
-          done(null, status: status, content: content)
+          switch status
+            when 404
+              done()
+            when 200
+              done(null, status: status, content: content)
+            else
+              done(new Error("Can't fetch README for #{@name}")) if status != 200
+
+          
     , (error, results)=>
       return callback(error) if error
+      return callback() unless results.readme
       try
         config = JSON.parse(results.config.content)
       catch error
         config = {}
+
+      config.private = true if access_token
 
       @config = config
       @source = results.readme.content
@@ -161,21 +178,17 @@ class Project
       @save callback
 
 
-  @load: (username, project_name, callback)->
+  @load: (username, project_name, access_token, callback)->    
     project = new Project(username, project_name)
-    
-    if project._isComplete
-      return callback(null, project)
-    else
-      project._retrieve (error, project)=>
-        return callback(error) if error
-        if !project._isComplete
-          project.update (error)=>
-            return callback(error) if error
-            project.save callback
 
-        else
-          callback(null, project)
+    project._retrieve access_token, (error, project)=>
+      return callback(error) if error
+      return callback() unless project
+      if !project._isComplete
+        project.update access_token, callback
+
+      else
+        callback(null, project)
 
 
 
