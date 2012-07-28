@@ -11,14 +11,11 @@ respond_with_html = (res, data, status = 200)->
     json =
       status: status
     if status && status != 200
-      console.log "ERROR SENT BACK: #{data}"
       json.error = data
     else
       json.html = data
     return res.json(json)
-  
   else
-
     return res.send(data, status)
 
 
@@ -44,7 +41,7 @@ Server.post "/recompile", (req, res, next)->
 
 
 
-# Compile any markdown, doesn't cache it.
+# Compile any markdown
 compile_route = (req, res, next)->
   config = (!Object.isEmpty(req.body) && req.body) || (!Object.isEmpty(req.query) && req.query)
   return next(new Error("Please send markdown content as the `content` parameter")) unless config || config.content
