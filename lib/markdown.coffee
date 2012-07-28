@@ -1,7 +1,6 @@
 marked = require("./marked.js")
 hljs   = require("highlight.js")
 
-console.log Object.keys(hljs.LANGUAGES)
 
 marked.setOptions
   gfm: true

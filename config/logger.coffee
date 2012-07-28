@@ -7,8 +7,6 @@ Path    = require("path")
 Winston = require("winston")
 config  = require("./index")
 
-console.dir config
-
 require('winston-loggly')
 
 # Use syslog logging levels.
