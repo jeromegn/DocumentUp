@@ -6,7 +6,6 @@ redis    = require("../../config/redis")
 config   = require("../../config")
 ns       = config.redis.namespace
 
-github = new Github()
 
 class Project
   @defaults =
@@ -124,6 +123,8 @@ class Project
 
   # Gets the readme and config from Github
   update: (callback)->
+    github = new Github()
+    
     Async.parallel
       config: (done)=>
         Async.waterfall [
