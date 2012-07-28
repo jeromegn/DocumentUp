@@ -1,5 +1,18 @@
-marked = require("marked")
-hljs   = require("./highlighter")
+marked = require("./marked.js")
+hljs   = require("highlight.js")
+
+console.log Object.keys(hljs.LANGUAGES)
+
+marked.setOptions
+  gfm: true
+  highlight: (code, lang)->
+    if lang in Object.keys(hljs.LANGUAGES)
+      return hljs.highlight(lang, code).value
+    else if lang != "plain" && lang != "text"
+      return hljs.highlightAuto(code).value
+    else
+      return code
+
 
 
 Markdown =
@@ -12,19 +25,13 @@ Markdown =
     tokens = marked.lexer(markdown)
     token = undefined
     for token in tokens
-      if token.type is "heading"
+      if token.type == "heading"
         to_param = token.text.parameterize()
         if token.depth == 2
           current_h2 = to_param
           token.depth = "#{token.depth} id='#{to_param}'"
         else if token.depth == 3
           token.depth = "#{token.depth} id='#{current_h2}/#{to_param}'"
-      else if token.type is "code"
-        if token.lang in Object.keys(hljs.LANGUAGES)
-          token.text = hljs.highlight(token.lang, token.text).value
-        else
-          token.text = hljs.highlightAuto(token.text).value
-        token.escaped = true;
     
     return marked.parser(tokens)
 

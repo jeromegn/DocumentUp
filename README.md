@@ -47,7 +47,7 @@ All the configuration parameters detailed [options](#options) are also valid.
 
 Pipe the response HTML into a file and open it. Example using `curl`:
 
-```shell
+```bash
 curl -X POST --data-urlencode content@README.md \
 http://documentup.com/compiled > index.html && open index.html
 ```
@@ -138,7 +138,7 @@ h1's (# in markdown) will appear as first level navigation in the sidebar while 
 
 Example:
 
-```plain
+```markdown
 # Project name / Title (won't appear in the sidebar)
 
 Some intro text if you want.
