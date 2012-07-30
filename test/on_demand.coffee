@@ -19,9 +19,7 @@ describe "On Demand API", ->
         { @statusCode, body } = response
         @browser = new Browser()
         @browser.load body, done
-
-    it "should succeed", ->
-      assert.equal @statusCode, 200
+        
     it "should return the parsed html", ->
       assert @browser.query("a[href='#h2']")
       assert.equal @browser.text("p"), "Some paragraph"

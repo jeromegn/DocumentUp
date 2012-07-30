@@ -1,9 +1,19 @@
 @import "base";
 
 .error {
+  .header {
+    width: 240px;
+    margin: 100px auto 0;
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.error-message {
   width: 300px;
   padding: 30px;
-  margin: 100px auto 0;
+  margin: 10px auto 0;
   text-align: center;
   background: #fff;
   border-radius: 3px;
@@ -17,4 +27,32 @@ h1 {
   font-size: 24px;
   margin: 0 0 20px;
   font-weight: bold;
+}
+
+.login {
+  &.github {
+    height: 24px;
+    line-height: 24px;
+    inline-block();
+    background: #eee url(/images/icon-github.png) no-repeat 5px 0;
+    background: url(/images/icon-github.png) no-repeat 5px 0, linear-gradient(top, #eee, #ddd);
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    padding: 0 5px 0 26px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    font-size: 13px;
+    &:hover {
+      background: #599bdc url(/images/icon-github.png) no-repeat 5px -24px;
+      background: url(/images/icon-github.png) no-repeat 5px -24px, linear-gradient(top, #599bdc, #3072b3);
+      color: #fff;
+      border-color: #518cc6;
+    }
+    &:active {
+      background: #3072b3 url(/images/icon-github.png) no-repeat 5px -24px;
+      background: url(/images/icon-github.png) no-repeat 5px -24px, linear-gradient(top, #3072b3, #599bdc);
+      border-color: #2A65A0;
+    }
+  }
 }

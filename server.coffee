@@ -83,19 +83,18 @@ server.configure "production", ->
   server.use Express.static "#{__dirname}/public", maxAge: 1000 * 60 * 60 * 24 * 14
 
 
-server.configure ->
-  server.use (error, req, res, next)->
-    logger.error(error)
-    res.render "errors/500", layout: "layouts/error", status: 500
-  
-  # 404 error
-  server.use (req, res, next)->
-    res.render "errors/404", layout: "layouts/error", status: 404
-
 server.on "listening", ->
-  require("./app/resources/users")
   require("./app/resources/projects")
   require("./app/resources/site")
+
+  server.configure ->
+    server.use (error, req, res, next)->
+      logger.error(error)
+      res.render "errors/500", layout: "layouts/error", status: 500
+    
+    # 404 error
+    server.use (req, res, next)->
+      res.render "errors/404", layout: "layouts/error", status: 404
 
   server.emit "loaded"
 

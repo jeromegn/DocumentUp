@@ -32,9 +32,9 @@ Server.post "/recompile", (req, res, next)->
 
   if recompile
     splitted = push.repository.url.replace(/(http|https):\/\/github.com/, "").split("/")
-    Project.load splitted[1], splitted[2], (error, project)->
+    Project.load splitted[1], splitted[2], null, (error, project)->
       return next(error) if error
-      project.update (error, project)->
+      project.update null, (error, project)->
         return next(error) if error
         res.send 200
   else
@@ -116,7 +116,7 @@ Server.get "/:username/:project_name", (req, res, next)->
 
 Server.get "/:username/:project_name", (req, res, next)->
   return next() if req.params.username == "stylesheets" || req.params.username == "javascripts" || req.params.username == "images"
-  res.render "projects/404", layout: "layouts/error", locals:
+  res.render "projects/404", layout: "layouts/error", status: 404, locals:
     project: "#{req.params.username}/#{req.params.project_name}"
 
 
@@ -124,7 +124,7 @@ Server.get "/:username/:project_name", (req, res, next)->
 Server.get "/:username/:project_name/recompile", (req, res, next)->
   Project.load req.params.username, req.params.project_name, req.session.access_token, (error, project)->
     return next(error) if error
-    project.update (req.session.access_token || null), (error)->
+    project.update req.session.access_token, (error)->
       return next(error) if error
       res.redirect "/#{project.name}", 302
 

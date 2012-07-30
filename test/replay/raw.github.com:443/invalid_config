@@ -1,5 +1,4 @@
 GET /test/invalid/master/.documentup.json
-accept: application/vnd.github.beta.raw+json
 host: raw.github.com
 
 200 HTTP/1.1

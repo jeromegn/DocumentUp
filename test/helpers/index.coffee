@@ -9,8 +9,14 @@ File    = require("fs")
 Chai    = require('chai')
 redis   = require("../../config/redis")
 
+listening = false
 listen = (callback)->
-  server.listen(3003, callback)
+  if listening
+    process.nextTick callback
+    return
+  server.listen 3003, ->
+    listening = true
+    process.nextTick callback
 
 flush_redis = (callback)->
   redis.flushall callback

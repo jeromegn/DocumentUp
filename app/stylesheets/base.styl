@@ -19,3 +19,15 @@ body {
 a {
   color: #369;
 }
+
+inline-block() {
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: top;
+  if support-for-ie {
+    & {
+      *display: inline;
+    }
+  }
+}

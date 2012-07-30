@@ -1,0 +1,12 @@
+GET /repos/private/repo/readme
+accept: application/vnd.github.beta.raw+json
+host: api.github.com
+authorization: bearer token
+
+200 HTTP/1.1
+
+# h1
+
+## h2
+
+Some paragraph

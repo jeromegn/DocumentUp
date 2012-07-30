@@ -76,7 +76,6 @@ class Github
 
     # Build URL
     params.url    = "#{GITHUB_API}/#{params.path}"
-    #params.url   += "?access_token=#{@accessToken}" if @accessToken
     delete params.path
 
     logger.info "#{params.method} #{params.url}"

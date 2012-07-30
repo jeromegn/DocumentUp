@@ -42,6 +42,28 @@ describe "Hosted", ->
       # Look for a paragraph with an image in it.
       assert @browser.query("p:first img")
 
+
+  describe "viewing a repository where github returns a 404", ->
+    before (done)->
+      @browser = new Browser()
+      @browser.visit "/404/repo", =>
+        done()
+    it "should return a 404", ->
+      assert.equal @browser.statusCode, 404
+    it "should show 404 text", ->
+      assert.equal @browser.text("h1"), "Not found"
+    it "should show link to login", ->
+      assert.equal @browser.text("a[href='/404/repo?auth=1']"), "Sign-in with Github"
+
+
+  describe "logging in to view a private repo", ->
+    before (done)->
+      @browser = new Browser()
+      @browser.visit "/private/repo?code=12345", =>
+        done()
+    it "should redirect to the repository", ->
+      assert.ok @browser.redirected
+
   
   describe "post receive hook", ->
     before (done)->

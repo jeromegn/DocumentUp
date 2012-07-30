@@ -15,7 +15,7 @@ describe "Project", ->
   describe "class methods", ->
     describe "load", ->
       before (done)->
-        Project.load "jeromegn", "DocumentUp", (error, @project)=>
+        Project.load "jeromegn", "DocumentUp", null, (error, @project)=>
           done(error)
       it "should return a project object", ->
         assert @project instanceof Project
@@ -34,6 +34,7 @@ describe "Project", ->
             google_analytics: 'UA-5201171-14'
             theme:   null
             name:    'DocumentUp'
+            private: false
           assert.deepEqual @project.config, config
         it "source", ->
           assert.isString @project.source
@@ -80,7 +81,7 @@ describe "Project", ->
 
   describe "instance methods", ->
     before (done)->
-      Project.load "jeromegn", "DocumentUp", (error, @project)=>
+      Project.load "jeromegn", "DocumentUp", null, (error, @project)=>
         done(error)
     
     describe "set config", ->
