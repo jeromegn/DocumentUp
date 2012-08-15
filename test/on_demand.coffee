@@ -25,7 +25,7 @@ describe "On Demand API", ->
       assert.equal @browser.text("p"), "Some paragraph"
 
     it "uses the screen.css", ->
-      stylesheet_url = @browser.query("link[href]")._attributes.href._nodeValue
+      stylesheet_url = @browser.query("link[href]").getAttribute("href")
       assert stylesheet_url.indexOf("screen.css") > -1
 
   describe "POST", ->
@@ -41,6 +41,6 @@ describe "On Demand API", ->
         @browser.load body, done
 
     it "uses the v1.css", ->
-      stylesheet_url = @browser.query("link[href]")._attributes.href._nodeValue
+      stylesheet_url = @browser.query("link[href]").getAttribute("href")
       assert stylesheet_url.indexOf("v1.css") > -1
     
