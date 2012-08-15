@@ -66,7 +66,8 @@ compile_route = (req, res, next)->
       compiled: compiled
       toc:      toc
       config:   config
-  res.render "projects/show", locals: locals, (error, html)->
+      
+  res.render "projects/show", locals: locals, theme: config.theme, (error, html)->
     respond_with_html(res, html)
 
 
