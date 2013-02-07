@@ -130,18 +130,18 @@ class Project
 
   # Gets the readme and config from Github
   update: (access_token, callback)->
-    github = new Github(access_token)
+    github = new Github(access_token, path: "repos/#{@name}")
     
     Async.parallel
       config: (done)=>
         Async.waterfall [
           (done)=>
-            github.getFile "#{@name}/master/.documentup.json", (error, status, content)->
+            github.getFile "#{@name}/#{github.defaultBranch}/.documentup.json", (error, status, content)->
               return done(error) if error
               return done(null, status, content)
           (status, content, done)=>
             return done(null, status, content) if status == 200
-            github.getFile "#{@name}/master/documentup.json", (error, status, content)->
+            github.getFile "#{@name}/#{github.defaultBranch}/documentup.json", (error, status, content)->
               return done(error) if error
               return done(null, status, content)
         ], (error, status, content)->
