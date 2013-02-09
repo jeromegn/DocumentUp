@@ -12,8 +12,7 @@ GITHUB_RAW = "https://raw.github.com"
 # Static class to handle Github API requests
 class Github
 
-  constructor: (@accessToken, params)->
-    @setDefaultBranch params
+  constructor: (@accessToken)->
 
   post: (params, callback)->
     params = Object.clone(params)
@@ -29,14 +28,6 @@ class Github
   getFile: (path, callback)->
     @_getRaw path: path, callback
 
-
-  defaultBranchCallBack: (error, status, content) =>
-    @defaultBranch = "master" if error or status isnt 200
-    @defaultBranch = content.master_branch ? content.default_branch ? "master"
-
-  setDefaultBranch: (params)->
-    params = Object.clone(params)
-    @_request(params, @defaultBranchCallBack)
 
   _headers: ->
     headers =
