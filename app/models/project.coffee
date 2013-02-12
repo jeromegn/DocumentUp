@@ -163,8 +163,14 @@ class Project
     , (error, results)=>
       return callback(error) if error
       return callback() unless results.readme
-      if results.config.status is 200
-        config = results.config.content
+      if results.config.status is 200 
+        if typeof results.config.content is "object"
+          config = results.config.content
+        else
+          try
+            config = JSON.parse(results.config.content)
+          catch error
+            config = {}
       else
         config = {}
 
