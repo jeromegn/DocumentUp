@@ -1,0 +1,12 @@
+GET /repos/test/invalid/contents/.documentup.json
+host: api.github.com
+
+200 HTTP/1.1
+
+{
+  "name": "DocumentUp",
+  "twitter": [
+    "jeromegn",
+    "DocumentUp"
+  ],
+  "google_analytics": "UA-5201171-14"
