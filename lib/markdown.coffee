@@ -51,7 +51,7 @@ Markdown =
     toc = {}
     navigation.forEach (token, i, arr)->
       id =   token.text.parameterize()
-      n  =   marked.parse(token.text).replace(/<[^>]+>/g, '').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      n  =   marked.parse(token.text).replace(/<[^>]+>/g, '').replace(/</g, '&lt;').replace(/>/g, '&gt;').trim()
       
       if token.depth == 2
         current_section = id
