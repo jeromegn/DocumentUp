@@ -32,6 +32,7 @@ class Github
   _headers: ->
     headers =
       "Accept": "application/vnd.github.beta.raw+json"
+      "User-Agent": "DocumentUp"
 
     # Got an access token kiddo?
     headers["Authorization"] = "bearer #{@accessToken}" if @accessToken
