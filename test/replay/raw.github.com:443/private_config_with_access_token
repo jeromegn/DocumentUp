@@ -1,8 +1,0 @@
-GET /private/repo/master/.documentup.json?access_token=token
-host: raw.github.com
-
-200 HTTP/1.1
-
-{
-  "name": "Private Repo"
-}

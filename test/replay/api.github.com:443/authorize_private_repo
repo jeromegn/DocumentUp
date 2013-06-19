@@ -1,6 +1,0 @@
-GET /repos/private/repo
-accept: application/vnd.github.beta.raw+json
-host: api.github.com
-authorization: bearer token
-
-200 HTTP/1.1

@@ -1,4 +1,0 @@
-GET REGEXP /\/404\/repo\/master\/.{0,1}documentup\.json/
-host: raw.github.com
-
-404 HTTP/1.1

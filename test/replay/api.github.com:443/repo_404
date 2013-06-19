@@ -1,5 +1,0 @@
-GET /repos/404/repo/readme
-accept: application/vnd.github.beta.raw+json
-host: api.github.com
-
-404 HTTP/1.1
