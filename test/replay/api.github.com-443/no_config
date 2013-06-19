@@ -1,0 +1,4 @@
+GET /repos/test/test/contents/.documentup.json
+host: api.github.com
+
+404 HTTP/1.1

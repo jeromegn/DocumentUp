@@ -1,0 +1,13 @@
+GET /jeromegn/DocumentUp/master/.documentup.json
+host: raw.github.com
+
+200 HTTP/1.1
+
+{
+  "name": "DocumentUp",
+  "twitter": [
+    "jeromegn",
+    "DocumentUp"
+  ],
+  "google_analytics": "UA-5201171-14"
+}
