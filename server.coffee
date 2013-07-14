@@ -5,6 +5,10 @@ process.env.TZ = "EST"
 # NODE_ENV
 process.env.NODE_ENV ||= "development"
 
+process.on "uncaughtException", (error)->
+  console.log "Caught exception: #{error}"
+  console.log error.stack.split("\n")
+  process.exit(1)
 
 # Running this file fires up the Web server.
 if module.id == "."
@@ -56,12 +60,7 @@ server.configure ->
     release:  new Date().toJSON()
     env:      server.settings.env
 
-
 server.configure "development", ->
-  process.on "uncaughtException", (error)->
-    console.log "Caught exception: #{error}"
-    console.log error.stack.split("\n")
-
   if process.env.DEBUG
     server.use Express.profiler()
   server.error Express.errorHandler(dumpExceptions: true, showStack: true)
