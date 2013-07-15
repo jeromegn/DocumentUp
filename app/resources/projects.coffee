@@ -34,6 +34,7 @@ Server.post "/recompile", (req, res, next)->
     splitted = push.repository.url.replace(/(http|https):\/\/github.com/, "").split("/")
     Project.load splitted[1], splitted[2], null, (error, project)->
       return next(error) if error
+      return res.send(200) unless project
       project.update null, (error, project)->
         return next(error) if error
         res.send 200
@@ -125,6 +126,10 @@ Server.get "/:username/:project_name", (req, res, next)->
 Server.get "/:username/:project_name/recompile", (req, res, next)->
   Project.load req.params.username, req.params.project_name, req.session.access_token, (error, project)->
     return next(error) if error
+    if !project
+      error = new Error("Could not find project")
+      error.code = 404
+      return next(error)
     project.update req.session.access_token, (error)->
       return next(error) if error
       res.redirect "/#{project.name}", 302

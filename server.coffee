@@ -89,7 +89,10 @@ server.on "listening", ->
   server.configure ->
     server.use (error, req, res, next)->
       logger.error(error)
-      res.render "errors/500", layout: "layouts/error", status: 500
+      if code = error.code
+        res.render "errors/#{code}", layout: "layouts/error", status: 404
+      else
+        res.render "errors/500", layout: "layouts/error", status: 500
     
     # 404 error
     server.use (req, res, next)->
