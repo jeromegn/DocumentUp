@@ -23,7 +23,7 @@
     </ul>
     <% if @project.name: %>
       <div class="extra" id="github">
-        <a href="<%= @project.url %>">Source on Github</a>
+        <a href="<%= @project.url %>">Source on GitHub</a>
       </div>
       <% if @project.config.issues: %>
         <div class="extra" id="github-issues">
