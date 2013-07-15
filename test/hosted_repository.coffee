@@ -31,7 +31,7 @@ describe "Hosted", ->
       # second level
       assert.equal @browser.text("#sections li ul a"), "Post-Receive HookManual RecompileConfigurationParametersPOST exampleJSONP example with jQueryConfigurationExampleWhat this script does"
     it "should display a link to the repository", ->
-      assert.equal @browser.text("#github"), "Source on Github"
+      assert.equal @browser.text("#github"), "Source on GitHub"
     it "should display a link to the repository's issues", ->
       assert.equal @browser.text("#github-issues"), "Issues"
     it "should display the twitter buttons",->
