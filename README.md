@@ -14,7 +14,7 @@ DocumentUp hosts your documentation sites. Just visit `http://documentup.com/use
 
 Recommended if you have a public Github repository.
 
-Feel free to tip me on [gittip: jeromegn](https://www.gittip.com/jeromegn/)
+[![Gittip](http://badgr.co/gittip/jeromegn.png)](https://www.gittip.com/jeromegn/)
 
 ### Post-Receive Hook
 
