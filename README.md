@@ -14,6 +14,8 @@ DocumentUp hosts your documentation sites. Just visit `http://documentup.com/use
 
 Recommended if you have a public Github repository.
 
+Feel free to tip me on [gittip: jeromegn](https://www.gittip.com/jeromegn/)
+
 ### Post-Receive Hook
 
 If you want your readme to be recompiled, please add a [Post-Receive Hook](http://help.github.com/post-receive-hooks/) to your Github repository pointing to: `http://documentup.com/recompile`
