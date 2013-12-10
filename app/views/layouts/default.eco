@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= @project.config.name || @project.project_name %></title>
     
-    <link rel="stylesheet" type="text/css" href="<% if @env == "production": %>http://documentup.com<% else: %>http://localhost:8080<% end %>/stylesheets/<% if @theme: %>themes/<%= @theme %>.css<% else: %>screen.css<% end %>">
+    <link rel="stylesheet" type="text/css" href="<% if @env == "production": %>//documentup.com<% else: %>//localhost:8080<% end %>/stylesheets/<% if @theme: %>themes/<%= @theme %>.css<% else: %>screen.css<% end %>">
     
     <% if @project.config.color: %>
       <style type="text/css">
