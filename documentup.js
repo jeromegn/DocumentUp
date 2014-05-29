@@ -21,7 +21,7 @@ DocumentUp.document = function (opts) {
   }
 
   var script = document.createElement('script');
-  script.src = 'http://documentup.com/'+repo
+  script.src = '//documentup.com/'+repo
   if (opts)
     script.src += "?config="+encodeURIComponent(JSON.stringify(opts))+'&callback=callback';
   else
