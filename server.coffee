@@ -33,6 +33,7 @@ Stylus     = require("stylus")
 Nib        = require("nib")
 FS         = require("fs")
 logger     = require("./config/logger")
+redis      = require("./config/redis")
 
 compileStylus = (str, path) ->
   Stylus(str).set('filename', path).set('compress', true).use(Nib())
@@ -52,7 +53,7 @@ server.configure ->
 
   server.use logger.middleware()
 
-  server.use Express.session(secret: "c96dbcc746d551ea0665da4a23536280", store: new RedisStore)
+  server.use Express.session(secret: "c96dbcc746d551ea0665da4a23536280", store: new RedisStore(client: redis))
 
   # Templates and views
   server.set "views", "#{__dirname}/app/views"
