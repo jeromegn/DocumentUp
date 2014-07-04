@@ -18,11 +18,12 @@ class Project
     theme:            null
     private:          false
 
-  @_normalizeName: (username, project_name)->    
+  @_normalizeName: (username, project_name)->
     return "#{username}/#{project_name}".toLowerCase()
 
 
   @makeConfig: (config)->
+    console.log('Project::makeConfig')
     merged = Object.clone(Project.defaults)
     merged[key] = value for key,value of config
     unless Array.isArray(merged.twitter)
@@ -32,6 +33,7 @@ class Project
 
   # Simple constructor
   constructor: (@username, @project_name)->
+    console.log('Project constructor')
     name = Project._normalizeName(@username, @project_name)
 
     Object.defineProperty this, "config",
@@ -70,6 +72,7 @@ class Project
 
 
   _parse: (data)->
+    console.log('Project::_parse')
     parsed = Object.clone(data)
     if data.config
       parsed.config = JSON.parse(data.config)
@@ -80,6 +83,7 @@ class Project
 
   # Retrieve from the DB
   _retrieve: (access_token, callback)->
+    console.log('Project::_retrieve')
     redis.hgetall @redisKey, (error, result)=>
       return callback(error) if error
       return callback(null, this) unless result
@@ -97,6 +101,7 @@ class Project
         callback(null, this)
 
   _saveable: ->
+    console.log('Project::_saveable')
     return {
       username:     @username
       project_name: @project_name
@@ -110,12 +115,14 @@ class Project
 
   # Save to the DB
   save: (callback)->
+    console.log('Project::save')
     redis.hmset @redisKey, @_saveable(), (error)=>
       callback(error, this)
 
 
   # Compile a project's readme
   _compile: ->
+    console.log('Project::_compile')
     if @source
       try
         @compiled = Markdown.parse(@source)
@@ -130,8 +137,9 @@ class Project
 
   # Gets the readme and config from Github
   update: (access_token, callback)->
+    console.log('Project::update')
     github = new Github(access_token)
-    
+
     Async.parallel
       config: (done)=>
         Async.waterfall [
@@ -159,11 +167,11 @@ class Project
             else
               done(new Error("Can't fetch README for #{@name}")) if status != 200
 
-          
+
     , (error, results)=>
       return callback(error) if error
       return callback() unless results.readme
-      if results.config.status is 200 
+      if results.config.status is 200
         if typeof results.config.content is "object"
           config = results.config.content
         else
@@ -184,7 +192,8 @@ class Project
       @save callback
 
 
-  @load: (username, project_name, access_token, callback)->    
+  @load: (username, project_name, access_token, callback)->
+    console.log('Project.load')
     project = new Project(username, project_name)
 
     project._retrieve access_token, (error, project)=>
