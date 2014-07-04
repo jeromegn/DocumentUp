@@ -10,6 +10,8 @@ process.on "uncaughtException", (error)->
   console.log error.stack.split("\n")
   process.exit(1)
 
+config = require("./config")
+
 # Running this file fires up the Web server.
 if module.id == "."
   Server = require("./server")
@@ -18,8 +20,8 @@ if module.id == "."
     if process.env.NODE_ENV == "development"
       growl = require("growl").notify
       growl "Restarted", title: "DocumentUp"
-  
-  Server.listen 8080
+
+  Server.listen config.server.port
   return
 
 require("sugar")
@@ -47,7 +49,7 @@ server.configure ->
   server.use Express.query()
   server.use Express.bodyParser()
   server.use Express.cookieParser()
-  
+
   server.use logger.middleware()
 
   server.use Express.session(secret: "c96dbcc746d551ea0665da4a23536280", store: new RedisStore)
@@ -93,7 +95,7 @@ server.on "listening", ->
         res.render "errors/#{code}", layout: "layouts/error", status: 404
       else
         res.render "errors/500", layout: "layouts/error", status: 500
-    
+
     # 404 error
     server.use (req, res, next)->
       res.render "errors/404", layout: "layouts/error", status: 404
