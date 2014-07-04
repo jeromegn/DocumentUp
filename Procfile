@@ -1,1 +1,1 @@
-web: coffee server.coffee
+web: PORT=$PORT coffee server.coffee
