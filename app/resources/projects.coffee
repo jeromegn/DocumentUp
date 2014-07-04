@@ -45,6 +45,7 @@ Server.post "/recompile", (req, res, next)->
 
 # Compile any markdown
 compile_route = (req, res, next)->
+  console.log('compile_route')
   config = (!Object.isEmpty(req.body) && req.body) || (!Object.isEmpty(req.query) && req.query)
   return next(new Error("Please send markdown content as the `content` parameter")) unless config || config.content
 
@@ -61,13 +62,13 @@ compile_route = (req, res, next)->
     toc      = Markdown.tableOfContents(content)
   catch error
     return respond_with_html(res, "Error while compiling your content", 500)
-  
+
   locals =
     project:
       compiled: compiled
       toc:      toc
       config:   config
-      
+
   res.render "projects/show", locals: locals, theme: config.theme, (error, html)->
     respond_with_html(res, html)
 
@@ -77,20 +78,26 @@ Server.get "/compiled", compile_route
 
 
 Server.get "/", (req, res, next)->
+  console.log('root route')
   Project.load "jeromegn", "DocumentUp", req.session.access_token, (error, project)->
+    console.log('root project loaded')
     render_project req, res, project
 
 
 render_project = (req, res, project)->
+  console.log('render project')
   res.render "projects/show", locals: {project: project}, theme: req.query.theme || project.config.theme, (error, html)->
     return next(error) if error
+    console.log('html rendered')
     respond_with_html res, html
 
 
 Server.get "/:username/:project_name", (req, res, next)->
   return next() if req.params.username == "stylesheets" || req.params.username == "javascripts" || req.params.username == "images"
   return res.redirect("/", 301) if req.params.username == "username" && req.params.project_name == "repository"
-  
+
+  console.log('project route', req.params)
+
   if req.query.auth
     return res.redirect Github.oauthUrl("/#{req.params.username}/#{req.params.project_name}")
 
@@ -98,7 +105,7 @@ Server.get "/:username/:project_name", (req, res, next)->
     Github.getAccessToken code, (error, access_token)->
       return next(error) if error
       return next() unless access_token
-      
+
       req.session.access_token = access_token
       return res.redirect "/#{req.params.username}/#{req.params.project_name}"
   else
@@ -133,4 +140,3 @@ Server.get "/:username/:project_name/recompile", (req, res, next)->
     project.update req.session.access_token, (error)->
       return next(error) if error
       res.redirect "/#{project.name}", 302
-
