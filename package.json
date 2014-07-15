@@ -10,7 +10,8 @@
   },
   "scripts": {
     "start": "supervisor -w app/resources,app/models,lib,config,server.coffee server.coffee",
-    "test": "mocha"
+    "test": "mocha",
+    "postinstall": "make public/stylesheets"
   },
   "filename": "documentup.min.js",
   "dependencies": {
