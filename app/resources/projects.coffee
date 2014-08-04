@@ -102,26 +102,34 @@ Server.get "/:username/:project_name", (req, res, next)->
     return res.redirect Github.oauthUrl("/#{req.params.username}/#{req.params.project_name}")
 
   if code = req.query.code
-    Github.getAccessToken code, (error, access_token)->
+    return Github.getAccessToken code, (error, access_token)->
       return next(error) if error
       return next() unless access_token
 
       req.session.access_token = access_token
       return res.redirect "/#{req.params.username}/#{req.params.project_name}"
-  else
-    Project.load req.params.username, req.params.project_name, req.session.access_token, (error, project)->
-      return next(error) if error
-      return next() unless project
-      if (config = req.query.config && Project.makeConfig(JSON.parse(req.query.config))) && !Object.equal(project.config, config)
-        project.config = config
-        project.save (error, project)->
-          return next(error) if error
-          res.render "projects/show", locals: {project: project, theme: req.query.theme || project.config.theme}, (error, html)->
-            respond_with_html(res, html)
+  
+  Project.load req.params.username, req.params.project_name, req.session.access_token, (error, project)->
+    return next(error) if error
+    return next() unless project
+    try
+      if req.query.config
+        config = Project.makeConfig(JSON.parse(req.query.config))
+    catch e
+      return res.render "projects/show", locals: {project: project, theme: req.query.theme || project.config.theme}, (error, html)->
+          respond_with_html(res, html)
 
-      else
+    config ||= null
+
+    if config
+      project.config = config
+      project.save (error, project)->
+        return next(error) if error
         res.render "projects/show", locals: {project: project, theme: req.query.theme || project.config.theme}, (error, html)->
-            respond_with_html(res, html)
+          respond_with_html(res, html)
+    else
+      res.render "projects/show", locals: {project: project, theme: req.query.theme || project.config.theme}, (error, html)->
+        respond_with_html(res, html)
 
 Server.get "/:username/:project_name", (req, res, next)->
   return next() if req.params.username == "stylesheets" || req.params.username == "javascripts" || req.params.username == "images"
