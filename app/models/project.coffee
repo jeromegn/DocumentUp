@@ -87,6 +87,9 @@ class Project
     redis.hgetall @redisKey, (error, result)=>
       return callback(error) if error
       return callback(null, this) unless result
+
+      console.log('no result from key')
+
       try
         @[key] = value for key, value of @_parse(result)
       catch error

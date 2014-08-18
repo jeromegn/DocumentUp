@@ -6,9 +6,9 @@ process.env.TZ = "EST"
 process.env.NODE_ENV ||= "development"
 
 process.on "uncaughtException", (error)->
-  console.log "Caught exception: #{error}"
+  console.log "Uncaught exception: #{error}"
   console.log error.stack.split("\n")
-  process.exit(1)
+  # process.exit(1)
 
 config = require("./config")
 
