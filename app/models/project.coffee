@@ -85,6 +85,7 @@ class Project
   _retrieve: (access_token, callback)->
     console.log('Project::_retrieve')
     redis.hgetall @redisKey, (error, result)=>
+      console.log(error, result)
       return callback(error) if error
       return callback(null, this) unless result
 
