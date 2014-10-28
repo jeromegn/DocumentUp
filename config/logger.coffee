@@ -7,8 +7,6 @@ Path    = require("path")
 Winston = require("winston")
 config  = require("./index")
 
-require('winston-loggly')
-
 # Use syslog logging levels.
 Winston.setLevels Winston.config.syslog.levels
 
@@ -32,7 +30,6 @@ switch env
     # Production/staging, log to console, which gets piped to a file
     level = if process.env.DEBUG then "debug" else "info"
     Winston.add Winston.transports.Console, level: level, colorize: false, timestamp: true
-    Winston.add Winston.transports.Loggly, level: level, subdomain: config.loggly.subdomain, inputToken: config.loggly.inputToken
 
 # Connect middleware for logging every request.
 Winston.middleware = ->

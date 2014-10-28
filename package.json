@@ -27,7 +27,6 @@
     "connect-redis": "~1.4.0",
     "qs": "~0.5.0",
     "winston": "~0.6.1",
-    "winston-loggly": "~0.6.0",
     "highlight.js": "~7.3.0",
     "marked": "~0.2.9"
   },
