@@ -68,7 +68,7 @@ class Project
     return "http://travis-ci.org/#{@name}"
 
   @prototype.__defineGetter__ "travisImageUrl", ->
-    return "https://secure.travis-ci.org/#{@name}.png?branch=master"
+    return "https://travis-ci.org/#{@name}.svg?branch=master"
 
 
   _parse: (data)->
