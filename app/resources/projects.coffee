@@ -45,7 +45,7 @@ Server.post "/recompile", (req, res, next)->
 
 # Compile any markdown
 compile_route = (req, res, next)->
-  console.log('compile_route')
+
   config = (!Object.isEmpty(req.body) && req.body) || (!Object.isEmpty(req.query) && req.query)
   return next(new Error("Please send markdown content as the `content` parameter")) unless config || config.content
 
@@ -78,25 +78,19 @@ Server.get "/compiled", compile_route
 
 
 Server.get "/", (req, res, next)->
-  console.log('root route')
   Project.load "jeromegn", "DocumentUp", req.session.access_token, (error, project)->
-    console.log('root project loaded')
     render_project req, res, project
 
 
 render_project = (req, res, project)->
-  console.log('render project')
   res.render "projects/show", locals: {project: project}, theme: req.query.theme || project.config.theme, (error, html)->
     return next(error) if error
-    console.log('html rendered')
     respond_with_html res, html
 
 
 Server.get "/:username/:project_name", (req, res, next)->
   return next() if req.params.username == "stylesheets" || req.params.username == "javascripts" || req.params.username == "images"
   return res.redirect("/", 301) if req.params.username == "username" && req.params.project_name == "repository"
-
-  console.log('project route', req.params)
 
   if req.query.auth
     return res.redirect Github.oauthUrl("/#{req.params.username}/#{req.params.project_name}")
