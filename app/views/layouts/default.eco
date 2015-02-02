@@ -8,6 +8,12 @@
     
     <link rel="stylesheet" type="text/css" href="<% if @env == "production": %>//documentup.com<% else: %>//localhost:8080<% end %>/stylesheets/<% if @theme: %>themes/<%= @theme %>.css<% else: %>screen.css<% end %>">
     
+    <% if @project.config.css_files && @project.config.css_files.length: %>
+      <% for css_file in @project.config.css_files: %>
+        <link rel="stylesheet" type="text/css" href="<%= css_file %>">
+      <% end %>
+    <% end %>
+    
     <% if @project.config.color: %>
       <style type="text/css">
         a {color: <%= @project.config.color %>}
