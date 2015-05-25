@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Error | DocumentUp</title>
+    <link href='//fonts.googleapis.com/css?family=Josefin+Slab:400,700,400italic,700italic|Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/stylesheets/site.css">
     <% if @env == "production": %>
       <!-- Google Analytics -->
@@ -15,18 +16,6 @@
           var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
           ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
           var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-      </script>
-    <% end %>
-    <!-- Typekit -->
-    <% unless @env == "test": %>
-      <script type="text/javascript">
-        (function() {
-          var config = {
-            kitId: 'hjp0pft',
-            scriptTimeout: 3000
-          };
-          var h=document.getElementsByTagName("html")[0];h.className+=" wf-loading";var t=setTimeout(function(){h.className=h.className.replace(/( |^)wf-loading( |$)/g,"");h.className+=" wf-inactive"},config.scriptTimeout);var tk=document.createElement("script");tk.src='//use.typekit.net/'+config.kitId+'.js';tk.type="text/javascript";tk.async="true";tk.onload=tk.onreadystatechange=function(){var a=this.readyState;if(a&&a!="complete"&&a!="loaded")return;clearTimeout(t);try{Typekit.load(config)}catch(b){}};var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(tk,s)
         })();
       </script>
     <% end %>
