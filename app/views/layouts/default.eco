@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= @project.config.name || @project.project_name %></title>
     
-    <link href='//fonts.googleapis.com/css?family=Josefin+Slab:400,700,400italic,700italic|Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Alegreya:400italic,700italic,400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="<% if @env == "production": %>//documentup.com<% else: %>//localhost:8080<% end %>/stylesheets/<% if @theme: %>themes/<%= @theme %>.css<% else: %>screen.css<% end %>">
     
     <% if @project.config.color: %>

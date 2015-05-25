@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Error | DocumentUp</title>
-    <link href='//fonts.googleapis.com/css?family=Josefin+Slab:400,700,400italic,700italic|Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Alegreya:400italic,700italic,400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/stylesheets/site.css">
     <% if @env == "production": %>
       <!-- Google Analytics -->
