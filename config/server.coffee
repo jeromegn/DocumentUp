@@ -41,26 +41,13 @@ server.set "views", "#{__dirname}/../app/views"
 server.locals.env = server.settings.env
 server.locals.release = new Date().toJSON()
 
-if process.env['NODE_ENV'] == "development"
-  # use Stylus
-  # server.use Stylus.middleware
-  #   src: "#{__dirname}/../app"
-  #   dest: "#{__dirname}/../public"
-  #   compile: compileStylus
+server.use sassMiddleware
+  src: "#{__dirname}/../app"
+  dest: "#{__dirname}/../public"
+  debug: (process.env.NODE_ENV == 'development')
+  outputStyle: 'compressed'
 
-  server.use sassMiddleware
-    src: "#{__dirname}/../app"
-    dest: "#{__dirname}/../public"
-    debug: (process.env.NODE_ENV == 'development')
-    outputStyle: 'compressed'
-
-  # server.use server.router
-  server.use serveStatic "#{__dirname}/../public"
-
-
-if process.env['NODE_ENV'] == "production"
-  server.use responseTime()
-  server.use serveStatic "#{__dirname}/../public", maxAge: 1000 * 60 * 60 * 24 * 14
+server.use serveStatic "#{__dirname}/../public", maxAge: 1000 * 60 * 60 * 24 * 14
 
 server.use errorHandler()
 
