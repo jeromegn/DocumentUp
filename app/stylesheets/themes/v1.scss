@@ -1,6 +1,14 @@
 @import "../lib/normalize";
 @import "../syntax/tomorrow";
 
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
 html {
   height: 100%;
 }
