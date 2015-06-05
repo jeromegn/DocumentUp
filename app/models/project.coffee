@@ -70,8 +70,6 @@ class Project
 
 
   _parse: (data)->
-    console.log "parsing data"
-    console.log data
     parsed = Object.clone(data)
     if data.config
       parsed.config = JSON.parse(data.config)
@@ -127,12 +125,14 @@ class Project
         console.log "Error compiling markdown"
         console.log error
         console.log error.stack.split("\n") if error.stack
+        @compiled = "Could not compile your project's readme."
       try
         @toc = Markdown.tableOfContents(@source)
       catch error
         console.log "Error compiling markdown TOC"
         console.log error
         console.log error.stack.split("\n") if error.stack
+        @compile = "Could not compile your project's table of contents."
     return this
 
 
