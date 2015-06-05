@@ -76,7 +76,7 @@ class Github
     params.method = "GET"
 
     # Build URL
-    params.url    = "#{GITHUB_API}/#{params.path}"
+    params.url    = "#{GITHUB_API}/#{params.path}?client_id=#{config.github.client_id}&client_secret=#{config.github.client_secret}"
     delete params.path
 
     logger.info "#{params.method} #{params.url}"
