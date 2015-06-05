@@ -3,6 +3,8 @@ Redis  = require("redis")
 config = require("./index")
 
 { hostname, port } = config.redis
-redis = Redis.createClient(port, hostname)
+options = {}
+options.password = config.redis.password if config.redis.password
+redis = Redis.createClient(port, hostname, options)
 
 module.exports = redis
