@@ -15,7 +15,7 @@ respond_with_html = (res, data, status = 200)->
       json.error = data
     else
       json.html = data
-    return res.json(json)
+    return res.jsonp(json)
   else
     return res.status(status).send(data)
 
