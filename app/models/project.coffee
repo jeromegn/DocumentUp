@@ -124,7 +124,9 @@ class Project
       try
         @compiled = Markdown.parse(@source)
       catch error
-        console.log "Error compiling markdown", error
+        console.log "Error compiling markdown"
+        console.log error
+        console.log error.stack.split("\n")
       try
         @toc = Markdown.tableOfContents(@source)
       catch error
