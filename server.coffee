@@ -11,6 +11,21 @@ process.on "uncaughtException", (error)->
   # process.exit(1)
 
 config = require("./config")
+require("sugar")
+
+Express    = require("express")
+ECT        = require("ect")
+Stylus     = require("stylus")
+Nib        = require("nib")
+FS         = require("fs")
+logger     = require("./config/logger")
+redis      = require("./config/redis")
+bodyParser = require('body-parser')
+session    = require('express-session')
+cookieParser = require('cookie-parser')
+responseTime = require('response-time')
+serveStatic = require('serve-static')
+errorHandler = require('errorhandler')
 
 # Running this file fires up the Web server.
 if module.id == "."
@@ -21,76 +36,10 @@ if module.id == "."
       growl = require("growl").notify
       growl "Restarted", title: "DocumentUp"
 
-  Server.listen config.server.port
-  return
-
-require("sugar")
-
-Express    = require("express")
-RedisStore = require('connect-redis')(Express)
-Eco        = require("eco")
-Stylus     = require("stylus")
-Nib        = require("nib")
-FS         = require("fs")
-logger     = require("./config/logger")
-redis      = require("./config/redis")
-
-compileStylus = (str, path) ->
-  Stylus(str).set('filename', path).set('compress', true).use(Nib())
-
-server = Express.createServer()
-
-server.register ".eco", Eco
-
-server = Express.createServer()
-server.configure ->
-  server.set "root", __dirname
-  server.set "jsonp callback", true
-
-  server.use Express.query()
-  server.use Express.bodyParser()
-  server.use Express.cookieParser()
-
-  server.use logger.middleware()
-
-  server.use Express.session(secret: "c96dbcc746d551ea0665da4a23536280", store: new RedisStore(client: redis))
-
-  # Templates and views
-  server.set "views", "#{__dirname}/app/views"
-  server.set "view engine", "eco"
-  server.set "view options"
-    layout:  "layouts/default.eco"
-    release:  new Date().toJSON()
-    env:      server.settings.env
-
-server.configure "development", ->
-  if process.env.DEBUG
-    server.use Express.profiler()
-  server.error Express.errorHandler(dumpExceptions: true, showStack: true)
-
-  # use Stylus
-  server.use Stylus.middleware
-    src: "#{__dirname}/app"
-    dest: "#{__dirname}/public"
-    compile: compileStylus
-
-  server.use server.router
-  server.use Express.static "#{__dirname}/public"
-
-
-server.configure "production", ->
-  server.error Express.errorHandler()
-  server.use Express.responseTime()
-  server.use server.router
-  server.use Express.static "#{__dirname}/public", maxAge: 1000 * 60 * 60 * 24 * 14
-
-
-server.on "listening", ->
-  require("./app/resources/projects")
-  require("./app/resources/site")
-
-  server.configure ->
-    server.use (error, req, res, next)->
+  Server.listen config.server.port, ->
+    require("./app/resources/projects")
+    require("./app/resources/site")
+    Server.use (error, req, res, next)->
       logger.error(error)
       if code = error.code
         res.render "errors/#{code}", layout: "layouts/error", status: 404
@@ -98,9 +47,60 @@ server.on "listening", ->
         res.render "errors/500", layout: "layouts/error", status: 500
 
     # 404 error
-    server.use (req, res, next)->
+    Server.use (req, res, next)->
       res.render "errors/404", layout: "layouts/error", status: 404
 
-  server.emit "loaded"
+    Server.emit "loaded"
+  return
+
+RedisStore = require('connect-redis')(session)
+
+ectRenderer = ECT({ root: "#{__dirname}/app/views", ext : '.ect' })
+
+compileStylus = (str, path) ->
+  Stylus(str).set('filename', path).set('compress', true).use(Nib())
+
+server = Express()
+server.set "root", __dirname
+server.set "jsonp callback", true
+
+server.use bodyParser()
+server.use cookieParser()
+
+server.use logger.middleware()
+
+server.use session(secret: "c96dbcc746d551ea0665da4a23536280", store: new RedisStore(client: redis))
+
+# Templates and views
+server.set "view engine", "ect"
+server.engine "ect", ectRenderer.render
+server.set "views", "#{__dirname}/app/views"
+#   layout:  "layouts/default.eco"
+#   release:  new Date().toJSON()
+#   env:      server.settings.env
+
+if process.env['NODE_ENV'] == "development"
+  # use Stylus
+  server.use Stylus.middleware
+    src: "#{__dirname}/app"
+    dest: "#{__dirname}/public"
+    compile: compileStylus
+
+  # server.use server.router
+  server.use serveStatic "#{__dirname}/public"
+
+
+if process.env['NODE_ENV'] == "production"
+  server.use responseTime()
+  # server.use server.router
+  server.use serveStatic "#{__dirname}/public", maxAge: 1000 * 60 * 60 * 24 * 14
+
+server.use errorHandler()
+
+# server.on "listening", ->
+#   server.configure ->
+
+
+#   server.emit "loaded"
 
 module.exports = server

@@ -68,8 +68,9 @@ compile_route = (req, res, next)->
       compiled: compiled
       toc:      toc
       config:   config
+    theme: config.theme
 
-  res.render "projects/show", locals: locals, theme: config.theme, (error, html)->
+  res.render "projects/show", locals, (error, html)->
     respond_with_html(res, html)
 
 
@@ -81,11 +82,12 @@ Server.get "/", (req, res, next)->
   console.log "Hello /"
   Project.load "jeromegn", "DocumentUp", req.session.access_token, (error, project)->
     console.log "DocumentUp project loaded"
-    render_project req, res, project
+    console.log project.config
+    render_project req, res, project, next
 
 
-render_project = (req, res, project)->
-  res.render "projects/show", locals: {project: project}, theme: req.query.theme || project.config.theme, (error, html)->
+render_project = (req, res, project, next)->
+  res.render "projects/show", project: project, theme: req.query.theme || project.config.theme, (error, html)->
     return next(error) if error
     respond_with_html res, html
 
@@ -112,7 +114,7 @@ Server.get "/:username/:project_name", (req, res, next)->
       if req.query.config
         config = Project.makeConfig(JSON.parse(req.query.config))
     catch e
-      return res.render "projects/show", locals: {project: project, theme: req.query.theme || project.config.theme}, (error, html)->
+      return res.render "projects/show", project: project, theme: req.query.theme || project.config.theme, (error, html)->
           respond_with_html(res, html)
 
     config ||= null
@@ -121,15 +123,15 @@ Server.get "/:username/:project_name", (req, res, next)->
       project.config = config
       project.save (error, project)->
         return next(error) if error
-        res.render "projects/show", locals: {project: project, theme: req.query.theme || project.config.theme}, (error, html)->
+        res.render "projects/show", project: project, theme: req.query.theme || project.config.theme, (error, html)->
           respond_with_html(res, html)
     else
-      res.render "projects/show", locals: {project: project, theme: req.query.theme || project.config.theme}, (error, html)->
+      res.render "projects/show", project: project, theme: req.query.theme || project.config.theme, (error, html)->
         respond_with_html(res, html)
 
 Server.get "/:username/:project_name", (req, res, next)->
   return next() if req.params.username == "stylesheets" || req.params.username == "javascripts" || req.params.username == "images"
-  res.render "projects/404", layout: "layouts/error", status: 404, locals:
+  res.render "projects/404", status: 404, locals:
     project: "#{req.params.username}/#{req.params.project_name}"
 
 
