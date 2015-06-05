@@ -6,22 +6,9 @@
         <a href="#" id="logo"><%= @project.config.name || @project.project_name %></a>
       </div>
     <% end %>
-    <ul id="sections">
-      <% for id, section of @project.toc: %>
-        <li>
-          <a href="#<%= id %>"><%= section.name %></a>
-          <% if section.subSections: %>
-            <ul>
-              <% for sub in section.subSections: %>
-                <li>
-                  <a href="#<%= id %>/<%= sub.id %>"><%= sub.name %></a>
-                </li>
-              <% end %>
-            </ul>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
+    <div id="sections">
+      <%- @project.toc %>
+    </div>
     <% if @project.name: %>
       <div class="extra" id="github">
         <a href="<%= @project.url %>">Source on GitHub</a>
