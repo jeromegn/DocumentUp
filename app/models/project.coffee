@@ -80,7 +80,9 @@ class Project
 
   # Retrieve from the DB
   _retrieve: (access_token, callback)->
+    console.log "in retrieve function"
     redis.hgetall @redisKey, (error, result)=>
+      console.log "hgotall", arguments
       return callback(error) if error
       return callback(null, this) unless result
 
@@ -187,9 +189,12 @@ class Project
 
 
   @load: (username, project_name, access_token, callback)->
+    console.log "Load project", arguments
     project = new Project(username, project_name)
 
+    console.log "retrieving project"
     project._retrieve access_token, (error, project)=>
+      console.log "project retrieved"
       return callback(error) if error
       return callback() unless project
       if !project._isComplete

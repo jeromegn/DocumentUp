@@ -78,7 +78,9 @@ Server.get "/compiled", compile_route
 
 
 Server.get "/", (req, res, next)->
+  console.log "Hello /"
   Project.load "jeromegn", "DocumentUp", req.session.access_token, (error, project)->
+    console.log "DocumentUp project loaded"
     render_project req, res, project
 
 
@@ -102,7 +104,7 @@ Server.get "/:username/:project_name", (req, res, next)->
 
       req.session.access_token = access_token
       return res.redirect "/#{req.params.username}/#{req.params.project_name}"
-  
+
   Project.load req.params.username, req.params.project_name, req.session.access_token, (error, project)->
     return next(error) if error
     return next() unless project
