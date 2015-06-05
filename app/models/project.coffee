@@ -123,7 +123,6 @@ class Project
         @compiled = Markdown.parse(@source)
       catch error
         console.log "Error compiling markdown", error
-        console.log @source
       try
         @toc = Markdown.tableOfContents(@source)
       catch error

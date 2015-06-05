@@ -75,9 +75,8 @@ server.use session(secret: "c96dbcc746d551ea0665da4a23536280", store: new RedisS
 server.set "view engine", "ect"
 server.engine "ect", ectRenderer.render
 server.set "views", "#{__dirname}/app/views"
-#   layout:  "layouts/default.eco"
-#   release:  new Date().toJSON()
-#   env:      server.settings.env
+server.locals.env = server.settings.env
+server.locals.release = new Date().toJSON()
 
 if process.env['NODE_ENV'] == "development"
   # use Stylus
