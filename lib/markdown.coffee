@@ -27,10 +27,7 @@ Markdown =
   # This is necessary to both highlight the code and
   # add browsable IDs (via /#some-id) to each heading
   parse: (markdown)->
-    console.log markdown
-    rendered = md.render(markdown)
-    console.log(rendered)
-    rendered
+    md.render(markdown)
     # current_h2 = null
     # tokens = marked.lexer(markdown)
     # for token in tokens
