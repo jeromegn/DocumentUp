@@ -16,7 +16,7 @@ config = require("./config")
 if module.id == "."
   Server = require("./server")
   Server.on "loaded", ->
-    console.log "Server is READY!"
+    console.log "Server is READY! on port #{config.server.port}"
     if process.env.NODE_ENV == "development"
       growl = require("growl").notify
       growl "Restarted", title: "DocumentUp"

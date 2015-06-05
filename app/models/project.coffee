@@ -203,6 +203,4 @@ class Project
       else
         callback(null, project)
 
-
-
 module.exports = Project
