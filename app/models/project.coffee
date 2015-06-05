@@ -126,11 +126,13 @@ class Project
       catch error
         console.log "Error compiling markdown"
         console.log error
-        console.log error.stack.split("\n")
+        console.log error.stack.split("\n") if error.stack
       try
         @toc = Markdown.tableOfContents(@source)
       catch error
-
+        console.log "Error compiling markdown TOC"
+        console.log error
+        console.log error.stack.split("\n") if error.stack
     return this
 
 
