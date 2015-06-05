@@ -14,6 +14,7 @@ cookieParser = require('cookie-parser')
 responseTime = require('response-time')
 serveStatic = require('serve-static')
 errorHandler = require('errorhandler')
+sassMiddleware = require('node-sass-middleware')
 
 RedisStore = require('connect-redis')(session)
 
@@ -42,18 +43,24 @@ server.locals.release = new Date().toJSON()
 
 if process.env['NODE_ENV'] == "development"
   # use Stylus
-  server.use Stylus.middleware
-    src: "#{__dirname}/app"
-    dest: "#{__dirname}/public"
-    compile: compileStylus
+  # server.use Stylus.middleware
+  #   src: "#{__dirname}/../app"
+  #   dest: "#{__dirname}/../public"
+  #   compile: compileStylus
+
+  server.use sassMiddleware
+    src: "#{__dirname}/../app"
+    dest: "#{__dirname}/../public"
+    debug: (process.env.NODE_ENV == 'development')
+    outputStyle: 'compressed'
 
   # server.use server.router
-  server.use serveStatic "#{__dirname}/public"
+  server.use serveStatic "#{__dirname}/../public"
 
 
 if process.env['NODE_ENV'] == "production"
   server.use responseTime()
-  server.use serveStatic "#{__dirname}/public", maxAge: 1000 * 60 * 60 * 24 * 14
+  server.use serveStatic "#{__dirname}/../public", maxAge: 1000 * 60 * 60 * 24 * 14
 
 server.use errorHandler()
 

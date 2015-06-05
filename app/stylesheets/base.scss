@@ -1,4 +1,3 @@
-@import "nib";
 @import "lib/normalize";
 
 html {
@@ -20,7 +19,7 @@ a {
   color: #369;
 }
 
-inline-block() {
+@mixin inline-block() {
   display: -moz-inline-box;
   -moz-box-orient: vertical;
   display: inline-block;
@@ -29,5 +28,13 @@ inline-block() {
     & {
       *display: inline;
     }
+  }
+}
+
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
   }
 }

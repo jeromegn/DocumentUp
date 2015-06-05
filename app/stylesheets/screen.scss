@@ -1,6 +1,6 @@
 @import "syntax/tomorrow";
 
-@import "base"
+@import "base";
 
 // Layout
 
@@ -107,7 +107,7 @@
   }
 
   > p {
-    clearfix()
+    @include clearfix;
   }
   p { padding:0 0 0.8125em 0; color:#444;}
 
@@ -205,7 +205,7 @@
   }
   #content {
     border-radius: 0;
-    border-width: 1px
+    border-width: 1px;
     float: none;
     margin: 0;
     width: 100%;

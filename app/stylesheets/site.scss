@@ -33,7 +33,7 @@ h1 {
   &.github {
     height: 24px;
     line-height: 24px;
-    inline-block();
+    @include inline-block;
     background: #eee url(/images/icon-github.png) no-repeat 5px 0;
     background: url(/images/icon-github.png) no-repeat 5px 0, linear-gradient(top, #eee, #ddd);
     border-radius: 3px;

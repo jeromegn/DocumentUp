@@ -11,6 +11,8 @@ md = new Remarkable
     catch error
       return hljs.highlightAuto(code).value
 
+toc_md = new Remarkable
+
 # md.use(emojis)
 
 # marked.setOptions
@@ -49,7 +51,7 @@ Markdown =
   # h2 -> first-level
   #   h3 -> second-level
   tableOfContents: (markdown)->
-    md.render toc(markdown).content
+    toc_md.render toc(markdown).content
     # navigation = marked.lexer(markdown).filter((token)->
     #   return token.type == "heading" && (token.depth == 2 || token.depth == 3)
     # )

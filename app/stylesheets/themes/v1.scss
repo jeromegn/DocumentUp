@@ -1,7 +1,4 @@
-@import "nib";
-
 @import "../lib/normalize";
-
 @import "../syntax/tomorrow";
 
 html {
@@ -175,7 +172,7 @@ a {
 
 
   ul{list-style-position:outside;}
-  li ul, 
+  li ul,
   li ol  { margin:0 1.625em;  }
   ul, ol { margin: 0 0 1.625em 1em; }
 
@@ -208,11 +205,11 @@ a {
   em, dfn { font-style: italic; }
   dfn { font-weight: bold; }
   pre, code { margin: 0 0 1.625em; white-space: pre; }
-  pre, code, tt { 
+  pre, code, tt {
     font-size: 0.9em;
     font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
     line-height: 1.5;
-  } 
+  }
   code { background: #f8f8ff; padding: 1px 2px; border: 1px solid #ddd; }
   pre code {padding: 10px 12px; word-wrap: normal; }
   tt { display: block; margin: 1.625em 0; }
