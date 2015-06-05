@@ -53,7 +53,7 @@ class Github
     logger.info "#{params.method} #{params.url}"
 
     try
-    
+
       Request params, (error, response, body)->
         if error
           logger.error "#{params.method} #{params.url} => #{error.message}"
@@ -62,7 +62,7 @@ class Github
         logger.info "#{params.method} #{params.url} => #{response.statusCode}"
 
         callback(null, response.statusCode, body)
-    
+
     catch error
       logger.error "#{params.method} #{params.url} => #{error.message}"
       process.nextTick ->
@@ -82,7 +82,7 @@ class Github
     logger.info "#{params.method} #{params.url}"
 
     try
-    
+
       Request params, (error, response, body)->
         if error
           logger.error "#{params.method} #{params.url} => #{error.message}"
@@ -95,7 +95,7 @@ class Github
             body = JSON.parse(body)
           catch error
         callback(null, response.statusCode, body)
-    
+
     catch error
       logger.error "#{params.method} #{params.url} => #{error.message}"
       process.nextTick ->
