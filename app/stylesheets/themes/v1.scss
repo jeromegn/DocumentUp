@@ -155,7 +155,7 @@ a {
     font-size: 18px;
   }
 
-  p { padding:0 0 0.8125em 0; color:#111; font-weight:300; clearfix();}
+  p { padding:0 0 0.8125em 0; color:#111; font-weight:300; @include clearfix();}
 
   p img       { float: left; margin: 0.5em 0.8125em 0.8125em 0; padding: 0; }
   img { max-width: 100%; }
