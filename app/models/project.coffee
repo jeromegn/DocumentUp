@@ -70,6 +70,8 @@ class Project
 
 
   _parse: (data)->
+    console.log "parsing data"
+    console.log data
     parsed = Object.clone(data)
     if data.config
       parsed.config = JSON.parse(data.config)
@@ -101,8 +103,8 @@ class Project
     return {
       username:     @username
       project_name: @project_name
-      config:       JSON.stringify(@config)
-      toc:          JSON.stringify(@toc)
+      config:       (@config && JSON.stringify(@config) || '{}')
+      toc:          (@toc && JSON.stringify(@toc) || '{}')
       source:       @source
       compiled:     @compiled
       updated_at:   Date.now()
