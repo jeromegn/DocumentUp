@@ -1,4 +1,4 @@
-Server   = require("../../server")
+Server   = require("../../config/server")
 Project  = require("../models/project")
 Markdown = require("../../lib/markdown")
 Github   = require("../../lib/github")
@@ -17,7 +17,7 @@ respond_with_html = (res, data, status = 200)->
       json.html = data
     return res.json(json)
   else
-    return res.send(data, status)
+    return res.status(status).send(data)
 
 
 # Github Post-Receive Hook
@@ -115,7 +115,7 @@ Server.get "/:username/:project_name", (req, res, next)->
         config = Project.makeConfig(JSON.parse(req.query.config))
     catch e
       return res.render "projects/show", project: project, theme: req.query.theme || project.config.theme, (error, html)->
-          respond_with_html(res, html)
+        respond_with_html(res, html)
 
     config ||= null
 

@@ -20,14 +20,14 @@ Markdown =
   parse: (markdown)->
     current_h2 = null
     tokens = marked.lexer(markdown)
-    for token in tokens
-      if token.type == "heading"
-        to_param = token.text.parameterize()
-        if token.depth == 2
-          current_h2 = to_param
-          token.depth = "#{token.depth} id='#{to_param}'"
-        else if token.depth == 3
-          token.depth = "#{token.depth} id='#{current_h2}/#{to_param}'"
+    # for token in tokens
+    #   if token.type == "heading"
+    #     to_param = token.text.parameterize()
+    #     if token.depth == 2
+    #       current_h2 = to_param
+    #       # token.depth = "#{token.depth} id='#{to_param}'"
+    #     else if token.depth == 3
+    #       # token.depth = "#{token.depth} id='#{current_h2}/#{to_param}'"
     return marked.parser(tokens)
 
 

@@ -1,4 +1,4 @@
-GET /repos/404/repo/readme
+GET /repos/404/repo/readme?client_id=test&client_secret=test
 accept: application/vnd.github.beta.raw+json
 host: api.github.com
 

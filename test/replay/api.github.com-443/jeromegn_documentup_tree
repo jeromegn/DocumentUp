@@ -1,4 +1,4 @@
-GET /repos/jeromegn/DocumentUp/git/trees/master
+GET /repos/jeromegn/DocumentUp/git/trees/master?client_id=test&client_secret=test
 accept: application/vnd.github.beta.raw+json
 host: api.github.com
 

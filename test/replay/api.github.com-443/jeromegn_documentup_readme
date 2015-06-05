@@ -1,4 +1,4 @@
-GET /repos/jeromegn/DocumentUp/readme
+GET /repos/jeromegn/DocumentUp/readme?client_id=test&client_secret=test
 accept: application/vnd.github.beta.raw+json
 host: api.github.com
 
@@ -115,7 +115,7 @@ All options detailed in the [options](#options) section are available.
 
 In addition to those, one special option is available to "gh-pages version" of DocumentUp:
 
-**afterRender** (Function)  
+**afterRender** (Function)
 A function to be executed after the document has been replaced with the compiled HTML.
 
 ### Example
@@ -162,23 +162,23 @@ Some intro text if you want.
 
 ## Options
 
-**name** (String) *default: repository name*  
+**name** (String) *default: repository name*
 Name of your project. It'll appear in the header of the sidebar. Defaults to the `repository` substring of the `repo` option.
 
-**color** (String) *default: "#336699"*  
+**color** (String) *default: "#336699"*
 CSS-like color representing the color for the links both in the sidebar and the content.
 
 **issues** (Boolean or String) *default: true*
 Adds a link to the sidebar for the issues tab of the repository if `true`. Also accepts a string if your issues are managed elsewhere.
 
-**travis** (Boolean) *default: false*  
+**travis** (Boolean) *default: false*
 Indicate if the project is being tested by [Travis-CI](http://travis-ci.org/). If `true`, it'll add the small travis badge in the sidebar.
 
-**twitter** (String *or* Array of strings) *default: null*  
+**twitter** (String *or* Array of strings) *default: null*
 Add follow buttons for one or more Twitter accounts to your sidebar. Useful to gather followers.
 
-**google_analytics** (String) *default: null*  
-This is your Google Analytics "UA" unique ID. Adds GA tracking to your generated documentation.  
+**google_analytics** (String) *default: null*
+This is your Google Analytics "UA" unique ID. Adds GA tracking to your generated documentation.
 e.g.: "UA-5201171-14"
 
 ## Roadmap

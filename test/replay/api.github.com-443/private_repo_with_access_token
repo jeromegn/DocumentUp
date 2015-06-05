@@ -1,4 +1,4 @@
-GET /repos/private/repo/readme
+GET /repos/private/repo/readme?client_id=test&client_secret=test
 accept: application/vnd.github.beta.raw+json
 host: api.github.com
 authorization: bearer token

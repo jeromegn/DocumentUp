@@ -9,7 +9,7 @@ describe "Markdown", ->
     before ->
       @compiled = Markdown.parse(SAMPLE)
     it "should return html", ->
-      assert.equal @compiled, "<h1>h1</h1>\n<h2 id='h2'>h2</h2 id='h2'>\n<p>Some paragraph</p>\n"
+      assert.equal @compiled, '<h1 id="h1">h1</h1>\n<h2 id="h2">h2</h2 id="h2">\n<p>Some paragraph</p>\n'
 
   describe "table of contents", ->
     before ->

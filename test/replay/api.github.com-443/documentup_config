@@ -1,4 +1,4 @@
-GET /repos/jeromegn/DocumentUp/contents/.documentup.json
+GET /repos/jeromegn/DocumentUp/contents/.documentup.json?client_id=test&client_secret=test
 host: api.github.com
 
 200 HTTP/1.1
