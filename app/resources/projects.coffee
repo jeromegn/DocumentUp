@@ -143,4 +143,5 @@ Server.get "/:username/:project_name/recompile", (req, res, next)->
       return next(error)
     project.update req.session.access_token, (error)->
       return next(error) if error
+      console.log "NO ERRORS"
       res.redirect "/#{project.name}", 302

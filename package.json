@@ -28,7 +28,7 @@
     "qs": "~0.5.0",
     "winston": "~0.6.1",
     "highlight.js": "~7.3.0",
-    "marked": "~0.2.9"
+    "marked": "~0.3.3"
   },
   "devDependencies": {
     "uglify-js": "1.2.5",
