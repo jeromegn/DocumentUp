@@ -23,6 +23,9 @@ gem "nokogiri", "~> 1.6"
 
 gem "rails_12factor"
 
+gem 'raygun4ruby'
+gem 'newrelic_rpm'
+
 group :development, :test do
   gem 'byebug'
   gem 'spring'
