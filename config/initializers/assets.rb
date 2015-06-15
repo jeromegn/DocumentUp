@@ -1,0 +1,1 @@
+Rails.application.config.assets.precompile += ['themes/v1.css']

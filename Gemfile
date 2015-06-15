@@ -21,6 +21,8 @@ gem "sass-rails", github: "rails/sass-rails" #"~> 5.0.3"
 
 gem "nokogiri", "~> 1.6"
 
+gem "rails_12factor"
+
 group :development, :test do
   gem 'byebug'
   gem 'spring'
