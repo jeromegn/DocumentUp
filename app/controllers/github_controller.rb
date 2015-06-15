@@ -16,7 +16,7 @@ class GithubController < ActionController::Base
   end
 
   def payload
-    @payload ||= Sawyer::Resource.new(Octokit.client.agent, agent.class.decode(params[:payload]))
+    @payload ||= Sawyer::Resource.new(Octokit.client.agent, Octokit.client.agent.class.decode(params[:payload]))
   end
 
   def commits
