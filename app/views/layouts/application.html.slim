@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+html
+  head
+    meta charset="utf-8"
+    meta name="apple-mobile-web-app-capable" content="yes"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    title= current_repository.config.name || current_repository.full_name
+    link href='//fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Alegreya:400italic,700italic,400,700' rel='stylesheet' type='text/css'
+    link rel="stylesheet" type="text/css" href=stylesheet_url(current_repository.config.theme && "themes/#{current_repository.config.theme}" || 'application') media="all"
+    = csrf_meta_tags
+    - if current_repository.config.color.present?
+      css:
+        a {color: '#{current_repository.color}'}
+
+  body
+    = yield
+    - if current_repository.config.google_analytics.present?
+      javascript:
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', '#{current_repository.config.google_analytics}']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();

@@ -1,0 +1,290 @@
+@import "syntax/tomorrow";
+@import "base";
+
+// Layout
+
+#container {
+  width: 922px;
+  margin: 0 auto;
+}
+
+#header {
+  border-bottom: 3px solid rgba(black, 0.1);
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  #logo {
+    color: #111;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 10px 0;
+    text-decoration: none;
+  }
+}
+
+#nav {
+  float: left;
+  width: 230px;
+  margin-right: 30px;
+  margin-top: 40px;
+  a {
+    display: block;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  #sections > ul {
+    list-style-type: none;
+    border-bottom: 3px solid rgba(black, 0.1);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    li {
+      a {
+        padding: 3px 0;
+        color: #444;
+        font-size: 16px;
+      }
+    }
+    li.h2 {
+      margin-top: 0.5em;
+    }
+    li.h3 {
+      list-style-type: none;
+      a {
+        padding: 1px 15px;
+        font-size: 13px;
+        color: #369;
+        font-weight: normal;
+      }
+    }
+  }
+  .extra {
+    padding: 5px 0;
+    min-height: 1.4em;
+    a {
+      color: #555;
+      font-size: 14px;
+    }
+  }
+  #travis {
+    img {margin-top: 10px; display: block;}
+  }
+
+  > *:last-child {
+    margin-bottom: 20px;
+  }
+}
+
+#github-ribbon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  img {
+    border: 0;
+  }
+}
+
+#content {
+  padding: 30px 30px 20px 30px;
+  min-height: 100px;
+  width: 600px;
+  background: #fff;
+  float: left;
+  border: 1px solid rgba(black, 0.2);
+  border-radius: 3px 3px 0 0;
+  margin-top: 15px;
+
+  #loader {
+    color: #888;
+    width: 300px;
+    height: 24px;
+    line-height: 24px;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    background: url(unquote('data:image/gif;base64,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')) no-repeat center left;
+    padding-left: 32px;
+    font-size: 18px;
+  }
+
+  > p {
+    @include clearfix;
+  }
+  p { padding:0 0 0.8125em 0; color:#444; }
+
+  p img { margin: 0.5em 0.8125em 0.8125em 0; padding: 0; }
+  img { max-width: 100%; }
+
+
+  h1,h2,h3,h4,h5,h6 { font-weight:bold; line-height: 1.2em; }
+
+  h1 { font-size: 2.125em; margin-bottom: 0.4em; }
+  h2 { font-size: 1.7em;  margin: 0.855em 0 0.4em; color: #CC333F; }
+  h3 { font-size: 1.3em;  margin: 0.956em 0 0.4em; }
+  h4 { font-size: 1.1em;  margin: 1.161em 0 0.4em; }
+  h5,h6 { font-size: 1em; font-weight: bold;  margin: 1.238em 0 0.4em; }
+
+  > h1, > h2 {margin-top: 0}
+
+  ul{list-style-position:outside;}
+  li ul,
+  li ol  { margin:0 1.625em;  }
+  ul, ol { margin: 0 0 1.625em 1.25em; }
+
+
+  dl { margin: 0 0 1.625em 0; }
+  dl dt { font-weight: bold; }
+  dl dd { margin-left: 1.625em; }
+
+  a { text-decoration:none; }
+  a:hover { text-decoration: underline; }
+
+
+  table { margin-bottom:1.625em; border-collapse: collapse; }
+  th { font-weight:bold; }
+  tr,th,td { margin:0; padding:0 1.625em 0 1em; height:26px; }
+  tfoot { font-style: italic; }
+  caption { text-align:center; font-family:Georgia, serif; }
+
+
+  abbr, acronym { border-bottom:1px dotted #000; }
+  address { margin-top:1.625em; font-style: italic; }
+  del {color:#000;}
+
+
+  blockquote { padding:1em 1em 1.625em 1em; font-family:georgia,serif;font-style: italic;  }
+  blockquote:before { content:"\201C";font-size:3em;margin-left:-.625em; font-family:georgia,serif;color:#aaa;line-height:0;}/* From Tripoli  */
+  blockquote > p {padding:0; margin:0; }
+
+  strong { font-weight: bold; }
+  em, dfn { font-style: italic; }
+  dfn { font-weight: bold; }
+  pre, code { margin: 0 0 1.625em; white-space: pre; }
+  pre, code, tt {
+    font-family: "Source Code Pro", monospace;
+    line-height: 1.5;
+  }
+  code { font-size: 0.8em; background: #f7f8f1; padding: 1px 2px; border: 1px solid #CCCCCC;  }
+  pre { font-size: 0.8em; background: #f7f8f1; border: 1px solid #CCCCCC; padding: 10px 12px; word-wrap: normal; overflow-y: auto; }
+  tt { display: block; margin: 1.625em 0; }
+  hr { margin-bottom:1.625em; }
+
+  table {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    width: 100%;
+  }
+  th, td {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+  }
+  th {
+    background: #eee;
+    padding: 7px 10px;
+  }
+  td {
+    font-size: 0.9em;
+    border-color: #ddd;
+  }
+  tbody tr:nth-child(2n) {
+    background: #f5f5f5;
+  }
+}
+
+@media only screen and (max-width : 480px) {
+  #container {
+    width: 100%;
+  }
+  #nav {
+    width: 100%;
+    margin-top: 10px;
+    float: none;
+    #sections, #header, .extra {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+  }
+  #content {
+    border-radius: 0;
+    border-width: 1px;
+    float: none;
+    margin: 0;
+    width: 100%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+}
+@media only screen and (min-device-pixel-ratio: 1.5), only screen and (min-resolution : 1.5dppx){
+  #github-ribbon {
+    img {
+      width: 100px;
+    }
+  }
+}
+
+.error .header {
+  width: 240px;
+  margin: 100px auto 0;
+}
+.error .header img {
+  width: 100%;
+}
+.error-message {
+  width: 300px;
+  padding: 30px;
+  margin: 10px auto 0;
+  text-align: center;
+  background: #fff;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+}
+.error-message p {
+  margin-bottom: 10px;
+}
+h1 {
+  font-size: 24px;
+  margin: 0 0 20px;
+  font-weight: bold;
+}
+.login.github {
+  height: 24px;
+  line-height: 24px;
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: top;
+  background: #eee url(<%= image_path "icon-github.png" %>) no-repeat 5px 0;
+  background: url(<%= image_path "icon-github.png" %>) no-repeat 5px 0, -webkit-gradient(linear, left top, left bottom, color-stop(0, #eee), color-stop(1, #ddd));
+  background: url(<%= image_path "icon-github.png" %>) no-repeat 5px 0, -webkit-linear-gradient(top, #eee 0%, #ddd 100%);
+  background: url(<%= image_path "icon-github.png" %>) no-repeat 5px 0, -moz-linear-gradient(top, #eee 0%, #ddd 100%);
+  background: url(<%= image_path "icon-github.png" %>) no-repeat 5px 0, linear-gradient(top, #eee 0%, #ddd 100%);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  padding: 0 5px 0 26px;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+  font-size: 13px;
+}
+.login.github {
+  *display: inline;
+}
+.login.github:hover {
+  background: #599bdc url(<%= image_path "icon-github.png" %>) no-repeat 5px -24px;
+  background: url(<%= image_path "icon-github.png" %>) no-repeat 5px -24px, -webkit-gradient(linear, left top, left bottom, color-stop(0, #599bdc), color-stop(1, #3072b3));
+  background: url(<%= image_path "icon-github.png" %>) no-repeat 5px -24px, -webkit-linear-gradient(top, #599bdc 0%, #3072b3 100%);
+  background: url(<%= image_path "icon-github.png" %>) no-repeat 5px -24px, -moz-linear-gradient(top, #599bdc 0%, #3072b3 100%);
+  background: url(<%= image_path "icon-github.png" %>) no-repeat 5px -24px, linear-gradient(top, #599bdc 0%, #3072b3 100%);
+  color: #fff;
+  border-color: #518cc6;
+}
+.login.github:active {
+  background: #3072b3 url(<%= image_path "icon-github.png" %>) no-repeat 5px -24px;
+  background: url(<%= image_path "icon-github.png" %>) no-repeat 5px -24px, -webkit-gradient(linear, left top, left bottom, color-stop(0, #3072b3), color-stop(1, #599bdc));
+  background: url(<%= image_path "icon-github.png" %>) no-repeat 5px -24px, -webkit-linear-gradient(top, #3072b3 0%, #599bdc 100%);
+  background: url(<%= image_path "icon-github.png" %>) no-repeat 5px -24px, -moz-linear-gradient(top, #3072b3 0%, #599bdc 100%);
+  background: url(<%= image_path "icon-github.png" %>) no-repeat 5px -24px, linear-gradient(top, #3072b3 0%, #599bdc 100%);
+  border-color: #2a65a0;
+}
