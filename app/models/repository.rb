@@ -29,7 +29,7 @@ class Repository < ActiveRecord::Base
     "http://travis-ci.org/#{full_name}"
   end
   def travis_image_url
-    "https://secure.travis-ci.org/#{full_name}.png?branch=#{branch}"
+    "https://travis-ci.org/#{full_name}.svg?branch=#{branch}"
   end
 
   def refresh_config
