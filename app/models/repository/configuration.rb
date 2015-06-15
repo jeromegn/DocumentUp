@@ -18,7 +18,7 @@ class Repository::Configuration
     return [] if t.blank?
     t.is_a?(Array) ? t : [JSON.parse(t)].flatten
   rescue JSON::ParserError => exception
-    t
+    [t]
   end
 
   def self.dump(obj)
