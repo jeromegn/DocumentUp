@@ -6,19 +6,19 @@
       == current_page.parsed_toc
     .extra#github
       a href=current_repository.github_url Source on Github
-    - if current_repository.config.issues
+    - if current_config.issues
       .extra#github-issues
         a href=current_repository.github_issues_url Issues
-    - if current_repository.config.travis
+    - if current_config.travis
       .extra#travis
         a href=current_repository.travis_url
           img src=current_repository.travis_image_url
-    - current_repository.config.twitter.each do |handle|
+    - current_config.twitter.each do |handle|
       .extra.twitter
         <iframe allowtransparency="true" frameborder="0" scrolling="no" style="width:162px; height:20px;" src="https://platform.twitter.com/widgets/follow_button.html?screen_name=#{handle.gsub('@', '')}&show_count=false"></iframe>
 
   #content
-    - if current_repository.config.github_ribbon
+    - if current_config.github_ribbon
       a#github-ribbon href=current_repository.github_url
         img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"
     == current_page.html

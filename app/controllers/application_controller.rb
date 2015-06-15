@@ -3,21 +3,18 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :ensure_repository!, :ensure_page!
-  helper_method :current_page, :current_repository
+  helper_method :current_page, :current_repository, :current_config
 
   def full_repository
     "#{params[:user_login]}/#{params[:repository_name] || params[:name]}".downcase
   end
 
   def current_repository
-    @current_repository ||= begin
-      repo = Repository.find_or_create_by(full_name: full_repository)
-      if params[:config]
-        repo.config = Repository::Configuration.new(JSON.parse(params[:config]))
-        repo.save
-      end
-      repo
-    end
+    @current_repository ||= Repository.where('LOWER(full_name) = ?', full_repository).first_or_create(full_name: full_repository)
+  end
+
+  def current_config
+    @current_config ||= params[:config].present? ? Repository::Configuration.new(JSON.parse(params[:config])) : current_repository.config
   end
 
   def ensure_repository!

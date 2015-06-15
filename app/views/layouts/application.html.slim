@@ -4,20 +4,20 @@ html
     meta charset="utf-8"
     meta name="apple-mobile-web-app-capable" content="yes"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
-    title= current_repository.config.name || current_repository.full_name
+    title= current_config.name || current_repository.full_name
     link href='//fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Alegreya:400italic,700italic,400,700' rel='stylesheet' type='text/css'
-    link rel="stylesheet" type="text/css" href=stylesheet_url(current_repository.config.theme && "themes/#{current_repository.config.theme}" || 'application') media="all"
+    link rel="stylesheet" type="text/css" href=stylesheet_url(current_config.theme && "themes/#{current_config.theme}" || 'application') media="all"
     = csrf_meta_tags
-    - if current_repository.config.color.present?
+    - if current_config.color.present?
       css:
         a {color: '#{current_repository.color}'}
 
   body
     = yield
-    - if current_repository.config.google_analytics.present?
+    - if current_config.google_analytics.present?
       javascript:
         var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', '#{current_repository.config.google_analytics}']);
+        _gaq.push(['_setAccount', '#{current_config.google_analytics}']);
         _gaq.push(['_trackPageview']);
 
         (function() {

@@ -5,7 +5,6 @@ class Page < ActiveRecord::Base
   after_save :parse, if: :html_changed?
 
   def parse
-    Rails.logger.info "BEFORE SAVE!!!!"
     # Rails.cache.write "#{id}:body", parse_body
     Rails.cache.write "page:#{id}:toc", parse_toc
   end

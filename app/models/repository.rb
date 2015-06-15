@@ -75,6 +75,7 @@ class Repository < ActiveRecord::Base
 
   def refresh
     response = Octokit.repository(full_name)
+    self.full_name = response.full_name
     self.branch = response.default_branch
     refresh_config
     save
