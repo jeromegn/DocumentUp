@@ -5,7 +5,7 @@ class Repository < ActiveRecord::Base
   serialize :config, Repository::Configuration
 
   def tree
-    @tree ||= Octokit.tree(full_name, CGI::escape(branch), recursive: true)
+    @tree ||= Octokit.tree(full_name, branch, recursive: true)
   end
 
   def name
