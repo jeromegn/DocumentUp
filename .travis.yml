@@ -1,3 +1,18 @@
 language: ruby
+
 rvm:
   - 2.1.6
+
+addons:
+  postgresql: "9.4"
+
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - cp config/database.yml.travis config/database.yml
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: jEiECnyMzA0TtJ8mQhY6lGJIroksSMIg8bhjhM4Y8UxtnMbfrhPb7T3T+3s0MdiNFFEi/P4OKinv4ErofBdz10AKrO5XTcEHorhoQoKoQK2E4iPNQnm9abI+Z2IbcU7z1hExoh2QzpR243vA4oWZSLQd9yLmIxudzM0qJ8UUD9s=
+  run:
+    - "rake db:migrate"
