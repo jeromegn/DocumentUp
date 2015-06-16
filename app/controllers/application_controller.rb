@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_config
-    @current_config ||= params[:config].present? ? Repository::Configuration.new(JSON.parse(params[:config])) : current_repository.config
+    @current_config ||= params[:config].present? ? Repository::Configuration.new(params[:config].is_a?(String) ? JSON.parse(params[:config]) : params[:config]) : current_repository.config
   end
 
   def ensure_repository!
