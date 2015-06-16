@@ -10,7 +10,7 @@ html
     = csrf_meta_tags
     - if current_config.color.present?
       css:
-        a {color: '#{current_repository.color}'}
+        a {color: '#{current_config.color}'}
 
   body
     = yield
