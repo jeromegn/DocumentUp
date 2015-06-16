@@ -4,7 +4,7 @@ class RepositoriesController < ApplicationController
     render_page
   end
   def recompile
-    current_page.process
+    current_page.refresh
     redirect_to user_repository_page_path(path: '')
   end
 end
