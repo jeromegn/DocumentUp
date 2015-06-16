@@ -12,7 +12,7 @@ html
       css:
         a {color: '#{current_config.color}'}
 
-  body
+  body.no-literate
     = yield
     - if current_config.google_analytics.present?
       javascript:

@@ -2,19 +2,19 @@
   #nav
     #header
       a href="#" id="logo" = current_repository.display_name
-    #sections
+    #sections.section
       == current_page.parsed_toc
-    .extra#github
+    .extra.section#github
       a href=current_repository.github_url Source on Github
     - if current_config.issues
-      .extra#github-issues
+      .extra.section#github-issues
         a href=current_repository.github_issues_url Issues
     - if current_config.travis
-      .extra#travis
+      .extra.section#travis
         a href=current_repository.travis_url
           img src=current_repository.travis_image_url
     - current_config.twitter.each do |handle|
-      .extra.twitter
+      .extra.section.twitter
         <iframe allowtransparency="true" frameborder="0" scrolling="no" style="width:162px; height:20px;" src="https://platform.twitter.com/widgets/follow_button.html?screen_name=#{handle.gsub('@', '')}&show_count=false"></iframe>
 
   #content

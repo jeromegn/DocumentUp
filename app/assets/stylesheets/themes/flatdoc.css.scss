@@ -1,0 +1,812 @@
+@import '../lib/reset';
+
+// Fonts
+$body-font: Helvetica Neue, Open Sans, sans-serif;
+$mono-font: Menlo, monospace;
+
+// Margins
+$pad: 40px;      // Space between things
+$sidepad: 30px;  // Padding to the left of the sidebar
+$minipad: 20px;  // Space for mobile
+$vmargin: 10px;  // Margin between blocks
+
+// Colors
+$offwhite: #f3f6fb;
+$grey: #9090aa;
+$txt: #505050;
+$accent: #3cc * 0.85;
+$line: #e4e7ec * 0.98;
+
+// Misc
+$shadow-str: 0.1;
+
+// Dimensions
+$sidebar-width: 230px;
+$content-width: 550px;
+$pre-width: 380px;
+
+/* ----------------------------------------------------------------------------
+ * Fonts
+ */
+
+@import url('//fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:300');
+
+// ----------------------------------------------------------------------------
+// Mixins
+
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin scrollbar($bg: white) {
+  & {
+    -webkit-overflow-scrolling: touch;
+  }
+  &::-webkit-scrollbar {
+    width: 15px;
+    height: 15px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #ddd;
+    border-radius: 8px;
+    border: solid 4px $bg;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background: #999;
+    box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.2);
+  }
+
+}
+
+@mixin antialias() {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ----------------------------------------------------------------------------
+ * Base
+ */
+
+
+
+html, body {
+  height: 100%;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body, td, textarea, input {
+  font-family: $body-font;
+  line-height: 1.6;
+  font-size: 13px;
+  color: $txt;
+
+  @media (max-width: 480px) {/* Mobile */
+    font-size: 12px;
+  }
+}
+
+a {
+  color: $accent;
+  text-decoration: none;
+  &:hover {
+    color: $accent * 0.8;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+ * Content styling
+ */
+
+#content {
+  p, ul, ol, h1, h2, h3, h4, h5, h6, pre, blockquote {
+    padding: $vmargin 0;
+    box-sizing: border-box;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    @include antialias();
+  }
+
+  pre {
+    font-family: $mono-font;
+  }
+
+  ul > li {
+    list-style-type: disc;
+  }
+
+  ol > li {
+    list-style-type: decimal;
+  }
+
+  ul, ol {
+    margin-left: 20px;
+  }
+
+  ul > li {
+    list-style-type: none;
+    position: relative;
+    &:before {
+      content: '';
+      display: block;
+      absolute: left -17px top 7px;
+      width: 5px;
+      height: 5px;
+      border-radius: 4px;
+      box-sizing: border-box;
+      background: white;
+      border: solid 1px $grey;
+    }
+  }
+
+  li > :first-child {
+    padding-top: 0
+  }
+
+  strong, b {
+    font-weight: bold;
+  }
+
+  i, em {
+    font-style: italic;
+    color: $grey;
+  }
+
+  code, .highlight pre {
+    font-family: $mono-font;
+    background: $offwhite;
+    padding: 1px 3px;
+    font-size: 0.95em;
+  }
+
+  .highlight pre {
+    display: block;
+    background: transparent;
+    font-size: 0.85em;
+    letter-spacing: -1px;
+  }
+
+  blockquote {
+    :first-child {
+      padding-top: 0;
+    }
+    :last-child {
+      padding-bottom: 0;
+    }
+  }
+
+  table {
+
+    margin-top: $vmargin;
+    margin-bottom: $vmargin;
+    padding: 0;
+    border-collapse: collapse;
+    clear: both;
+
+    tr {
+      border-top: 1px solid #cccccc;
+      background-color: white;
+      margin: 0;
+      padding: 0;
+
+      :nth-child(2n) {
+        background-color: #f8f8f8;
+      }
+
+      th {
+        text-align: auto;
+        font-weight: bold;
+        border: 1px solid #cccccc;
+        margin: 0;
+        padding: 6px 13px;
+      }
+      td {
+        text-align: auto;
+        border: 1px solid #cccccc;
+        margin: 0;
+        padding: 6px 13px;
+      }
+      th, td {
+        :first-child {
+          margin-top: 0;
+        }
+        :last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+}
+
+/* ----------------------------------------------------------------------------
+ * Content
+ */
+
+#container {
+  min-height: 90%;
+  position: relative;
+}
+
+#content {
+  padding-top: $pad - $vmargin;
+  padding-bottom: $pad;
+  padding-left: $pad;
+  padding-right: $pad;
+  @include clearfix;
+  max-width: 700px;
+  blockquote {
+    color: $grey;
+    text-shadow: 0 1px 0 rgba(white, 0.5);
+  }
+  h1, h2, h3 {
+    @include antialias;
+    font-family: montserrat;
+    padding-bottom: 0;
+    + p, ul, ol {
+      padding-top: 10px;
+    }
+  }
+  h1, h2 {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1.5em;
+  }
+  h3 {
+    font-size: 1.2em;
+  }
+  // Lines
+  h1, h2, .big-heading {
+    padding-top: $pad * 2;
+    &:before {
+      display: block;
+      content: "";
+      background: linear-gradient(left, rgba($line, 1) 80%, rgba($line, 0));
+      box-shadow: 0 1px 0 rgba(white, 0.4);
+      height: 1px;
+      position: relative;
+      top: $pad * -1;
+      left: $pad * -1;
+      width: 100%;
+    }
+    @media (max-width: 768px) {
+      padding-top: $minipad * 2;
+      &:before {
+        background: $line;
+        left: $pad * -1;
+        top: $minipad * -1;
+        width: 120%;
+      }
+    }
+  }
+  // Small headings
+  h4, h5, .small-heading {
+    border-bottom: solid 1px rgba(black, 0.07);
+    color: $grey;
+    padding-top: $vmargin * 3;
+    padding-bottom: 10px;
+  }
+  body:not(.big-h3) & h3 {
+    @extends #content .small-heading;
+    font-size: 0.9em;
+  }
+  body.big-h3 & h3 {
+    @extends #content .big-heading;
+  }
+  h1:first-child {
+    padding-top: 0;
+    &, a, a:visited {
+      color: $txt;
+    }
+    &:before {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #content {
+    h4, h5, .small-heading, body:not(.big-h3) & h3 {
+      padding-top: $vmargin * 2;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  #content {
+    padding: $minipad;
+    padding-top: $minipad * 2;
+    h4, h5, .small-heading, body:not(.big-h3) & h3 {
+      padding-top: $vmargin;
+    }
+  }
+}
+
+// ----------------------------------------------------------------------------
+// Code blocks
+
+@mixin inset-box {
+  background: $offwhite;
+  border: solid 1px $offwhite * 0.95;
+  border-top: solid 1px $offwhite * 0.9;
+  border-left: solid 1px $offwhite * 0.93;
+  display: block;
+  padding: 10px;
+  border-radius: 2px;
+  overflow: auto;
+  @include scrollbar($offwhite);
+}
+
+body.no-literate #content .highlight pre {
+  @include inset-box;
+}
+
+@media (max-width: 1180px) {
+  #content .highlight pre {
+    @include inset-box;
+  }
+}
+
+// ----------------------------------------------------------------------------
+// Buttons
+
+.button {
+  @include antialias;
+  font-family: montserrat, sans-serif;
+  letter-spacing: -1px;
+  font-weight: bold;
+  display: inline-block;
+  padding: 3px 25px;
+  border: solid 2px $accent;
+  border-radius: 20px;
+  margin-right: 15px;
+  &, &:visited {
+    background: $accent;
+    color: white;
+    text-shadow: none;
+  }
+  &:hover {
+    border-color: #111111;
+    background: #111111;
+    color: white;
+  }
+  &.light {
+    &, &:visited {
+      background: transparent;
+      color: $grey;
+      border-color: $grey;
+      text-shadow: none;
+    }
+    &:hover {
+      border-color: $grey;
+      background: $grey;
+      color: white;
+    }
+  }
+}
+
+#content {
+  .button + em {
+    color: $grey;
+  }
+}
+
+// ----------------------------------------------------------------------------
+// Literate mode content
+
+@media (min-width: 1180px) {
+  body:not(.no-literate) {
+    #container {
+      background-color: $offwhite;
+      $w: $sidebar-width + $content-width;
+      box-shadow: inset $w 0 white, inset $w + 1 0 $line, inset $w + 10 0 5px -10px rgba(black, $shadow-str);
+    }
+  }
+}
+
+// Literate mode
+@media (min-width: 1180px) {
+  @mixin small-heading {
+    margin-left: $pad;
+    width: $content-width - $pad * 2;
+    margin-bottom: 3px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  body:not(.no-literate) {
+    #content {
+      padding-left: 0;
+      padding-right: 0;
+      width: $content-width + $pre-width;
+      max-width: none;
+      > {
+        p, ul, ol, h1, h2, h3, h4, h5, h6, pre, blockquote {
+          width: $content-width;
+          box-sizing: border-box;
+          padding-right: $pad;
+          padding-left: $pad;
+        }
+        h1, h2, h3 {
+          clear: both;
+          width: 100%;
+        }
+        pre, blockquote {
+          width: $pre-width;
+          padding-left: $pad / 2;
+          padding-right: $pad / 2;
+          float: right;
+          clear: right;
+          + {
+            p, ul, ol, h4, h5, h6 {
+              clear: both;
+            }
+          }
+        }
+        p, ul, ol, h4, h5, h6 {
+          float: left;
+          clear: left;
+        }
+        h4, h5, .small-heading, body:not(.big-h3) & h3 {
+          @include small-heading;
+        }
+        table {
+          margin-left: $pad;
+          margin-right: $pad;
+          max-width: $content-width - $pad * 2;
+        }
+      }
+    }
+  }
+  body:not(.no-literate):not(.big-h3) {
+    #content > h3 {
+      @include small-heading;
+    }
+  }
+}
+
+// ----------------------------------------------------------------------------
+// Header
+
+#header {
+  background: $offwhite;
+  text-shadow: 0 1px 0 rgba(white, 0.5);
+  border-bottom: solid 1px $line;
+  padding: 15px 15px 15px $sidepad;
+  @include clearfix;
+  line-height: 20px;
+  position: relative;
+  .left {
+    float: left;
+  }
+  .right {
+    text-align: right;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    iframe {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+  h1 {
+    @include antialias;
+    font-weight: bold;
+    font-family: montserrat, sans-serif;
+    font-size: 13px;
+    &, a, a:visited {
+      color: $grey;
+    }
+    a:hover {
+      color: $txt;
+    }
+  }
+  li a {
+    font-size: 0.88em;
+    color: $grey;
+    display: block;
+    &:hover {
+      color: $grey * 0.4;
+    }
+  }
+  @media (min-width: 480px) {
+    h1 {
+      float: left;
+    }
+    ul, li {
+      display: block;
+      float: left;
+    }
+    ul {
+      margin-left: -15px;
+    }
+    h1 + ul {
+      border-left: solid 1px $line;
+      margin-left: 15px;
+    }
+    li {
+      border-left: solid 1px rgba(white, 0.5);
+      border-right: solid 1px $line;
+      &:last-child {
+        border-right: 0;
+      }
+    }
+    li a {
+      padding: 0 15px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  // Hide extra stuff on mobile
+  .right {
+    display: none;
+  }
+}
+
+// ----------------------------------------------------------------------------
+// Sidebar
+
+#nav {
+  @include antialias;
+  .section {
+    padding: $sidepad $sidepad;
+    box-sizing: border-box;
+  }
+  .section + .section {
+    border-top: solid 1px $line;
+  }
+  .section.no-line {
+    border-top: 0;
+    padding-top: 0;
+  }
+}
+
+a.big.button {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 20px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1em;
+  background: transparent;
+  border: solid 3px $accent;
+  border-radius: 30px;
+  font-family: montserrat, sans-serif;
+  &, &:visited {
+    color: $accent;
+    text-decoration: none;
+  }
+  &:hover {
+    background: $accent;
+    &, &:visited {
+      color: white;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  #nav {
+    padding: $minipad;
+    border-bottom: solid 1px $line;
+  }
+}
+
+@media (max-width: 768px) {
+  #nav {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  #container {
+    padding-left: $sidebar-width;
+  }
+  #nav {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: $sidebar-width;
+    border-right: solid 1px $line;
+  }
+  #nav.fixed {
+    position: fixed;
+    @include scrollbar;
+    overflow-y: auto;
+  }
+}
+
+#nav {
+  font-size: 0.9em;
+}
+
+// Menu items
+#nav {
+  .h2 {
+    margin-top: 20px;
+  }
+  a {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    margin-right: $sidepad * -1;
+    &, &:visited {
+      color: $accent;
+    }
+    &:hover {
+      color: $accent * 0.8;
+    }
+  }
+  .h2 a {
+    font-family: montserrat, sans-serif;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    font-weight: bold;
+    &, &:visited {
+      color: $grey;
+    }
+    &:hover {
+      color: $grey * 0.6;
+    }
+  }
+  .h3 a {
+    font-weight: normal;
+  }
+  .h4 a {
+    font-weight: normal;
+    font-size: 0.9em;
+    padding-left: 10px;
+  }
+  a.active {
+    &, &:visited, &:hover {
+      color: $txt !important;
+    }
+    font-weight: bold !important;
+    // Indicator
+    &:after {
+      content: "";
+      display: block;
+      box-sizing: border-box;
+      absolute: top 10px right $sidepad;
+      width: 9px;
+      height: 3px;
+      border-radius: 2px;
+      background: $accent;
+    }
+  }
+}
+
+// ----------------------------------------------------------------------------
+// Syntax highlighting
+
+// code {
+//   .string, .number {
+//     color: #33aacc;
+//   }
+//   .init {
+//     color: #338833;
+//   }
+//   .keyword {
+//     font-weight: bold;
+//   }
+//   .comment {
+//     color: $grey * 1.2;
+//   }
+// }
+
+.highlight .pl-hll { background-color: #d6d6d6 }
+.highlight .pl-c { color: $grey * 1.2; } /* Comment */
+.highlight .pl-k { font-weight: bold; } /* Keyword */
+.highlight .pl-l { color: #33aacc } /* Literal */
+.highlight .pl-n { color: #4d4d4c } /* Name */
+.highlight .pl-o { color: #3e999f } /* Operator */
+.highlight .pl-p { color: #4d4d4c } /* Punctuation */
+.highlight .pl-cm { color: #8e908c } /* Comment.Multiline */
+.highlight .pl-cp { color: #8e908c } /* Comment.Preproc */
+.highlight .pl-c1 { color: #8e908c } /* Comment.Single */
+.highlight .pl-cs { color: #8e908c } /* Comment.Special */
+.highlight .pl-gd { color: #c82829 } /* Generic.Deleted */
+.highlight .pl-ge { font-style: italic } /* Generic.Emph */
+.highlight .pl-gh { color: #4d4d4c; font-weight: bold } /* Generic.Heading */
+.highlight .pl-gi { color: #718c00 } /* Generic.Inserted */
+.highlight .pl-gp { color: #8e908c; font-weight: bold } /* Generic.Prompt */
+.highlight .pl-gs { font-weight: bold } /* Generic.Strong */
+.highlight .pl-gu { color: #3e999f; font-weight: bold } /* Generic.Subheading */
+.highlight .pl-kc { color: #8959a8 } /* Keyword.Constant */
+.highlight .pl-kd { color: #8959a8 } /* Keyword.Declaration */
+.highlight .pl-kn { color: #3e999f } /* Keyword.Namespace */
+.highlight .pl-kp { color: #8959a8 } /* Keyword.Pseudo */
+.highlight .pl-kr { color: #8959a8 } /* Keyword.Reserved */
+.highlight .pl-kt { color: #eab700 } /* Keyword.Type */
+.highlight .pl-ld { color: #718c00 } /* Literal.Date */
+.highlight .pl-m { color: #33aacc } /* Literal.Number */
+.highlight .pl-s { color: #33aacc } /* Literal.String */
+.highlight .pl-na { color: #4271ae } /* Name.Attribute */
+.highlight .pl-nb { color: #4d4d4c } /* Name.Builtin */
+.highlight .pl-nc { color: #eab700 } /* Name.Class */
+.highlight .pl-no { color: #c82829 } /* Name.Constant */
+.highlight .pl-nd { color: #3e999f } /* Name.Decorator */
+.highlight .pl-ni { color: #4d4d4c } /* Name.Entity */
+.highlight .pl-ne { color: #c82829 } /* Name.Exception */
+.highlight .pl-nf { color: #4271ae } /* Name.Function */
+.highlight .pl-nl { color: #4d4d4c } /* Name.Label */
+.highlight .pl-nn { color: #eab700 } /* Name.Namespace */
+.highlight .pl-nx { color: #4271ae } /* Name.Other */
+.highlight .pl-py { color: #4d4d4c } /* Name.Property */
+.highlight .pl-nt { color: #3e999f } /* Name.Tag */
+.highlight .pl-nv { color: #c82829 } /* Name.Variable */
+.highlight .pl-ow { color: #3e999f } /* Operator.Word */
+.highlight .pl-w { color: #4d4d4c } /* Text.Whitespace */
+.highlight .pl-mf { color: #33aacc } /* Literal.Number.Float */
+.highlight .pl-mh { color: #33aacc } /* Literal.Number.Hex */
+.highlight .pl-mi { color: #33aacc } /* Literal.Number.Integer */
+.highlight .pl-mo { color: #33aacc } /* Literal.Number.Oct */
+.highlight .pl-sb { color: #33aacc } /* Literal.String.Backtick */
+.highlight .pl-sc { color: #4d4d4c } /* Literal.String.Char */
+.highlight .pl-sd { color: #8e908c } /* Literal.String.Doc */
+.highlight .pl-s2 { color: #33aacc } /* Literal.String.Double */
+.highlight .pl-se { color: #33aacc } /* Literal.String.Escape */
+.highlight .pl-sh { color: #33aacc } /* Literal.String.Heredoc */
+.highlight .pl-si { color: #33aacc } /* Literal.String.Interpol */
+.highlight .pl-sx { color: #33aacc } /* Literal.String.Other */
+.highlight .pl-sr { color: #33aacc } /* Literal.String.Regex */
+.highlight .pl-s1 { color: #33aacc } /* Literal.String.Single */
+.highlight .pl-ss { color: #33aacc } /* Literal.String.Symbol */
+.highlight .pl-bp { color: #4d4d4c } /* Name.Builtin.Pseudo */
+.highlight .pl-vc { color: #c82829 } /* Name.Variable.Class */
+.highlight .pl-vg { color: #c82829 } /* Name.Variable.Global */
+.highlight .pl-vi { color: #c82829 } /* Name.Variable.Instance */
+.highlight .pl-il { color: #33aacc } /* Literal.Number.Integer.Long */
+
+// ----------------------------------------------------------------------------
+
+#content {
+  .large-brief & > h1:first-child + p,
+  > p.brief {
+    font-size: 1.3em;
+    font-family: Open Sans, sans-serif;
+    font-weight: 300;
+  }
+}
+
+// ----------------------------------------------------------------------------
+
+.title-area {
+  min-height: 100px;
+  box-sizing: border-box;
+  @include antialias;
+  text-align: center;
+  border-bottom: solid 1px $line;
+  overflow: hidden;
+  > img.bg {
+    z-index: 0;
+    // Start it off screen
+    position: absolute;
+    left: -9999px;
+  }
+  > div {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+#github-ribbon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  img {
+    border: 0;
+  }
+}

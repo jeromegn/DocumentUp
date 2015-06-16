@@ -26,6 +26,8 @@ gem "rails_12factor"
 gem 'raygun4ruby'
 gem 'newrelic_rpm'
 
+gem "autoprefixer-rails"
+
 group :development, :test do
   gem 'byebug'
   gem 'spring'
