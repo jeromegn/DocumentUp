@@ -2,8 +2,10 @@
   #nav
     #header
       a href="#" id="logo" = current_repository.display_name
+    
     #sections.section
-      == current_page.parsed_toc
+      == current_page.toc
+    
     .extra.section#github
       a href=current_repository.github_url Source on Github
     - if current_config.issues

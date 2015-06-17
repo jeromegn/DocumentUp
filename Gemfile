@@ -10,16 +10,11 @@ gem "virtus", "~> 1.0.5"
 
 gem "octokit", "~> 3.8.0"
 
-gem "redcarpet", "~> 3.2.3"
-gem "pygments.rb", "~> 0.6.3"
-
 gem "slim-rails", "~> 3.0.1"
 gem "puma", "~> 2.11.3"
 
 gem "sprockets", "~> 3.2.0"
 gem "sass-rails", github: "rails/sass-rails" #"~> 5.0.3"
-
-gem "nokogiri", "~> 1.6"
 
 gem "rails_12factor"
 
@@ -27,6 +22,18 @@ gem 'raygun4ruby'
 gem 'newrelic_rpm'
 
 gem "autoprefixer-rails"
+
+# HTML::Pipeline needs those
+gem "pygments.rb", "~> 0.6.3"
+
+gem 'html-pipeline'
+gem "task_list"
+gem "rinku",              "~> 1.7",   :require => false
+gem "gemoji",             "~> 2.0",   :require => false
+gem "github-markdown",    "~> 0.5",   :require => false
+gem "sanitize",           "~> 4.0",   :require => false
+gem "escape_utils",       "~> 1.0",   :require => false
+gem "github-linguist",    "~> 4.5",  :require => false
 
 group :development, :test do
   gem 'byebug'

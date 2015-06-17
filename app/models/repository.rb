@@ -65,14 +65,6 @@ class Repository < ActiveRecord::Base
     end
   end
 
-  def page_html(path)
-    if found = find_in_tree(path)
-      Octokit.contents(full_name, path: found[:path], accept: 'application/vnd.github.html')
-    else
-      false
-    end
-  end
-
   def refresh
     response = Octokit.repository(full_name)
     self.full_name = response.full_name
