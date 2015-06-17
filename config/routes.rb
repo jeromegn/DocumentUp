@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  constraints Subdomain do
+    get '/', to: 'repositories#show'
+    get :__recompile, to: 'repositories#recompile', as: :recompile
+    resources :pages, param: :path, path: '', constraints: {path: /.*/}, only: [:show]
+  end
+
   get '/', to: redirect('/jeromegn/documentup')
   post :recompile, to: 'github#push', as: :github_push
 

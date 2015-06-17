@@ -6,6 +6,11 @@ class ApplicationController < ActionController::Base
   helper_method :current_page, :current_repository, :current_config
 
   def full_repository
+    if Subdomain.matches? request
+      splitted = request.subdomain.split('.')
+      params[:user_login] = splitted.pop
+      params[:repository_name] = splitted.join(".")
+    end
     "#{params[:user_login]}/#{params[:repository_name] || params[:name]}".downcase
   end
 
