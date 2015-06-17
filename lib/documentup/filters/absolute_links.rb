@@ -6,7 +6,7 @@ class DocumentUp::Filters::AbsoluteLinks < HTML::Pipeline::Filter
     doc.search("a").each do |element|
       href = (element['href'] || '').strip
       next if href.nil? || href.blank?
-      unless href.start_with?('http') || href.start_with?('//')
+      unless href.start_with?('http') || href.start_with?('//') || href.start_with?('#')
         element['href'] = URI.join(link_subpage_url, href).to_s
       end
     end
