@@ -1,4 +1,4 @@
-![DocumentUp](http://documentup.com/images/logo.png)
+![DocumentUp](app/assets/images/logo.png)
 
 **This site has been generated with DocumentUp** (eat your own dog food, people)
 
@@ -182,7 +182,7 @@ The one you're looking at now.
 
 For the nostalgic. Use `v1` in your `theme` config option.
 
-![V1](http://documentup.com/images/v1.png)
+![V1](app/assets/images/v1.png)
 
 ## Roadmap
 
