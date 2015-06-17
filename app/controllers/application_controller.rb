@@ -16,6 +16,9 @@ class ApplicationController < ActionController::Base
 
   def current_repository
     @current_repository ||= Repository.where('LOWER(full_name) = ?', full_repository).first_or_create(full_name: full_repository)
+  rescue Octokit::NotFound => exception
+    Rails.logger.info "Could not find repository #{full_repository}"
+    nil
   end
 
   def current_config
@@ -28,6 +31,9 @@ class ApplicationController < ActionController::Base
 
   def current_page
     @current_page ||= Page.find_or_create_by(repository: current_repository, path: params[:page_path] || params[:path] || '')
+  rescue Octokit::NotFound => exception
+    Rails.logger.info "Could not find page #{params[:page_path] || params[:path]}"
+    nil
   end
 
   def ensure_page!
