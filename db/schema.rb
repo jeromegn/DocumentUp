@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150615160026) do
+ActiveRecord::Schema.define(version: 20150617124754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,4 +38,5 @@ ActiveRecord::Schema.define(version: 20150615160026) do
 
   add_index "repositories", ["full_name"], name: "index_repositories_on_full_name", using: :btree
 
+  add_foreign_key "pages", "repositories"
 end

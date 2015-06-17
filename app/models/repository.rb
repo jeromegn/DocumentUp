@@ -1,5 +1,5 @@
 class Repository < ActiveRecord::Base
-  has_many :pages
+  has_many :pages, dependent: :destroy
   after_create :refresh
 
   serialize :config, Repository::Configuration
