@@ -12,7 +12,11 @@ class GithubController < ActionController::Base
   private
 
   def current_repository
-    @current_repository ||= Repository.find_or_create_by(full_name: payload.repository.full_name.downcase)
+    @current_repository ||= Repository.where('LOWER(full_name) = ?', full_repository).first_or_create(full_name: full_repository)
+  end
+
+  def full_repository
+    payload.repository.full_name.downcase
   end
 
   def payload
