@@ -31,7 +31,7 @@ gem "task_list"
 gem "rinku",              "~> 1.7",   :require => false
 gem "gemoji",             "~> 2.0",   :require => false
 gem "github-markdown",    "~> 0.5",   :require => false
-gem "sanitize",           "~> 4.0",   :require => false
+gem "sanitize",           "~> 5.2",   :require => false
 gem "escape_utils",       "~> 1.0",   :require => false
 gem "github-linguist",    "~> 4.5",  :require => false
 
