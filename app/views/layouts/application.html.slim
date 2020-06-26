@@ -25,3 +25,19 @@ html
           ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
           var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
         })();
+    - if current_config.matomo_analytics.present?
+      javascript:
+        var _paq = window._paq || [];
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+          var u="//#{current_config.matomo_analytics.domain/;
+          _paq.push(['setTrackerUrl', u+'matomo.php']);
+          _paq.push(['setSiteId', {$IDSITE}]);
+          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+          g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+        })();
+    - if current_config.plausible_analytics.present?
+      script async defer data-domain="#{current_config.plausible_analytics.domain}" src=”https://plausible.io/js/plausible.js”
+    - if current_config.goatcounter_analytics.present?
+      script data-goatcounter="#{current_config.goatcounter_analytics.domain}" async src="//gc.zgo.at/count.js"
