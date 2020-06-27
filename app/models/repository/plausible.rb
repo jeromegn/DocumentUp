@@ -1,4 +1,4 @@
-class Repository::Configuration::Plausible
+class Repository::Plausible
   include Virtus.model
 
   attribute :domain, String

@@ -1,4 +1,4 @@
-class Repository::Configuration::GoatCounter
+class Repository::GoatCounter
   include Virtus.model
   
   attribute :domain, String

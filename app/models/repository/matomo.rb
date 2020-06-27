@@ -1,4 +1,4 @@
-class Repository::Configuration::Matomo
+class Repository::Matomo
   include Virtus.model
 
   attribute :domain, String

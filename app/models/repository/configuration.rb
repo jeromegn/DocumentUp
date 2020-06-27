@@ -9,9 +9,9 @@ class Repository::Configuration
   
   # Analytics
   attribute :google_analytics, String, default: nil
-  attribute :matomo_analytics, Repository::Configuration::Matomo, default: nil
-  attribute :plausible_analytics, Repository::Configuration::Plausible, default: nil
-  attribute :goatcounter_analytics, Repository::Configuration::GoatCounter, default: nil
+  attribute :matomo_analytics, Repository::Matomo, default: nil
+  attribute :plausible_analytics, Repository::Plausible, default: nil
+  attribute :goatcounter_analytics, Repository::GoatCounter, default: nil
 
   attribute :github_ribbon, Boolean, default: true
 
