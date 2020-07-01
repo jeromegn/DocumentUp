@@ -33,11 +33,11 @@ html
         (function() {
           var u="//#{current_config.matomo_analytics.domain/;
           _paq.push(['setTrackerUrl', u+'matomo.php']);
-          _paq.push(['setSiteId', {$IDSITE}]);
+          _paq.push(['setSiteId', "#{current_config.matomo_analytics.tracking_id}"]);
           var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
           g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
         })();
     - if current_config.plausible_analytics.present?
-      script async defer data-domain="#{current_config.plausible_analytics.domain}" src=”https://plausible.io/js/plausible.js”
+      script async defer data-domain="#{current_config.plausible_analytics.domain}" src=”#{current_config.plausible_analytics.script}”
     - if current_config.goatcounter_analytics.present?
-      script data-goatcounter="#{current_config.goatcounter_analytics.domain}" async src="//gc.zgo.at/count.js"
+      script data-goatcounter="#{current_config.goatcounter_analytics.domain}" async src="#{current_config.goatcounter_analytics.script}"
