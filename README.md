@@ -172,6 +172,63 @@ Add follow buttons for one or more Twitter accounts to your sidebar. Useful to g
 This is your Google Analytics "UA" unique ID. Adds GA tracking to your generated documentation.  
 e.g.: "UA-5201171-14"
 
+### matomo_analytics
+
+*Object default: null*
+
+#### domain
+
+*String*
+
+The domain of your Matomo instance goes here. This instance *must* have a matomo.php file available.
+
+#### tracking_id
+
+*String*
+
+Your Matomo tracking ID goes here.
+
+### goatcounter_analytics
+
+*Object default: null*
+
+#### domain
+
+*String*
+
+The domain of your Goatcounter setup should go here, e.g.
+
+```html
+<script data-goatcounter="https://yourdomain/count"
+        async src="//gc.zgo.at/count.js"></script>
+```
+
+#### script
+
+*String default: "//gc.zgo.at/count.js"*
+
+The URL of the Goatcounter tracking JavaScript. In the above example, this is set to Goatcounter's default.
+
+### plausible_analytics
+
+*Object default: null*
+
+#### domain
+
+*String*
+
+The domain of your Plausible setup should go here, e.g.
+
+```html
+<script async defer data-domain=”yourdomain.com” src=”https://plausible.io/js/plausible.js”></script> 
+```
+
+#### script
+
+*String default: "https://plausible.io/js/plausible.js"*
+
+The URL of the Plausible tracking JavaScript. In the above example, this is set to Plausible's default location. However, you can self-host this script.
+
 ## Themes
 
 ### Default
